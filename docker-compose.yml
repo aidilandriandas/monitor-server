@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  server-monitor:
+    build: .
+    container_name: server-monitor
+    restart: unless-stopped
+    privileged: true
+    network_mode: "host"
+    pid: "host"
+    volumes:
+      - ./data:/app/data
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /proc:/host/proc:ro
+      - /sys:/host/sys:ro
+      - /dev:/dev:ro
+      - /var/log:/host/var/log:ro
+      - /run/systemd/system:/run/systemd/system:ro
+    environment:
+      - PORT=8888
+      - HOST_PROC=/proc
+      - HOST_SYS=/sys
+      - HOST_LOG=/host/var/log
