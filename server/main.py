@@ -24,8 +24,9 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import database
 import logs
 import ai_copilot
+import security_engine
 
-app = FastAPI(title="Sentinel - Infrastructure, Storage & Security Sentinel")
+app = FastAPI(title="Aegis - Infrastructure Observability • Engineered by Aidil Andriandas")
 
 # Initialize database
 database.init_db()
@@ -128,7 +129,7 @@ async def update_settings(payload: dict):
         database.set_setting(k, str(v).strip())
     return {"status": "success", "message": "Settings saved"}
 
-# --- AI Homelab Copilot Endpoints ---
+# --- Aegis AI Endpoints ---
 @app.get("/api/v1/ai/audit")
 async def get_ai_audit():
     audit = ai_copilot.copilot.generate_homelab_audit()
@@ -157,6 +158,217 @@ async def test_ai_connection(payload: dict):
     res = ai_copilot.copilot.test_llm_connection(provider, api_key, model, base_url)
     return JSONResponse(res)
 
+# --- Aegis Cyber Shield & Realtime Traffic Endpoints (By Aidil Andriandas) ---
+@app.get("/api/v1/security/traffic/live")
+async def get_live_security_traffic():
+    data = security_engine.security_engine.get_full_security_dashboard()
+    return JSONResponse(data)
+
+@app.post("/api/v1/security/block-ip")
+async def block_security_ip(payload: dict):
+    ip = payload.get("ip", "").strip()
+    reason = payload.get("reason", "Manual Aegis Cyber Defense Block")
+    if not ip:
+        return JSONResponse({"status": "error", "message": "IP address is required"}, status_code=400)
+    ok = security_engine.security_engine.block_ip(ip, reason)
+    if ok:
+        return JSONResponse({"status": "success", "message": f"IP {ip} has been blocked and neutralized"})
+    return JSONResponse({"status": "error", "message": f"Failed to block {ip}"}, status_code=400)
+
+@app.post("/api/v1/security/unblock-ip")
+async def unblock_security_ip(payload: dict):
+    ip = payload.get("ip", "").strip()
+    if not ip:
+        return JSONResponse({"status": "error", "message": "IP address is required"}, status_code=400)
+    ok = security_engine.security_engine.unblock_ip(ip)
+    if ok:
+        return JSONResponse({"status": "success", "message": f"IP {ip} removed from blocklist"})
+    return JSONResponse({"status": "error", "message": f"Failed to unblock {ip}"}, status_code=400)
+
+@app.get("/api/v1/security/events")
+async def get_security_events(limit: int = 50):
+    events = security_engine.security_engine.get_security_events(limit=limit)
+    return JSONResponse(events)
+
+@app.get("/api/v1/security/jail")
+async def get_security_jail():
+    jailed = security_engine.security_engine.get_jail_matrix()
+    return JSONResponse(jailed)
+
+@app.post("/api/v1/security/jail/release")
+async def release_security_jail(payload: dict):
+    ip = payload.get("ip", "").strip()
+    if not ip:
+        return JSONResponse({"status": "error", "message": "IP address is required"}, status_code=400)
+    ok = security_engine.security_engine.release_jailed_ip(ip)
+    if ok:
+        return JSONResponse({"status": "success", "message": f"IP {ip} released from jail matrix"})
+    return JSONResponse({"status": "error", "message": f"Failed to release {ip}"}, status_code=400)
+
+@app.get("/api/v1/security/hardening")
+async def get_security_hardening():
+    report = security_engine.security_engine.audit_os_and_ssh_hardening()
+    return JSONResponse(report)
+
+@app.post("/api/v1/security/hardening/remediate")
+async def remediate_security_hardening():
+    res = security_engine.security_engine.remediate_os_hardening()
+    return JSONResponse(res)
+
+@app.get("/api/v1/security/fim")
+async def get_security_fim():
+    fim = security_engine.security_engine.audit_fim_integrity()
+    return JSONResponse(fim)
+
+@app.post("/api/v1/security/fim/baseline")
+async def update_security_fim_baseline():
+    ok = security_engine.security_engine.update_fim_baseline()
+    if ok:
+        return JSONResponse({"status": "success", "message": "FIM baselines updated successfully to current file hashes"})
+    return JSONResponse({"status": "error", "message": "Failed to update FIM baselines"}, status_code=400)
+
+@app.post("/api/v1/security/ai-analyze")
+async def analyze_security_threat_ai(payload: dict):
+    ip = payload.get("ip", "unknown").strip()
+    threat_type = payload.get("threat_type", "general")
+    context = payload.get("context", "")
+    analysis = security_engine.security_engine.ai_investigate_threat(ip, threat_type, context)
+    return JSONResponse(analysis)
+
+@app.get("/api/v1/security/docker-audit")
+async def get_security_docker_audit():
+    res = security_engine.security_engine.audit_docker_security()
+    return JSONResponse(res)
+
+@app.get("/api/v1/security/c2-miner")
+async def get_security_c2_miner():
+    res = security_engine.security_engine.detect_c2_crypto_mining()
+    return JSONResponse(res)
+
+@app.get("/api/v1/security/perimeter")
+async def get_security_perimeter():
+    res = security_engine.security_engine.pve_perimeter.get_cluster_status()
+    return JSONResponse(res)
+
+@app.post("/api/v1/security/perimeter/sync")
+async def sync_security_perimeter():
+    res = security_engine.security_engine.sync_perimeter_rules()
+    return JSONResponse(res)
+
+def get_process_hunter_data(limit: int = 60):
+    procs = []
+    zombies = 0
+    running = 0
+    sleeping = 0
+    
+    for p in psutil.process_iter(['pid', 'name', 'username', 'cpu_percent', 'memory_percent', 'memory_info', 'status', 'num_threads', 'cmdline']):
+        try:
+            info = p.info
+            st = str(info.get('status') or 'unknown').lower()
+            if 'zombie' in st:
+                zombies += 1
+            elif 'running' in st:
+                running += 1
+            else:
+                sleeping += 1
+                
+            mem_info = info.get('memory_info')
+            rss_mb = round(mem_info.rss / (1024 * 1024), 1) if mem_info else 0.0
+            cpu_pct = round(info.get('cpu_percent') or 0.0, 1)
+            mem_pct = round(info.get('memory_percent') or 0.0, 1)
+            
+            cmd = ' '.join(info.get('cmdline') or [])
+            if not cmd:
+                cmd = f"[{info.get('name')}]"
+                
+            procs.append({
+                "pid": info['pid'],
+                "name": info.get('name') or 'unknown',
+                "user": info.get('username') or 'root',
+                "cpu_percent": cpu_pct,
+                "memory_percent": mem_pct,
+                "memory_mb": rss_mb,
+                "status": (info.get('status') or 'unknown').upper(),
+                "threads": info.get('num_threads') or 1,
+                "cmdline": cmd[:120],
+                "is_critical": info['pid'] in (1, 2) or info.get('name') in ('systemd', 'init', 'kthreadd', 'sshd', 'dockerd')
+            })
+        except (psutil.NoSuchProcess, psutil.AccessDenied):
+            continue
+            
+    procs.sort(key=lambda x: (x['cpu_percent'], x['memory_mb']), reverse=True)
+    top_cpu = procs[0] if procs else None
+    top_mem = max(procs, key=lambda x: x['memory_mb']) if procs else None
+    
+    return {
+        "total": len(procs),
+        "running": running,
+        "sleeping": sleeping,
+        "zombies": zombies,
+        "top_cpu_process": top_cpu,
+        "top_mem_process": top_mem,
+        "processes": procs[:limit]
+    }
+
+@app.get("/api/v1/process/hunter")
+async def get_process_hunter_endpoint(limit: int = 60):
+    data = get_process_hunter_data(limit=limit)
+    return JSONResponse(data)
+
+@app.post("/api/v1/process/kill")
+async def kill_process_endpoint(payload: dict):
+    pid = payload.get("pid")
+    sig = str(payload.get("signal", "TERM")).upper()
+    if not pid:
+        return JSONResponse({"status": "error", "message": "PID is required"}, status_code=400)
+    
+    try:
+        pid = int(pid)
+    except ValueError:
+        return JSONResponse({"status": "error", "message": "Invalid PID format"}, status_code=400)
+        
+    current_pid = os.getpid()
+    if pid in (1, 2, current_pid):
+        return JSONResponse({"status": "error", "message": f"Protected system PID {pid} cannot be terminated."}, status_code=403)
+        
+    try:
+        p = psutil.Process(pid)
+        proc_name = p.name()
+        
+        if proc_name in ("dockerd", "containerd") and pid < 1500:
+            return JSONResponse({"status": "error", "message": f"Protected system daemon '{proc_name}' (PID {pid}) cannot be killed directly."}, status_code=403)
+            
+        import signal
+        sig_num = signal.SIGKILL if sig == "KILL" else signal.SIGTERM
+        p.send_signal(sig_num)
+        
+        return JSONResponse({
+            "status": "success",
+            "message": f"Process '{proc_name}' (PID {pid}) sent SIG{sig} successfully.",
+            "pid": pid,
+            "name": proc_name
+        })
+    except psutil.NoSuchProcess:
+        return JSONResponse({"status": "error", "message": f"PID {pid} no longer exists."}, status_code=404)
+    except Exception as e:
+        return JSONResponse({"status": "error", "message": str(e)}, status_code=500)
+
+@app.post("/api/v1/process/renice")
+async def renice_process_endpoint(payload: dict):
+    pid = payload.get("pid")
+    nice = payload.get("nice", 10)
+    if not pid:
+        return JSONResponse({"status": "error", "message": "PID is required"}, status_code=400)
+    try:
+        pid = int(pid)
+        p = psutil.Process(pid)
+        p.nice(int(nice))
+        return JSONResponse({"status": "success", "message": f"Process {p.name()} (PID {pid}) priority adjusted to {nice}."})
+    except psutil.NoSuchProcess:
+        return JSONResponse({"status": "error", "message": f"PID {pid} not found"}, status_code=404)
+    except Exception as e:
+        return JSONResponse({"status": "error", "message": str(e)}, status_code=500)
+
 
 @app.post("/api/v1/alert/test")
 async def send_test_alert(payload: dict = None):
@@ -167,10 +379,10 @@ async def send_test_alert(payload: dict = None):
 
     results = {}
     test_msg = (
-        "🚀 *SENTINEL NOC OBSERVABILITY*\n"
+        "🚀 *AEGIS NOC OBSERVABILITY*\n"
         "━━━━━━━━━━━━━━━━━━━━━━\n"
         "🔔 *TEST NOTIFICATION PIPELINE*\n\n"
-        "📍 *Cluster:* Sentinel Datacenter\n"
+        "📍 *Cluster:* Aegis Datacenter (By Aidil Andriandas)\n"
         "🖥️ *Central Node:* `aidil (10.10.10.9)`\n"
         "👑 *Hypervisor:* `pve (10.10.10.2)`\n"
         "📦 *Active Workloads:* 8 VMs, 7 Containers\n"
@@ -187,8 +399,8 @@ async def send_test_alert(payload: dict = None):
     if discord:
         dc_ok, dc_err = send_discord(
             discord, 
-            "SENTINEL NOC TEST NOTIFICATION", 
-            "Cluster test alert dispatched successfully from Central NOC Server (10.10.10.9).\n\n• Fleet Nodes: 9 Online\n• Master: pve (10.10.10.2)\n• Status: Operational"
+            "AEGIS NOC TEST NOTIFICATION", 
+            "Cluster test alert dispatched successfully from Central NOC Server (10.10.10.9).\n\n• Fleet Nodes: 9 Online\n• Master: pve (10.10.10.2)\n• Architect: Aidil Andriandas\n• Status: Operational"
         )
         results["discord"] = "SUCCESS" if dc_ok else f"FAILED: {dc_err}"
     else:
@@ -308,7 +520,7 @@ async def delete_node_endpoint(payload: dict):
     if not server_id:
         return {"status": "error", "message": "Missing server_id parameter"}
     if server_id == "srv-host-node":
-        return {"status": "error", "message": "The primary Sentinel monitoring server node cannot be removed."}
+        return {"status": "error", "message": "The primary Aegis monitoring server node cannot be removed."}
     database.delete_node(server_id)
     return {"status": "success", "message": f"Node '{server_id}' has been removed from cluster."}
 
@@ -408,7 +620,7 @@ async def terminal_exec(payload: dict):
         except subprocess.TimeoutExpired:
             return JSONResponse({"stdout": "", "stderr": "Command execution timed out after 20s", "exit_code": 124, "duration_ms": 20000.0})
     else:
-        # Remote node via Sentinel agent action
+        # Remote node via Aegis agent action
         action_id = f"term_{int(time.time())}_{uuid.uuid4().hex[:6]}"
         database.enqueue_action(action_id, node_id, "terminal_exec", cmd, params={"cmd": cmd})
         for _ in range(10):
@@ -476,7 +688,7 @@ async def trigger_speedtest():
     url = "https://speed.cloudflare.com/__down?bytes=5000000"
     download_mbps = 0.0
     try:
-        req = urllib.request.Request(url, headers={"User-Agent": "Sentinel-Speedtest/1.0"})
+        req = urllib.request.Request(url, headers={"User-Agent": "Aegis-Speedtest/1.0"})
         with urllib.request.urlopen(req, timeout=10) as r:
             buf = r.read()
         dur = time.time() - t0
@@ -899,7 +1111,7 @@ async def query_system_logs(source: str = "journal", level: str = "all", search:
         for r in raw_logs:
             results.append({
                 "timestamp": r.get("timestamp", time.strftime("%Y-%m-%d %H:%M:%S")),
-                "source": r.get("service", "sentinel"),
+                "source": r.get("service", "aegis"),
                 "level": r.get("level", "INFO"),
                 "message": r.get("message", "")
             })
@@ -1080,6 +1292,11 @@ async def get_power_estimate(node_id: Optional[str] = None):
         }
     }
 
+@app.get("/api/v1/power/settings")
+async def get_power_settings():
+    rate = database.get_setting("pln_tariff_rate", "1444.70")
+    return {"tariff_rate_kwh": float(rate)}
+
 @app.post("/api/v1/power/settings")
 async def save_power_settings(request: Request):
     body = await request.json()
@@ -1251,7 +1468,7 @@ def get_wol_devices():
             "mac": smac or "bc:24:11:00:00:00",
             "broadcast": "10.10.10.255",
             "port": 9,
-            "role": "Proxmox VE Master Hypervisor" if is_pve else ("Sentinel NOC Central Host" if is_noc else "Cluster Guest Node"),
+            "role": "Proxmox VE Master Hypervisor" if is_pve else ("Aegis NOC Central Host" if is_noc else "Cluster Guest Node"),
             "icon": "fa-server" if is_pve else ("fa-shield-halved" if is_noc else "fa-microchip"),
             "is_online": s.get("is_online", True)
         })
@@ -1285,7 +1502,7 @@ def get_wol_devices():
 
     noc_entry = next((n for n in discovered_nodes if n["ip"] == "10.10.10.9" or "host-node" in n["id"]), {
         "id": "srv-host-node",
-        "name": "Sentinel NOC Host (aidil)",
+        "name": "Aegis NOC Host (aidil)",
         "ip": "10.10.10.9",
         "mac": arp_map.get("10.10.10.9", "52:54:00:1a:2b:3c"),
         "broadcast": "10.10.10.255",
@@ -1392,7 +1609,7 @@ def send_discord(webhook_url: str, title: str, description: str):
                 "title": f"🚨 {title}",
                 "description": description,
                 "color": 15158332, # Red
-                "footer": {"text": "Sentinel NOC Observability"}
+                "footer": {"text": "Aegis NOC Observability"}
             }]
         }
         data = json.dumps(payload).encode()
@@ -1637,7 +1854,7 @@ def check_web_probes():
         ssl_days = -1
         try:
             start_t = time.time()
-            req = urllib.request.Request(target_url, headers={"User-Agent": "Sentinel-Probe/1.0"})
+            req = urllib.request.Request(target_url, headers={"User-Agent": "Aegis-Probe/1.0"})
             ctx = ssl.create_default_context()
             ctx.check_hostname = False
             ctx.verify_mode = ssl.CERT_NONE
@@ -1688,7 +1905,7 @@ def get_open_ports():
         6443: "Kubernetes API Server",
         8006: "Proxmox VE Web Management",
         8080: "HTTP Alternate / Proxy",
-        8888: "Sentinel NOC Dashboard",
+        8888: "Aegis NOC Dashboard",
         9000: "Portainer / FastCGI",
         9100: "Prometheus Node Exporter",
         10909: "SSH Custom Management Port",
@@ -1992,5 +2209,5 @@ ai_copilot.copilot.start_background_loop()
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 8888))
-    print(f"Starting Sentinel NOC on port {port}...")
+    print(f"Starting Aegis NOC (Engineered by Aidil Andriandas) on port {port}...")
     uvicorn.run("main:app", host="0.0.0.0", port=port, reload=False)

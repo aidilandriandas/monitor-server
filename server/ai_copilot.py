@@ -1,5 +1,5 @@
 """
-Sentinel AI Homelab Copilot & Autonomous Smart Advisor Engine
+Aegis AI - Autonomous Smart Advisor Engine
 24/7 Continuous Monitoring, Heuristic Anomaly Detection & Proactive Optimization Advisory
 """
 
@@ -24,6 +24,8 @@ class AICopilotEngine:
         self._is_running = False
         self._lock = threading.Lock()
         self._chat_history = []        # [{"role": "user"|"assistant", "content": "..."}]
+        # Agentic Action: pending confirmations {chat_id: {"action": ..., "cmd": ..., "desc": ..., "ts": ...}}
+        self._pending_confirmations = {}
 
     def get_settings(self):
         enabled = database.get_setting("ai_copilot_enabled", "true").lower() == "true"
@@ -454,7 +456,7 @@ class AICopilotEngine:
         pve_warn = " ⚠️" if pve_pct > 90 else ""
 
         msg = []
-        msg.append("🤖 *SENTINEL AI HOMELAB COPILOT*")
+        msg.append("🛡️ *AEGIS AI HOMELAB ADVISOR*")
         msg.append("━━━━━━━━━━━━━━━━━━━━━━━━━")
         msg.append(f"📊 *Status:* {grade_label} (*{score}/100*)")
         msg.append(f"⏱️ *Audit:* `{time_str}`\n")
@@ -494,7 +496,7 @@ class AICopilotEngine:
                 msg.append(f"📈 *Dampak:* {rec.get('impact')}\n")
 
         msg.append("━━━━━━━━━━━━━━━━━━━━━━━━━")
-        msg.append("🛡️ _Sentinel AI aktif memantau cluster 24/7._")
+        msg.append("🛡️ _Aegis AI aktif memantau cluster 24/7 • Engineered by Aidil Andriandas_")
         return "\n".join(msg)
 
     def format_telegram_alert(self, event_type: str, node: dict, detail: str = "", advice: str = "") -> str:
@@ -508,7 +510,7 @@ class AICopilotEngine:
 
         if event_type == "NODE_OFFLINE":
             return (
-                f"🚨 *[SENTINEL INCIDENT ALERT]*\n"
+                f"🚨 *[AEGIS INCIDENT ALERT]*\n"
                 f"━━━━━━━━━━━━━━━━━━━━━━━━━\n"
                 f"Node   : *{hostname}*\n"
                 f"IP     : `{ip}`\n"
@@ -516,14 +518,14 @@ class AICopilotEngine:
                 f"Waktu  : `{time_str}`\n\n"
                 f"🔍 *Diagnosa AI:*\n"
                 f"Node berhenti mengirimkan telemetry heartbeat (> 45 detik).\n\n"
-                f"💡 *Saran Copilot:*\n"
+                f"💡 *Saran Aegis:*\n"
                 f"{advice or 'Periksa status VM pada Proxmox VE (`qm status`) atau periksa koneksi switch/jaringan.'}\n"
                 f"━━━━━━━━━━━━━━━━━━━━━━━━━\n"
-                f"🛡️ _Sentinel Autonomous Observer 24/7_"
+                f"🛡️ _Aegis Autonomous Observer 24/7 • By Aidil Andriandas_"
             )
         elif event_type == "NODE_RECOVERED":
             return (
-                f"✅ *[SENTINEL INCIDENT RESOLVED]*\n"
+                f"✅ *[AEGIS INCIDENT RESOLVED]*\n"
                 f"━━━━━━━━━━━━━━━━━━━━━━━━━\n"
                 f"Node   : *{hostname}*\n"
                 f"IP     : `{ip}`\n"
@@ -532,21 +534,21 @@ class AICopilotEngine:
                 f"🔍 *Diagnosa AI:*\n"
                 f"Heartbeat telemetry kembali diterima normal. Layanan beroperasi stabil.\n"
                 f"━━━━━━━━━━━━━━━━━━━━━━━━━\n"
-                f"🛡️ _Sentinel Autonomous Observer 24/7_"
+                f"🛡️ _Aegis Autonomous Observer 24/7 • By Aidil Andriandas_"
             )
         elif event_type == "RESOURCE_SPIKE":
             return (
-                f"⚠️ *[SENTINEL RESOURCE ALERT]*\n"
+                f"⚠️ *[AEGIS RESOURCE ALERT]*\n"
                 f"━━━━━━━━━━━━━━━━━━━━━━━━━\n"
                 f"Node       : *{hostname}* (`{ip}`)\n"
                 f"Peringatan : *{detail}*\n"
                 f"Waktu      : `{time_str}`\n\n"
-                f"💡 *Saran Copilot:*\n"
+                f"💡 *Saran Aegis:*\n"
                 f"{advice or 'Periksa proses intensif di menu Top Processes NOC.'}\n"
                 f"━━━━━━━━━━━━━━━━━━━━━━━━━\n"
-                f"🛡️ _Sentinel Autonomous Observer 24/7_"
+                f"🛡️ _Aegis Autonomous Observer 24/7 • By Aidil Andriandas_"
             )
-        return f"ℹ️ *[SENTINEL NOTIFICATION]*\nNode: *{hostname}* ({ip})\n{detail}"
+        return f"ℹ️ *[AEGIS NOTIFICATION]*\nNode: *{hostname}* ({ip})\n{detail}\n_By Aidil Andriandas_"
 
     def send_telegram_direct(self, message: str) -> tuple[bool, str]:
         token = database.get_setting("telegram_token", "")
@@ -606,8 +608,8 @@ class AICopilotEngine:
             if self._is_running:
                 return
             self._is_running = True
-            threading.Thread(target=self._worker_loop, daemon=True, name="AICopilotSentinel").start()
-            threading.Thread(target=self._telegram_chat_loop, daemon=True, name="AICopilotTelegramChat").start()
+            threading.Thread(target=self._worker_loop, daemon=True, name="AegisAIObserver").start()
+            threading.Thread(target=self._telegram_chat_loop, daemon=True, name="AegisAITelegramChat").start()
 
     def _get_default_model(self, provider: str) -> str:
         p = (provider or "gemini").lower()
@@ -792,7 +794,7 @@ class AICopilotEngine:
             headers["Authorization"] = f"Bearer {api_key.strip()}"
         if provider == "openrouter":
             headers["HTTP-Referer"] = "http://localhost:8888"
-            headers["X-Title"] = "Sentinel Homelab Copilot"
+            headers["X-Title"] = "Aegis AI Homelab"
 
         clean_messages = []
         for m in messages:
@@ -853,8 +855,8 @@ class AICopilotEngine:
 
         vms_text = "\n".join(vm_lines)
 
-        prompt = f"""Anda adalah "Sentinel AI Homelab Copilot", asisten pribadi senior DevOps & Infrastructure Engineer untuk sebuah homelab nyata.
-Anda sedang berdialog langsung dengan pemilik homelab di Telegram.
+        prompt = f"""Anda adalah "Aegis AI", asisten pribadi senior DevOps & Infrastructure Engineer untuk sebuah homelab nyata milik AIDIL ANDRIANDAS (arsitek, pemilik, dan pembuat sistem Aegis ini).
+Anda sedang berdialog langsung dengan Aidil Andriandas di Telegram. Selalu hormati Aidil sebagai arsitek & pemilik cluster ini.
 
 STATUS TELEMETRI HOMELAB REAL-TIME DETIK INI:
 - Host Proxmox VE (10.10.10.2): CPU {fleet.get('pve_cpu', 5)}%, RAM {fleet.get('pve_ram_used_gb', 16.8)} GB dari {fleet.get('pve_ram_total_gb', 17.4)} GB ({fleet.get('pve_ram_used_pct', 96.1)}% terpakai ⚠️)
@@ -869,6 +871,19 @@ CATATAN PENTING ARSITEKTUR CLUSTER:
 4. Proxmox Memory Ballooning: BISA diterapkan pada sebagian besar VM Linux (Web Ceritakota, Sekar, Aidil, Pentest, Pambuluah) selama package `qemu-guest-agent` terpasang. TETAPI untuk VM Immich (104), jangan dipasang atau pasang minimum balloon tinggi (3500-4000MB) karena Immich butuh RAM konstan.
 5. Hardware & Power: Laptop dengan USB LAN adapter tidak bisa di-Wake-on-LAN (WoL) saat laptop mati (state S5) karena port USB diputus daya 5V standby. Jika ingin WoL bekerja 24 jam, migrasi ke Mini PC dengan onboard RJ45 LAN port yang terhubung ke bus PCIe standby rail.
 
+KEMAMPUAN AGENTIC (EKSEKUSI LANGSUNG KE CLUSTER):
+Anda memiliki kemampuan untuk TIDAK HANYA menyarankan, tapi juga langsung MENGEKSEKUSI perintah ke cluster Proxmox VE via sistem agentic yang terintegrasi. Jika user meminta Anda untuk melakukan sesuatu, Anda bisa dan HARUS proaktif memberi tahu bahwa Anda bisa langsung menjalankannya!
+
+Aksi yang bisa dieksekusi langsung (user cukup ketik):
+- *Set/ubah RAM VM*: "set ram pentest jadi 2gb" → sistem otomatis buat konfirmasi & jalankan `qm set 110 -memory 2048`
+- *Aktifkan ballooning*: "pasang balloon ceritakota" → jalankan `qm set 105 -balloon 2048`
+- *Nonaktifkan ballooning*: "matikan balloon sekar"
+- *Start/stop/reboot VM*: "start vm pentest", "shutdown ceritakota", "reboot database"
+- *Drop host cache*: "bersihkan cache host pve"
+- *Perintah shell bebas*: "jalankan free -h" (aman), "jalankan df -h"
+
+PENTING: Jika Anda menyarankan suatu tindakan, SELALU akhiri dengan kalimat ajakan seperti: "Mau saya langsung jalankan sekarang? Ketik: *[perintah yang bisa dilakukan user]*"
+
 PANDUAN GAYA JAWABAN:
 - Jawablah secara natural, cerdas, solutif, dan ramah seperti rekan senior engineer.
 - Jawab langsung pertanyaan spesifik user (termasuk pertanyaan lanjutan / follow-up pertanyaan sebelumnya).
@@ -880,6 +895,7 @@ PANDUAN GAYA JAWABAN:
             prompt += f"\n\nINSTRUKSI TAMBAHAN DARI PEMILIK:\n{extra_prompt}"
 
         return prompt
+
 
     def generate_chat_reply(self, text: str) -> str:
         """
@@ -922,6 +938,235 @@ PANDUAN GAYA JAWABAN:
         # 2. If NO API Key is configured yet, use heuristic engine with clear suggestion to connect API
         return self._generate_heuristic_reply(text, audit, show_api_hint=True)
 
+    # ─────────────────────────────────────────────────────────────────────────
+    # AGENTIC ACTION ENGINE — Parse intent & execute real cluster commands
+    # ─────────────────────────────────────────────────────────────────────────
+
+    # VM name → VMID map (used by intent parser)
+    VM_MAP = {
+        "immich": "104", "database": "103", "db": "103",
+        "ceritakota": "105", "sekar": "106", "portfolio-sekar": "106", "portfolio sekar": "106",
+        "proxy": "107", "pambuluah": "108",
+        "aidil": "109", "portfolio-aidil": "109", "portfolio aidil": "109",
+        "pentest": "110",
+    }
+
+    # RAM floor constraints (MB) – never let AI set below this
+    VM_RAM_FLOOR = {
+        "104": 4096,  # Immich – ML/CLIP/PostgreSQL
+        "103": 1024, "105": 1024, "106": 1024,
+        "107": 512,  "108": 1024, "109": 1024, "110": 1024,
+    }
+
+    def _parse_agentic_intent(self, text: str):
+        """
+        Parse natural-language text for executable cluster actions.
+        Returns dict {"type", "vmid", "vm_name", "cmd", "desc", "server_id"} or None.
+        """
+        import re
+        q = text.lower().strip()
+
+        def find_vm(q_text):
+            # Sort by length descending to match longer names first ("portfolio sekar" before "sekar")
+            sorted_map = sorted(self.VM_MAP.items(), key=lambda x: len(x[0]), reverse=True)
+            for vm_name, vmid in sorted_map:
+                # Use word boundaries so "sekar" doesn't match inside "sekarang"
+                pattern = r'\b' + re.escape(vm_name) + r'\b'
+                if re.search(pattern, q_text):
+                    return vmid, vm_name
+            m = re.search(r'\bvm\s*(\d{3})\b', q_text)
+            if m:
+                vmid = m.group(1)
+                return vmid, f"vm{vmid}"
+            return None, None
+
+        def extract_mb(q_text):
+            m = re.search(r'(\d+(?:\.\d+)?)\s*(gb|g\b)', q_text)
+            if m:
+                return int(float(m.group(1)) * 1024)
+            m = re.search(r'(\d{3,5})\s*(mb|m\b)?', q_text)
+            if m:
+                v = int(m.group(1))
+                if 256 <= v <= 131072:
+                    return v
+            return None
+
+        # ── 1. Set RAM ──────────────────────────────────────────────────────
+        if any(w in q for w in ["ram", "memori", "memory", "alokasi"]) and \
+           any(w in q for w in ["set", "ubah", "turun", "kurang", "jadikan", "jadi", "ganti", "tambah", "naik", "besarkan", "kecilkan"]):
+            vmid, vm_name = find_vm(q)
+            mb = extract_mb(q)
+            if vmid and mb:
+                floor = self.VM_RAM_FLOOR.get(vmid, 512)
+                if mb < floor:
+                    return {
+                        "type": "denied",
+                        "reason": (
+                            f"⛔ *Tidak bisa!* Minimum RAM aman untuk *{vm_name.title()}* (VM {vmid}) "
+                            f"adalah *{floor} MB* ({floor//1024} GB). "
+                            f"Nilai {mb} MB terlalu kecil dan bisa menyebabkan crash OOM."
+                        )
+                    }
+                return {
+                    "type": "set_ram", "vmid": vmid, "vm_name": vm_name.title(),
+                    "cmd": f"qm set {vmid} -memory {mb}",
+                    "server_id": "srv-pve",
+                    "desc": f"Set RAM {vm_name.title()} (VM {vmid}) → *{mb} MB* ({mb/1024:.1f} GB)",
+                }
+
+        # ── 2. Aktifkan Ballooning ───────────────────────────────────────────
+        if any(w in q for w in ["balloon", "balon"]) and \
+           any(w in q for w in ["pasang", "aktif", "enable", "set", "tambah", "terapkan", "nyalakan", "hidupkan"]):
+            vmid, vm_name = find_vm(q)
+            mb = extract_mb(q) or 2048
+            if vmid:
+                floor = self.VM_RAM_FLOOR.get(vmid, 512)
+                safe_mb = max(mb, floor // 2)
+                return {
+                    "type": "set_balloon", "vmid": vmid, "vm_name": vm_name.title(),
+                    "cmd": f"qm set {vmid} -balloon {safe_mb}",
+                    "server_id": "srv-pve",
+                    "desc": f"Aktifkan Ballooning {vm_name.title()} (VM {vmid}), minimum RAM *{safe_mb} MB*",
+                }
+
+        # ── 3. Nonaktifkan Ballooning ────────────────────────────────────────
+        if any(w in q for w in ["balloon", "balon"]) and \
+           any(w in q for w in ["matikan", "hapus", "nonaktif", "disable", "hilangkan", "off"]):
+            vmid, vm_name = find_vm(q)
+            if vmid:
+                return {
+                    "type": "disable_balloon", "vmid": vmid, "vm_name": vm_name.title(),
+                    "cmd": f"qm set {vmid} -balloon 0",
+                    "server_id": "srv-pve",
+                    "desc": f"Nonaktifkan Ballooning {vm_name.title()} (VM {vmid})",
+                }
+
+        # ── 4. Start VM ──────────────────────────────────────────────────────
+        if any(w in q for w in ["start", "nyalakan", "hidupkan", "jalankan"]) and \
+           (any(w in q for w in ["vm", "server"]) or any(n in q for n in self.VM_MAP)):
+            vmid, vm_name = find_vm(q)
+            if vmid:
+                return {
+                    "type": "start_vm", "vmid": vmid, "vm_name": vm_name.title(),
+                    "cmd": f"qm start {vmid}",
+                    "server_id": "srv-pve",
+                    "desc": f"Start VM {vm_name.title()} (VM {vmid})",
+                }
+
+        # ── 5. Stop/Shutdown VM ──────────────────────────────────────────────
+        if any(w in q for w in ["stop", "matikan", "shutdown"]) and \
+           (any(w in q for w in ["vm", "server"]) or any(n in q for n in self.VM_MAP)):
+            vmid, vm_name = find_vm(q)
+            if vmid:
+                return {
+                    "type": "stop_vm", "vmid": vmid, "vm_name": vm_name.title(),
+                    "cmd": f"qm shutdown {vmid}",
+                    "server_id": "srv-pve",
+                    "desc": f"Shutdown VM {vm_name.title()} (VM {vmid}) secara graceful",
+                }
+
+        # ── 6. Reboot VM ─────────────────────────────────────────────────────
+        if any(w in q for w in ["reboot", "restart"]) and \
+           (any(w in q for w in ["vm", "server"]) or any(n in q for n in self.VM_MAP)):
+            vmid, vm_name = find_vm(q)
+            if vmid:
+                return {
+                    "type": "reboot_vm", "vmid": vmid, "vm_name": vm_name.title(),
+                    "cmd": f"qm reboot {vmid}",
+                    "server_id": "srv-pve",
+                    "desc": f"Reboot VM {vm_name.title()} (VM {vmid})",
+                }
+
+        # ── 7. Drop host cache ───────────────────────────────────────────────
+        if re.search(r'drop.{0,5}cache|bersihkan.{0,5}cache|clear.{0,5}cache|kosongkan.{0,5}cache|free.{0,5}cache', q):
+            return {
+                "type": "drop_caches", "vmid": None, "vm_name": "Host PVE",
+                "cmd": "sync && echo 3 > /proc/sys/vm/drop_caches",
+                "server_id": "srv-pve",
+                "desc": "Drop Page Cache di Host Proxmox VE (bebaskan RAM host)",
+            }
+
+        # ── 8. Arbitrary shell (jalankan / eksekusi / run) ───────────────────
+        m = re.match(r'^(?:jalankan|eksekusi|run|execute|lakukan)\s+[`"\']?(.+?)[`"\']?\s*$', q)
+        if m:
+            raw_cmd = m.group(1).strip().strip("`'\"")
+            danger = ["rm -rf", "mkfs", "dd if=", ":(){ ", "> /dev/", "shutdown -h", "init 0"]
+            if any(d in raw_cmd for d in danger):
+                return {
+                    "type": "denied",
+                    "reason": (
+                        f"⛔ Perintah `{raw_cmd}` ditolak (mengandung pola berbahaya). "
+                        "Jalankan manual dari terminal jika memang diperlukan."
+                    )
+                }
+            return {
+                "type": "terminal_exec", "vmid": None, "vm_name": "Host PVE",
+                "cmd": raw_cmd, "server_id": "srv-pve",
+                "desc": f"Eksekusi shell di Host PVE: `{raw_cmd}`",
+            }
+
+        return None
+
+    def _execute_confirmed_action(self, pending: dict) -> str:
+        """
+        Execute the confirmed action natively via SSH (if Proxmox) or via Agent Queue.
+        Returns Telegram-formatted result message.
+        """
+        cmd = pending["cmd"]
+        server_id = pending.get("server_id", "srv-pve")
+
+        if server_id == "srv-pve":
+            # Native direct execution via Proxmox SSH Engine for instant reliable results
+            try:
+                import security_engine
+                ok, result_msg = security_engine.security_engine.pve_perimeter._exec_pve(cmd, timeout=30)
+                if ok:
+                    snippet = f"\n```\n{result_msg.strip()[:400]}\n```" if result_msg.strip() else ""
+                    msg = f" *Berhasil dieksekusi!*\n{pending['desc']}{snippet}"
+                else:
+                    msg = f" *Gagal!*\n{pending['desc']}\nError: `{result_msg.strip()[:400] or 'Tidak ada output'}`"
+                
+                with self._lock:
+                    self._chat_history.append({"role": "assistant", "content": f"[Sistem Otomatis]: Eksekusi selesai. Status:\n{msg}"})
+                return msg
+            except Exception as e:
+                msg = f" *Gagal Terhubung ke Hypervisor!*\n{pending['desc']}\nError: `{str(e)}`"
+                with self._lock:
+                    self._chat_history.append({"role": "assistant", "content": f"[Sistem Otomatis]: Eksekusi gagal:\n{msg}"})
+                return msg
+        
+        # Fallback to standard agent queue for non-hypervisor actions
+        import uuid as _uuid
+        action_id = f"ai_{int(time.time())}_{_uuid.uuid4().hex[:6]}"
+        import database
+        database.enqueue_action(action_id, server_id, "terminal_exec", cmd, params={"cmd": cmd})
+        print(f" [Agentic] Enqueued action_id={action_id} server={server_id} cmd={cmd}")
+
+        # Poll up to 15 seconds for result
+        import time
+        for _ in range(15):
+            time.sleep(1)
+            try:
+                st = database.get_action_status_data(action_id)
+                if st and st.get("status") in ["SUCCESS", "FAILED"]:
+                    result_msg = (st.get("result_msg") or "").strip()
+                    if st.get("status") == "SUCCESS":
+                        snippet = f"\n```\n{result_msg[:400]}\n```" if result_msg else ""
+                        msg = f" *Berhasil dieksekusi (via Agent)!*\n{pending['desc']}{snippet}"
+                    else:
+                        msg = f" *Gagal!*\n{pending['desc']}\nError: `{result_msg[:400] or 'Tidak ada output'}`"
+                    with self._lock:
+                        self._chat_history.append({"role": "assistant", "content": f"[Sistem Otomatis]: Eksekusi selesai. Status:\n{msg}"})
+                    return msg
+            except Exception as ex:
+                print(f" [Agentic] Poll error: {ex}")
+
+        return (
+            f" *Perintah terkirim ke agen!*\n"
+            f"{pending['desc']}\n"
+            f"_(Mungkin butuh beberapa detik untuk selesai dieksekusi oleh agen PVE)_"
+        )
+
     def _generate_heuristic_reply(self, text: str, audit: dict, show_api_hint: bool = False) -> str:
         q = text.lower().strip()
         fleet = audit.get("fleet_summary", {})
@@ -944,7 +1189,7 @@ PANDUAN GAYA JAWABAN:
                 "Pastikan package `qemu-guest-agent` terinstall dan running di dalam setiap VM (`sudo apt install qemu-guest-agent -y`) agar Proxmox bisa mengatur dynamic memory secara halus tanpa freeze.\n\n"
                 + (
                     "━━━━━━━━━━━━━━━━━━━━━━━━━\n"
-                    "💡 *Tips AI Copilot:* Anda dapat memasukkan API Key AI pilihan Anda (Gemini, Groq, OpenAI, Ollama) di Dashboard Web > AI Copilot > Konfigurasi AI 24/7 agar bot ini bisa berdialog bebas dan menjawab segala pertanyaan lanjutan secara otomatis!"
+                    "💡 *Tips Aegis AI:* Anda dapat memasukkan API Key AI pilihan Anda (Gemini, Groq, OpenAI, Ollama) di Dashboard Web > Aegis AI > Konfigurasi AI 24/7 agar bot ini bisa berdialog bebas dan menjawab segala pertanyaan lanjutan secara otomatis!"
                     if show_api_hint else ""
                 )
             )
@@ -977,7 +1222,7 @@ PANDUAN GAYA JAWABAN:
                 "Di Proxmox VE, VM *immich (104)* memang aktif menggunakan *~3.65 GB* dari 4.0 GB (89%). "
                 "Immich menjalankan microservices berat seperti Machine Learning (Facial Recognition & CLIP vector search), "
                 "database PostgreSQL vector, Redis queue, dan cache thumbnail foto yang intensif.\n\n"
-                "💡 *Keputusan AI Copilot:*\n"
+                "💡 *Keputusan Aegis AI:*\n"
                 "• *Alokasi VM Immich TETAP DIPERTAHANKAN di 4.0 GB* (tidak akan diturunkan) agar tidak crash OOM.\n"
                 "• Penghematan RAM difokuskan pada VM idle (Pentest 8GB->2GB, Pambuluah 5GB->2GB, Web 4GB->2GB) yang totalnya menghemat ~13 GB RAM untuk host PVE!"
             )
@@ -1024,24 +1269,25 @@ PANDUAN GAYA JAWABAN:
             pve_ram_tot = fleet.get('pve_ram_total_gb', 0)
             pve_pct = fleet.get('pve_ram_used_pct', 0)
             return (
-                "🤖 *SENTINEL AI HOMELAB COPILOT*\n"
+                "🛡️ *AEGIS AI HOMELAB ADVISOR*\n"
                 "━━━━━━━━━━━━━━━━━━━━━━━━━\n"
                 f"📊 *Kondisi Armada:* 🟢 {fleet.get('online_nodes', 9)}/{fleet.get('total_nodes', 9)} Node Online\n"
                 f"🖥️ *Host Proxmox VE:* RAM {pve_ram_used} / {pve_ram_tot} GB ({pve_pct}% ⚠️)\n"
                 f"📦 *Guest Workload:* {fleet.get('total_vms', 8)} VM Berjalan Aktif\n\n"
-                "💡 Anda dapat menghubungkan API AI (Gemini, Groq, OpenAI, Ollama) di Dashboard Web > AI Copilot > Konfigurasi AI untuk berdialog bebas tanpa batas!"
+                "💡 Anda dapat menghubungkan API AI (Gemini, Groq, OpenAI, Ollama) di Dashboard Web > Aegis AI > Konfigurasi AI untuk berdialog bebas tanpa batas!"
             )
 
         # G. General Fallback with invitation to configure AI API key
         return (
-            "🤖 *Sentinel AI Homelab Copilot*\n"
+            "🛡️ *Aegis AI - Homelab Advisor*\n"
             "━━━━━━━━━━━━━━━━━━━━━━━━━\n"
+            "👨‍💻 _Engineered by Aidil Andriandas_\n"
             f"Pertanyaan Anda: \"{text}\"\n\n"
             "⚠️ *API AI Belum Dikonfigurasi di Dashboard!*\n"
             "Agar saya bisa berdialog bebas dan menjawab segala pertanyaan tanpa batasan template (seperti rekan senior engineer):\n\n"
             "👉 *Langkah Mengaktifkan AI Bebas Pilih:*\n"
             "1. Buka Web Dashboard NOC (`http://10.10.10.9:8888`)\n"
-            "2. Klik menu **AI Copilot (Smart Advisor)** di header atas\n"
+            "2. Klik menu **Aegis AI (Smart Advisor)** di header atas\n"
             "3. Buka tab **Konfigurasi 24/7 & API AI**\n"
             "4. Pilih AI Provider yang Anda inginkan:\n"
             "   • **Google Gemini** (Gratis di *aistudio.google.com*)\n"
@@ -1053,12 +1299,86 @@ PANDUAN GAYA JAWABAN:
             "Setelah itu, bot ini akan langsung menjawab segala pertanyaan Anda dengan penalaran AI penuh!"
         )
 
+    # ─────────────────────────────────────────────────────────────────────────
+    # MAIN TELEGRAM MESSAGE DISPATCHER (agentic-aware)
+    # ─────────────────────────────────────────────────────────────────────────
+
+    def _handle_telegram_message(self, text: str, chat_id: str) -> str:
+        """
+        Orchestrates message handling:
+        1. Check if this is a confirmation reply ("ya" / "batalkan") for a pending action.
+        2. Parse for agentic intent → send confirmation prompt.
+        3. Fall back to generate_chat_reply (LLM / heuristic).
+        """
+        q = text.strip().lower()
+        now = time.time()
+        CONFIRM_TIMEOUT = 120  # seconds
+
+        # ── Step 1: Handle confirmation reply ────────────────────────────────
+        with self._lock:
+            pending = self._pending_confirmations.get(chat_id)
+
+        if pending:
+            # Expire old pending confirmations
+            if now - pending.get("ts", 0) > CONFIRM_TIMEOUT:
+                with self._lock:
+                    self._pending_confirmations.pop(chat_id, None)
+                return "⏰ *Waktu konfirmasi habis* (120 detik). Perintah dibatalkan otomatis."
+
+            # User says YES
+            if q in ["ya", "yes", "ok", "oke", "setuju", "lanjutkan", "lanjut", "konfirmasi", "execute", "eksekusi"]:
+                with self._lock:
+                    self._pending_confirmations.pop(chat_id, None)
+                print(f"🤖 [Agentic] User confirmed action: {pending['cmd']}")
+                return self._execute_confirmed_action(pending)
+
+            # User says NO
+            if q in ["tidak", "batal", "batalkan", "cancel", "no", "ga", "gak", "jangan"]:
+                with self._lock:
+                    self._pending_confirmations.pop(chat_id, None)
+                return "❌ Perintah dibatalkan. Ada yang bisa saya bantu lagi?"
+
+            # Not a direct confirm/cancel — clear the pending and process as new message
+            with self._lock:
+                self._pending_confirmations.pop(chat_id, None)
+
+        # ── Step 2: Parse for agentic action intent ──────────────────────────
+        try:
+            intent = self._parse_agentic_intent(text)
+        except Exception as e:
+            print(f"🤖 [Agentic] Intent parse error: {e}")
+            intent = None
+
+        if intent:
+            if intent.get("type") == "denied":
+                return intent["reason"]
+
+            # Store pending confirmation
+            pending_entry = {**intent, "ts": now}
+            with self._lock:
+                self._pending_confirmations[chat_id] = pending_entry
+
+            desc = intent["desc"]
+            cmd = intent["cmd"]
+            return (
+                f"⚠️ *Konfirmasi Diperlukan*\n\n"
+                f"Saya akan menjalankan:\n"
+                f"*{desc}*\n\n"
+                f"Perintah: `{cmd}`\n"
+                f"Target: Node `{intent.get('server_id', 'srv-pve')}`\n\n"
+                f"Balas *ya* untuk eksekusi atau *batalkan* untuk membatalkan.\n"
+                f"_(Konfirmasi akan kadaluarsa dalam 120 detik)_"
+            )
+
+        # ── Step 3: Regular chat reply (LLM / heuristic) ─────────────────────
+        return self.generate_chat_reply(text)
+
     def _telegram_chat_loop(self):
         """
         Background listener for bidirectional interactive chat on Telegram.
-        Polls getUpdates and generates intelligent AI Copilot responses.
+        Polls getUpdates and generates intelligent Aegis AI responses.
         """
-        print("🤖 Sentinel AI Homelab Copilot Telegram Chat Listener started.")
+        print("🛡️ Aegis AI Telegram Chat Listener started.")
         time.sleep(5)
         last_offset = 0
 
@@ -1111,10 +1431,10 @@ PANDUAN GAYA JAWABAN:
                             except Exception:
                                 pass
 
-                            # Generate intelligent AI Copilot reply
-                            reply = self.generate_chat_reply(text)
+                            # ── AGENTIC MESSAGE HANDLER ──────────────────────
+                            reply = self._handle_telegram_message(text, sender_chat)
                             self.send_telegram_direct(reply)
-                            print(f"🤖 [Telegram Chat Replied]: {reply[:60]}...")
+                            print(f"🤖 [Telegram Chat Replied]: {reply[:80]}...")
 
             except Exception as e:
                 time.sleep(4)
@@ -1126,7 +1446,7 @@ PANDUAN GAYA JAWABAN:
         """
         # Initial sleep to allow telemetry collection to warm up
         time.sleep(10)
-        print("🤖 Sentinel AI Homelab Copilot 24/7 Observer started.")
+        print("🛡️ Aegis AI 24/7 Homelab Observer started.")
 
         # Seed initial node states
         try:

@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """
-Sentinel Agent - High-fidelity Linux, Storage, Services & Proxmox Collector
+Aegis Agent - High-fidelity Linux, Storage, Services & Proxmox Collector
+Engineered by Aidil Andriandas.
 Can be deployed as a systemd service or cron job on any Linux/Proxmox node.
 """
 
@@ -37,30 +38,80 @@ def get_cpu_ram():
 
     load = os.getloadavg() if hasattr(os, "getloadavg") else [0.0, 0.0, 0.0]
 
-    # Quick CPU load sample
+    # CPU, Network, and TCP sample
     def read_stat():
-        with open('/proc/stat', 'r') as f:
-            for l in f:
-                if l.startswith('cpu '):
-                    fields = [float(x) for x in l.split()[1:8]]
-                    idle = fields[3] + fields[4]
-                    total = sum(fields)
-                    return idle, total
-        return 0, 0
+        try:
+            with open('/proc/stat', 'r') as f:
+                for l in f:
+                    if l.startswith('cpu '):
+                        fields = [float(x) for x in l.split()[1:9]]
+                        idle = fields[3] + fields[4]
+                        total = sum(fields)
+                        io = fields[4]
+                        steal = fields[7] if len(fields) > 7 else 0.0
+                        return idle, total, io, steal
+        except: pass
+        return 0, 0, 0, 0
 
-    idle1, tot1 = read_stat()
+    def read_net():
+        rx, tx = 0, 0
+        try:
+            with open('/proc/net/dev', 'r') as f:
+                for l in f.readlines()[2:]:
+                    parts = l.split(':')
+                    if len(parts) == 2 and parts[0].strip() != 'lo':
+                        vals = parts[1].split()
+                        rx += int(vals[0])
+                        tx += int(vals[8])
+        except: pass
+        return rx, tx
+
+    def read_tcp():
+        est, lis, tw = 0, 0, 0
+        for p in ['/proc/net/tcp', '/proc/net/tcp6']:
+            if os.path.exists(p):
+                try:
+                    with open(p, 'r') as f:
+                        for l in f.readlines()[1:]:
+                            st = l.split()[3]
+                            if st == '01': est += 1
+                            elif st == '0A': lis += 1
+                            elif st == '06': tw += 1
+                except: pass
+        return {"established": est, "listen": lis, "timewait": tw}
+
+    def get_cpu_cores():
+        c = 1
+        mhz = 0.0
+        try:
+            with open('/proc/cpuinfo', 'r') as f:
+                cores = 0
+                for l in f:
+                    if l.startswith('processor'): cores += 1
+                    elif l.startswith('cpu MHz'): mhz = float(l.split(':')[1].strip())
+                if cores > 0: c = cores
+        except: pass
+        return c, mhz
+
+    idle1, tot1, io1, st1 = read_stat()
+    rx1, tx1 = read_net()
     time.sleep(0.5)
-    idle2, tot2 = read_stat()
+    idle2, tot2, io2, st2 = read_stat()
+    rx2, tx2 = read_net()
     
     tot_diff = tot2 - tot1
     idle_diff = idle2 - idle1
-    cpu_pct = 0.0
+    cpu_pct, cpu_iowait, cpu_steal = 0.0, 0.0, 0.0
     if tot_diff > 0:
         cpu_pct = round((1.0 - (idle_diff / tot_diff)) * 100.0, 1)
+        cpu_iowait = round(((io2 - io1) / tot_diff) * 100.0, 1)
+        cpu_steal = round(((st2 - st1) / tot_diff) * 100.0, 1)
 
     uptime_sec = 0
-    with open('/proc/uptime', 'r') as f:
-        uptime_sec = int(float(f.readline().split()[0]))
+    try:
+        with open('/proc/uptime', 'r') as f:
+            uptime_sec = int(float(f.readline().split()[0]))
+    except: pass
 
     def format_uptime(s):
         if s <= 0: return "0m"
@@ -84,12 +135,14 @@ def get_cpu_ram():
                                         return {"temp_c": round(c, 1), "source": "Hardware Sensor", "status": st}
                 except Exception:
                     pass
-        import random
-        c = 39.5 + (pct * 0.28) + (random.random() - 0.5) * 0.8
-        st = "Normal" if c < 70 else ("Warning" if c < 80 else "Critical")
-        return {"temp_c": round(c, 1), "source": "Estimated Thermal", "status": st}
+        # No fallback random data. Let dashboard know it's unavailable.
+        return {"temp_c": 0, "source": "Unavailable", "status": "Normal"}
 
     thermal = get_cpu_temp(cpu_pct)
+    cores, mhz = get_cpu_cores()
+    
+    rx_kbps = max(0, round(((rx2 - rx1) / 1024) / 0.5))
+    tx_kbps = max(0, round(((tx2 - tx1) / 1024) / 0.5))
 
     return {
         "hostname": socket.gethostname(),
@@ -99,13 +152,20 @@ def get_cpu_ram():
         "cpu_temp_source": thermal["source"],
         "cpu_temp_status": thermal["status"],
         "cpu_usage_pct": cpu_pct,
+        "cpu_diag": {
+            "cores": cores,
+            "mhz": round(mhz, 1),
+            "iowait_pct": cpu_iowait,
+            "steal_pct": cpu_steal
+        },
         "ram": {
             "total_mb": round(total_mem, 1),
             "used_mb": round(used_mem, 1),
             "swap_used_pct": 0
         },
         "load_avg": list(load),
-        "network": {"rx_kbps": 210, "tx_kbps": 65}
+        "network": {"rx_kbps": rx_kbps, "tx_kbps": tx_kbps},
+        "tcp_sockets": read_tcp()
     }
 
 def get_disks():
@@ -570,7 +630,7 @@ def get_open_ports():
         6443: "Kubernetes API Server",
         8006: "Proxmox VE Web Management",
         8080: "HTTP Alternate / Proxy",
-        8888: "Sentinel NOC Dashboard",
+        8888: "Aegis NOC Dashboard",
         9000: "Portainer / FastCGI",
         9100: "Prometheus Node Exporter",
         10909: "SSH Custom Management Port",
@@ -823,7 +883,7 @@ def handle_agent_action(act):
 
     print(f"[{time.strftime('%X')}] Action result: {'SUCCESS' if success else 'FAILED'} - {msg}")
 
-    # Report execution result back to Sentinel NOC server
+    # Report execution result back to Aegis NOC server
     try:
         result_url = SERVER_ENDPOINT.replace("/telemetry", "/action/result")
         res_payload = {
@@ -834,11 +894,11 @@ def handle_agent_action(act):
         req = urllib.request.Request(
             result_url,
             data=json.dumps(res_payload).encode("utf-8"),
-            headers={"Content-Type": "application/json", "User-Agent": "Sentinel-Agent/1.0"},
+            headers={"Content-Type": "application/json", "User-Agent": "Aegis-Agent/1.0"},
             method="POST"
         )
         with urllib.request.urlopen(req, timeout=8) as r:
-            print(f"[{time.strftime('%X')}] Action status reported to Sentinel NOC server.")
+            print(f"[{time.strftime('%X')}] Action status reported to Aegis NOC server.")
     except Exception as err:
         print(f"[{time.strftime('%X')}] Error reporting action result: {err}")
 
@@ -866,7 +926,7 @@ def collect_and_send():
         req = urllib.request.Request(
             SERVER_ENDPOINT,
             data=data_bytes,
-            headers={"Content-Type": "application/json", "User-Agent": "Sentinel-Agent/1.0"},
+            headers={"Content-Type": "application/json", "User-Agent": "Aegis-Agent/1.0"},
             method="POST"
         )
         with urllib.request.urlopen(req, timeout=8) as resp:
@@ -883,7 +943,7 @@ def collect_and_send():
         print(f"[{time.strftime('%X')}] Error syncing telemetry: {err}")
 
 if __name__ == "__main__":
-    print(f"Sentinel Agent started. Target: {SERVER_ENDPOINT}")
+    print(f"Aegis Agent started. Target: {SERVER_ENDPOINT}")
     while True:
         collect_and_send()
         time.sleep(COLLECT_INTERVAL)

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sentinel NOC - Deep Infrastructure, Storage & Security Sentinel</title>
+  <title>Aegis NOC - Infrastructure, Storage & Security Observability</title>
   <!-- Google Fonts: Inter & JetBrains Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -196,10 +196,14 @@
         <!-- Clean Brand Name & Badge -->
         <div class="flex items-center gap-2.5">
           <span class="text-base font-extrabold tracking-wider text-white font-sans">
-            SENTINEL
+            AEGIS
           </span>
           <span class="px-2 py-0.5 text-[10px] font-mono font-bold tracking-widest rounded-md bg-cyan-500/10 text-cyan-300 border border-cyan-500/25">
             NOC
+          </span>
+          <span class="hidden md:inline-flex items-center gap-1.5 px-2.5 py-0.5 text-[10px] font-mono font-bold tracking-wider rounded-md bg-gradient-to-r from-blue-950/70 to-cyan-950/70 text-cyan-300 border border-cyan-500/30 shadow-sm" title="System Architect & Creator">
+            <i class="fa-solid fa-code text-[9px] text-cyan-400"></i>
+            <span>BY AIDIL ANDRIANDAS</span>
           </span>
         </div>
 
@@ -226,6 +230,13 @@
           <i class="fa-solid fa-network-wired text-[10px] text-cyan-400"></i>
           <span>Cluster Fleet</span>
           <span class="px-1.5 py-0.2 rounded text-[10px] font-mono bg-cyan-500/15 text-cyan-300 border border-cyan-500/30" id="clusterTotalBadge">--</span>
+        </button>
+        <button id="viewBtnSecurity" onclick="switchDashboardView('security')" class="px-3.5 py-1.5 font-semibold rounded-lg text-slate-400 hover:text-white transition-all flex items-center gap-1.5">
+          <i class="fa-solid fa-shield-halved text-[10px] text-emerald-400"></i>
+          <span>Traffic Shield</span>
+          <span class="px-1.5 py-0.2 rounded text-[10px] font-mono bg-emerald-500/15 text-emerald-300 border border-emerald-500/30 flex items-center gap-1" id="securityTrafficBadge">
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span> LIVE
+          </span>
         </button>
       </div>
 
@@ -291,10 +302,10 @@
           <span class="hidden xl:inline">Power Hub</span>
         </button>
 
-        <!-- AI Homelab Copilot Button (24/7 Smart Advisor) -->
-        <button onclick="openAiCopilotModal()" title="AI Homelab Copilot & Autonomous Advisor (24/7 Monitoring & Smart Advice)" class="px-2.5 py-1.5 rounded-lg bg-gradient-to-r from-purple-900/60 to-indigo-900/60 hover:from-purple-800/80 hover:to-indigo-800/80 border border-purple-500/40 hover:border-purple-400/80 text-purple-200 hover:text-white transition-all flex items-center gap-1.5 shadow-sm text-xs font-mono font-semibold group">
+        <!-- Aegis AI Button (24/7 Smart Advisor) -->
+        <button onclick="openAiCopilotModal()" title="Aegis AI - Smart Homelab Advisor (24/7 Monitoring & Optimization)" class="px-2.5 py-1.5 rounded-lg bg-gradient-to-r from-purple-900/60 to-indigo-900/60 hover:from-purple-800/80 hover:to-indigo-800/80 border border-purple-500/40 hover:border-purple-400/80 text-purple-200 hover:text-white transition-all flex items-center gap-1.5 shadow-sm text-xs font-mono font-semibold group">
           <i class="fa-solid fa-robot text-purple-400 group-hover:scale-110 transition-transform text-xs"></i>
-          <span class="hidden xl:inline">AI Copilot</span>
+          <span class="hidden xl:inline">Aegis AI</span>
           <span id="aiNavScoreBadge" class="px-1.5 py-0.2 text-[10px] rounded bg-purple-500/30 text-purple-300 font-bold border border-purple-400/30">24/7</span>
         </button>
 
@@ -687,7 +698,7 @@
                 <i class="fa-solid fa-bolt text-xs"></i>
               </span>
               <div>
-                <h3 class="text-xs font-bold text-white uppercase tracking-wider">Power & PLN Cost Sentinel</h3>
+                <h3 class="text-xs font-bold text-white uppercase tracking-wider">Power & PLN Cost Tracker</h3>
                 <p class="text-[10px] text-slate-400" id="powerScopeSub">Estimasi daya listrik</p>
               </div>
             </div>
@@ -762,7 +773,7 @@
         </div>
       </div>
 
-      <!-- Card 3: Proxmox VE Backup & Snapshot Sentinel -->
+      <!-- Card 3: Proxmox VE Backup & Snapshot Shield -->
       <div class="bg-surface-900 border border-slate-800/80 rounded-2xl p-4 shadow-sm flex flex-col justify-between">
         <div>
           <div class="flex items-center justify-between pb-2 mb-3 border-b border-slate-800/70">
@@ -771,7 +782,7 @@
                 <i class="fa-solid fa-box-archive text-xs"></i>
               </span>
               <div>
-                <h3 class="text-xs font-bold text-white uppercase tracking-wider">Proxmox Backup Sentinel</h3>
+                <h3 class="text-xs font-bold text-white uppercase tracking-wider">Proxmox Backup Shield</h3>
                 <p class="text-[10px] text-slate-400">Status & retensi backup VM/LXC</p>
               </div>
             </div>
@@ -897,13 +908,13 @@
         </div>
       </div>
 
-      <!-- Right Column: Web Availability & SSL Sentinel -->
+      <!-- Right Column: Web Availability & SSL Shield -->
       <div class="bg-surface-900 border border-slate-800/80 rounded-2xl p-5 shadow-lg flex flex-col">
         <div class="flex items-center justify-between pb-3 mb-3 border-b border-slate-800">
           <div>
             <h3 class="text-sm font-bold text-white flex items-center gap-2">
               <i class="fa-solid fa-globe text-cyan-400"></i>
-              HOMELAB ENDPOINTS & SSL SENTINEL
+              HOMELAB ENDPOINTS & SSL SHIELD
             </h3>
             <p class="text-xs text-slate-400">External/Internal HTTP availability & SSL expiry countdown</p>
           </div>
@@ -1100,7 +1111,7 @@
     <!-- ================================================================= -->
     <div id="clusterFleetView" class="space-y-6 hidden">
       
-      <!-- AI Homelab Copilot & Autonomous Advisor Quick Banner -->
+      <!-- Aegis AI Quick Banner -->
       <div id="aiCopilotQuickBanner" class="relative overflow-hidden bg-gradient-to-r from-purple-950/70 via-surface-900/95 to-indigo-950/70 border border-purple-500/30 hover:border-purple-400/50 rounded-2xl p-4 shadow-lg transition-all duration-300 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
         <div class="flex items-center gap-3">
           <div class="w-10 h-10 rounded-xl bg-purple-500/20 border border-purple-500/40 flex items-center justify-center text-purple-400 shadow-inner shrink-0">
@@ -1108,7 +1119,7 @@
           </div>
           <div>
             <div class="flex items-center gap-2">
-              <span class="font-bold text-white text-sm">Sentinel AI Homelab Copilot</span>
+              <span class="font-bold text-white text-sm">Aegis AI - Smart Homelab Advisor</span>
               <span id="aiBannerScoreBadge" class="px-2 py-0.5 rounded-full text-[10px] font-mono font-bold bg-purple-500/20 text-purple-300 border border-purple-500/40 flex items-center gap-1">
                 <span class="w-1.5 h-1.5 rounded-full bg-purple-400 animate-pulse"></span> 24/7 ACTIVE
               </span>
@@ -1295,7 +1306,7 @@
               </span>
               <span class="flex items-center gap-1.5">
                 <span class="w-3 h-0.5 bg-cyan-400 rounded"></span>
-                <span>Sentinel Telemetry Stream</span>
+                <span>Aegis Telemetry Stream</span>
               </span>
             </div>
             <div class="text-slate-500">
@@ -1459,6 +1470,1080 @@
       </section>
 
     </div> <!-- /#clusterFleetView -->
+
+    <!-- Dedicated Real-time Cyber Security & Traffic Shield View (Engineered by Aidil Andriandas) -->
+    <div id="securityTrafficView" class="space-y-6 hidden">
+      <!-- 1. Header Context Banner -->
+      <div class="relative overflow-hidden bg-gradient-to-r from-surface-900/95 via-surface-950/90 to-surface-900/95 backdrop-blur-md border border-slate-800/80 hover:border-emerald-500/40 rounded-2xl p-4 sm:p-5 shadow-lg transition-all duration-300 flex flex-col md:flex-row md:items-center justify-between gap-4 group">
+        <div class="absolute -top-12 -left-12 w-48 h-48 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none group-hover:bg-emerald-500/15 transition-all"></div>
+        
+        <div class="flex items-start sm:items-center gap-4 relative z-10">
+          <div class="w-12 h-12 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 font-bold shrink-0 shadow-[0_0_15px_rgba(16,185,129,0.15)] group-hover:scale-105 transition-transform duration-300">
+            <i class="fa-solid fa-shield-virus text-xl"></i>
+          </div>
+          <div>
+            <div class="flex items-center gap-2.5 flex-wrap">
+              <h2 class="text-lg font-black text-white font-mono tracking-tight">AEGIS CYBER SHIELD SOC</h2>
+              <span class="px-2.5 py-0.5 text-[10px] font-mono font-bold tracking-wider uppercase rounded-md bg-emerald-500/15 text-emerald-300 border border-emerald-500/40 shadow-[0_0_10px_rgba(16,185,129,0.2)]">
+                ALL-IN-ONE PERIMETER DEFENSE
+              </span>
+              <span id="secShieldStatusBadge" class="px-2.5 py-0.5 text-[10px] font-mono font-bold rounded-full bg-emerald-500/15 text-emerald-400 border border-emerald-500/40 flex items-center gap-1.5 shadow-[0_0_8px_rgba(16,185,129,0.2)]">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></span> <span id="secShieldStatusText">OPTIMAL DEFENSE</span>
+              </span>
+              <span class="hidden md:inline-flex items-center gap-1.5 px-2.5 py-0.5 text-[10px] font-mono font-bold tracking-wider rounded-md bg-gradient-to-r from-blue-950/70 to-emerald-950/70 text-emerald-300 border border-emerald-500/30 shadow-sm">
+                <i class="fa-solid fa-code text-[9px] text-emerald-400"></i>
+                <span>ENGINEERED BY AIDIL ANDRIANDAS</span>
+              </span>
+            </div>
+            <div class="flex items-center gap-2.5 text-xs text-slate-400 font-mono mt-1.5 flex-wrap">
+              <span class="text-slate-300">Real-Time Traffic • Fail2ban Auto-Jail • Nmap Radar • OS Hardening • FIM • AI Copilot</span>
+              <span class="text-slate-600">•</span>
+              <span class="text-emerald-400 font-semibold" id="secLiveRateSubtitle">Active Sampling: 2.0s</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-2 shrink-0 flex-wrap relative z-10 pt-2 md:pt-0 border-t md:border-t-0 border-slate-800/80">
+          <button onclick="toggleSecurityAutoRefresh()" id="secAutoRefreshBtn" class="px-3 py-1.5 text-xs font-semibold rounded-xl bg-surface-950 hover:bg-slate-800 text-slate-300 border border-slate-800 transition flex items-center gap-1.5 font-mono shadow-sm">
+            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" id="secAutoRefreshDot"></span>
+            <span id="secAutoRefreshLabel">Auto: 2s</span>
+          </button>
+          <button onclick="fetchSecurityTraffic()" class="px-3 py-1.5 text-xs font-semibold rounded-xl bg-surface-800 hover:bg-surface-700 text-slate-200 border border-slate-700 transition flex items-center gap-1.5">
+            <i class="fa-solid fa-arrows-rotate text-[11px]" id="secRefreshSpinner"></i>
+            <span>Scan Now</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Active Recon Alert Banner (Appears when port sweep detected) -->
+      <div id="secReconAlertBanner" class="hidden p-4 rounded-2xl bg-gradient-to-r from-rose-950/90 via-surface-900 to-rose-950/90 border border-rose-500/40 shadow-lg flex flex-col sm:flex-row items-center justify-between gap-3 animate-pulse">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-xl bg-rose-500/20 border border-rose-500/40 flex items-center justify-center text-rose-400 font-bold shrink-0">
+            <i class="fa-solid fa-triangle-exclamation text-lg"></i>
+          </div>
+          <div>
+            <div class="flex items-center gap-2">
+              <span class="text-sm font-bold text-white tracking-wide">RECONNAISSANCE / PORT SCAN IN PROGRESS!</span>
+              <span class="px-2 py-0.5 rounded text-[10px] font-mono bg-rose-500/20 text-rose-300 border border-rose-500/40">CRITICAL</span>
+            </div>
+            <p class="text-xs text-rose-300 font-mono mt-0.5" id="secReconAlertMessage">Suspicious IP probing multiple host ports in rapid succession.</p>
+          </div>
+        </div>
+        <div class="flex items-center gap-2 shrink-0">
+          <button onclick="switchSecSubTab('recon')" class="px-3.5 py-1.5 rounded-xl bg-rose-600 hover:bg-rose-500 text-white font-semibold text-xs transition">
+            View In Radar
+          </button>
+        </div>
+      </div>
+
+      <!-- Security Shield Sub-Nav Tabs (The 9 Feature Modules) -->
+      <div class="flex items-center bg-surface-950 p-1.5 rounded-2xl border border-slate-800 overflow-x-auto scrollbar-thin gap-1 text-xs font-mono">
+        <button onclick="switchSecSubTab('traffic')" id="secTabBtn_traffic" class="px-3.5 py-1.5 font-bold rounded-xl bg-emerald-600 text-white shadow-sm transition flex items-center gap-2 shrink-0">
+          <i class="fa-solid fa-satellite-dish text-[11px]"></i>
+          <span>1. Live Sockets</span>
+        </button>
+        <button onclick="switchSecSubTab('jail')" id="secTabBtn_jail" class="px-3.5 py-1.5 font-bold rounded-xl text-slate-400 hover:text-white transition flex items-center gap-2 shrink-0">
+          <i class="fa-solid fa-handcuffs text-rose-400 text-[11px]"></i>
+          <span>2. Jail Matrix</span>
+          <span id="secSubNavJailBadge" class="px-1.5 py-0.2 rounded text-[10px] bg-rose-500/15 text-rose-300 border border-rose-500/30">0</span>
+        </button>
+        <button onclick="switchSecSubTab('recon')" id="secTabBtn_recon" class="px-3.5 py-1.5 font-bold rounded-xl text-slate-400 hover:text-white transition flex items-center gap-2 shrink-0">
+          <i class="fa-solid fa-radar text-amber-400 text-[11px]"></i>
+          <span>3. Recon Radar</span>
+          <span id="secSubNavReconBadge" class="px-1.5 py-0.2 rounded text-[10px] bg-amber-500/15 text-amber-300 border border-amber-500/30">0</span>
+        </button>
+        <button onclick="switchSecSubTab('geo')" id="secTabBtn_geo" class="px-3.5 py-1.5 font-bold rounded-xl text-slate-400 hover:text-white transition flex items-center gap-2 shrink-0">
+          <i class="fa-solid fa-earth-americas text-cyan-400 text-[11px]"></i>
+          <span>4. GeoIP Map</span>
+        </button>
+        <button onclick="switchSecSubTab('hardening')" id="secTabBtn_hardening" class="px-3.5 py-1.5 font-bold rounded-xl text-slate-400 hover:text-white transition flex items-center gap-2 shrink-0">
+          <i class="fa-solid fa-shield-halved text-blue-400 text-[11px]"></i>
+          <span>5. OS Hardening</span>
+          <span id="secSubNavHardeningBadge" class="px-1.5 py-0.2 rounded text-[10px] bg-blue-500/15 text-blue-300 border border-blue-500/30">CIS</span>
+        </button>
+        <button onclick="switchSecSubTab('fim')" id="secTabBtn_fim" class="px-3.5 py-1.5 font-bold rounded-xl text-slate-400 hover:text-white transition flex items-center gap-2 shrink-0">
+          <i class="fa-solid fa-fingerprint text-purple-400 text-[11px]"></i>
+          <span>6. FIM Integrity</span>
+          <span id="secSubNavFimBadge" class="px-1.5 py-0.2 rounded text-[10px] bg-purple-500/15 text-purple-300 border border-purple-500/30">INTACT</span>
+        </button>
+        <button onclick="switchSecSubTab('docker')" id="secTabBtn_docker" class="px-3.5 py-1.5 font-bold rounded-xl text-slate-400 hover:text-white transition flex items-center gap-2 shrink-0">
+          <i class="fa-brands fa-docker text-sky-400 text-[11px]"></i>
+          <span>7. Docker Audit</span>
+          <span id="secSubNavDockerBadge" class="px-1.5 py-0.2 rounded text-[10px] bg-sky-500/15 text-sky-300 border border-sky-500/30">AUDIT</span>
+        </button>
+        <button onclick="switchSecSubTab('process')" id="secTabBtn_process" class="px-3.5 py-1.5 font-bold rounded-xl text-slate-400 hover:text-white transition flex items-center gap-2 shrink-0">
+          <i class="fa-solid fa-crosshairs text-rose-400 text-[11px]"></i>
+          <span>8. Process Hunter</span>
+          <span id="secSubNavProcessBadge" class="px-1.5 py-0.2 rounded text-[10px] bg-rose-500/15 text-rose-300 border border-rose-500/30">TOP</span>
+        </button>
+        <button onclick="switchSecSubTab('c2')" id="secTabBtn_c2" class="px-3.5 py-1.5 font-bold rounded-xl text-slate-400 hover:text-white transition flex items-center gap-2 shrink-0">
+          <i class="fa-solid fa-shield-virus text-emerald-400 text-[11px]"></i>
+          <span>9. C2 / Miner Shield</span>
+          <span id="secSubNavC2Badge" class="px-1.5 py-0.2 rounded text-[10px] bg-emerald-500/15 text-emerald-300 border border-emerald-500/30">ACTIVE</span>
+        </button>
+        <button onclick="switchSecSubTab('perimeter')" id="secTabBtn_perimeter" class="px-3.5 py-1.5 font-bold rounded-xl text-slate-400 hover:text-white transition flex items-center gap-2 shrink-0">
+          <i class="fa-solid fa-network-wired text-cyan-400 text-[11px]"></i>
+          <span>10. Hypervisor Perimeter</span>
+          <span id="secSubNavPerimeterBadge" class="px-1.5 py-0.2 rounded text-[10px] bg-cyan-500/15 text-cyan-300 border border-cyan-500/30">8 VMs</span>
+        </button>
+      </div>
+
+      <!-- =================================================================== -->
+      <!-- TAB 1: LIVE SOCKETS & REALTIME TRAFFIC STREAM                        -->
+      <!-- =================================================================== -->
+      <div id="secSubTabContent_traffic" class="space-y-6">
+        <!-- KPI Cards Row -->
+        <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <!-- KPI 1: Inbound Throughput -->
+          <div class="bg-gradient-to-b from-surface-900/90 to-surface-950/90 border border-slate-800/80 hover:border-emerald-500/40 rounded-2xl p-4 shadow-sm transition group">
+            <div class="flex items-center justify-between text-slate-400 mb-2">
+              <span class="text-[11px] font-bold uppercase tracking-wider flex items-center gap-2 text-slate-300">
+                <i class="fa-solid fa-arrow-down-long text-emerald-400"></i> Inbound Rate (RX)
+              </span>
+              <span class="px-2 py-0.5 text-[10px] font-mono font-bold rounded bg-emerald-500/15 text-emerald-300 border border-emerald-500/30" id="secRxPps">0 pps</span>
+            </div>
+            <div class="flex items-baseline justify-between mt-1">
+              <span class="text-3xl font-black text-white font-mono tracking-tight" id="secRxKbps">0.0 KB/s</span>
+              <span class="text-xs text-slate-400 font-mono" id="secTotalRx">-- MB Total</span>
+            </div>
+            <div class="mt-3 pt-2.5 border-t border-slate-800/80 flex items-center justify-between text-[11px] font-mono text-slate-400">
+              <span>Outbound (TX): <b class="text-cyan-400 font-semibold" id="secTxKbps">0.0 KB/s</b></span>
+              <span>Dropped: <b class="text-slate-300" id="secRxDrops">0</b></span>
+            </div>
+          </div>
+
+          <!-- KPI 2: Active Inbound Sockets -->
+          <div class="bg-gradient-to-b from-surface-900/90 to-surface-950/90 border border-slate-800/80 hover:border-cyan-500/40 rounded-2xl p-4 shadow-sm transition group">
+            <div class="flex items-center justify-between text-slate-400 mb-2">
+              <span class="text-[11px] font-bold uppercase tracking-wider flex items-center gap-2 text-slate-300">
+                <i class="fa-solid fa-network-wired text-cyan-400"></i> Active Sockets
+              </span>
+              <span class="px-2 py-0.5 text-[10px] font-mono font-bold rounded bg-cyan-500/15 text-cyan-300 border border-cyan-500/30" id="secTotalSockets">0 Sockets</span>
+            </div>
+            <div class="flex items-baseline justify-between mt-1">
+              <span class="text-3xl font-black text-white font-mono tracking-tight" id="secActiveInbound">0</span>
+              <span class="text-xs text-cyan-300/80 font-mono">Live Inbound</span>
+            </div>
+            <div class="mt-3 pt-2.5 border-t border-slate-800/80 flex items-center justify-between text-[11px] font-mono text-slate-400">
+              <span>Established: <b class="text-emerald-400 font-semibold" id="secEstablishedCount">0</b></span>
+              <span>Time-Wait: <b class="text-amber-400 font-semibold" id="secTimeWaitCount">0</b></span>
+              <span>Listen: <b class="text-blue-400 font-semibold" id="secListenCount">0</b></span>
+            </div>
+          </div>
+
+          <!-- KPI 3: Origin Breakdown (LAN vs WAN) -->
+          <div class="bg-gradient-to-b from-surface-900/90 to-surface-950/90 border border-slate-800/80 hover:border-purple-500/40 rounded-2xl p-4 shadow-sm transition group">
+            <div class="flex items-center justify-between text-slate-400 mb-2">
+              <span class="text-[11px] font-bold uppercase tracking-wider flex items-center gap-2 text-slate-300">
+                <i class="fa-solid fa-globe text-purple-400"></i> Traffic Origins
+              </span>
+              <span class="px-2 py-0.5 text-[10px] font-mono font-bold rounded bg-purple-500/15 text-purple-300 border border-purple-500/30">Network Map</span>
+            </div>
+            <div class="flex items-baseline justify-between mt-1">
+              <span class="text-3xl font-black text-white font-mono tracking-tight" id="secLanCount">0</span>
+              <span class="text-xs text-purple-300 font-mono font-bold">Cluster LAN / VPN</span>
+            </div>
+            <div class="mt-3 pt-2.5 border-t border-slate-800/80 flex items-center justify-between text-[11px] font-mono text-slate-400">
+              <span>Cluster 10.10.10.x: <b class="text-cyan-400 font-semibold" id="secClusterSubnetCount">0</b></span>
+              <span>WAN External: <b class="text-amber-400 font-semibold" id="secWanCount">0</b></span>
+            </div>
+          </div>
+
+          <!-- KPI 4: Threat Defense Score -->
+          <div class="bg-gradient-to-b from-surface-900/90 to-surface-950/90 border border-slate-800/80 hover:border-rose-500/40 rounded-2xl p-4 shadow-sm transition group">
+            <div class="flex items-center justify-between text-slate-400 mb-2">
+              <span class="text-[11px] font-bold uppercase tracking-wider flex items-center gap-2 text-slate-300">
+                <i class="fa-solid fa-shield-cat text-rose-400"></i> Threat Defense
+              </span>
+              <span class="px-2 py-0.5 text-[10px] font-mono font-bold rounded bg-rose-500/15 text-rose-300 border border-rose-500/30" id="secBlockedBadge">0 Blocked</span>
+            </div>
+            <div class="flex items-baseline justify-between mt-1">
+              <span class="text-3xl font-black text-white font-mono tracking-tight" id="secDefenseScore">100/100</span>
+              <span class="text-xs text-emerald-400 font-mono font-bold" id="secThreatScoreLabel">SECURE</span>
+            </div>
+            <div class="mt-3 pt-2.5 border-t border-slate-800/80 flex items-center justify-between text-[11px] font-mono text-slate-400">
+              <span>Failed Auth: <b class="text-rose-400 font-semibold" id="secFailedAuthCount">0</b></span>
+              <span>Jailed: <b class="text-amber-400 font-semibold" id="secJailedKpi">0</b></span>
+            </div>
+          </div>
+        </section>
+
+        <!-- Realtime Throughput Chart & Top Ports -->
+        <section class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          <div class="lg:col-span-2 bg-surface-900/90 border border-slate-800/80 rounded-2xl p-5 shadow-sm flex flex-col justify-between">
+            <div class="flex items-center justify-between mb-3">
+              <div class="flex items-center gap-2">
+                <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                <h3 class="text-sm font-bold text-white tracking-wide">Live Inbound vs Outbound Network Flow</h3>
+              </div>
+              <div class="flex items-center gap-3 text-xs font-mono">
+                <span class="flex items-center gap-1.5 text-emerald-400"><span class="w-2.5 h-1 bg-emerald-400 rounded-sm"></span> RX (Inbound)</span>
+                <span class="flex items-center gap-1.5 text-cyan-400"><span class="w-2.5 h-1 bg-cyan-400 rounded-sm"></span> TX (Outbound)</span>
+              </div>
+            </div>
+            <div class="h-56 relative w-full">
+              <canvas id="secTrafficChart"></canvas>
+            </div>
+            <div class="mt-3 pt-2.5 border-t border-slate-800/80 flex items-center justify-between text-xs text-slate-400 font-mono">
+              <span>Rolling 60-Second Real-Time Telemetry Buffer</span>
+              <span class="text-slate-500">Interface: ens18 / host</span>
+            </div>
+          </div>
+
+          <div class="bg-surface-900/90 border border-slate-800/80 rounded-2xl p-5 shadow-sm flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-3">
+                <h3 class="text-sm font-bold text-white tracking-wide flex items-center gap-2">
+                  <i class="fa-solid fa-server text-cyan-400"></i> Top Listening Ports
+                </h3>
+                <span class="text-[11px] font-mono text-slate-400">Target Services</span>
+              </div>
+              <p class="text-xs text-slate-400 mb-4">Live socket distribution across monitored daemon ports on host.</p>
+              <div id="secServicesContainer" class="space-y-3">
+                <!-- Dynamically populated service bars -->
+              </div>
+            </div>
+            
+            <div class="mt-4 pt-3 border-t border-slate-800/80 flex items-center justify-between text-[11px] font-mono text-slate-400">
+              <span>Perimeter Defense: <b class="text-emerald-400">ARMED</b></span>
+              <span>Aegis Shield</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- Real-Time Inbound Traffic Inspector Table -->
+        <section class="bg-surface-900/90 border border-slate-800/80 rounded-2xl shadow-sm overflow-hidden">
+          <div class="p-4 sm:p-5 border-b border-slate-800/80 flex flex-col md:flex-row md:items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+              <div class="w-9 h-9 rounded-xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-400 font-bold">
+                <i class="fa-solid fa-radar text-base"></i>
+              </div>
+              <div>
+                <h3 class="text-sm font-bold text-white tracking-wide flex items-center gap-2">
+                  Real-Time Inbound Traffic Inspector
+                  <span class="px-2 py-0.5 text-[10px] font-mono rounded bg-cyan-500/10 text-cyan-300 border border-cyan-500/20" id="secFilteredCountBadge">0 Connections</span>
+                </h3>
+                <p class="text-xs text-slate-400">Live socket inspector displaying peer IP, country flag, target port, TCP state, process and threat risk.</p>
+              </div>
+            </div>
+
+            <!-- Filters & Search -->
+            <div class="flex items-center gap-2 flex-wrap">
+              <div class="inline-flex rounded-xl bg-surface-950 p-1 border border-slate-800 text-xs font-mono">
+                <button onclick="setSecTrafficFilter('all')" id="secFilterBtnAll" class="px-3 py-1 rounded-lg bg-blue-600 text-white font-semibold transition">All</button>
+                <button onclick="setSecTrafficFilter('inbound')" id="secFilterBtnInbound" class="px-3 py-1 rounded-lg text-slate-400 hover:text-white transition flex items-center gap-1">
+                  <span>📥 Inbound</span>
+                </button>
+                <button onclick="setSecTrafficFilter('outbound')" id="secFilterBtnOutbound" class="px-3 py-1 rounded-lg text-slate-400 hover:text-white transition flex items-center gap-1">
+                  <span>📤 Outbound</span>
+                </button>
+                <button onclick="setSecTrafficFilter('wan')" id="secFilterBtnWan" class="px-3 py-1 rounded-lg text-slate-400 hover:text-white transition">WAN</button>
+                <button onclick="setSecTrafficFilter('lan')" id="secFilterBtnLan" class="px-3 py-1 rounded-lg text-slate-400 hover:text-white transition">LAN</button>
+                <button onclick="setSecTrafficFilter('suspicious')" id="secFilterBtnSuspicious" class="px-3 py-1 rounded-lg text-slate-400 hover:text-rose-400 transition flex items-center gap-1">
+                  <span>Suspicious</span>
+                  <span class="w-1.5 h-1.5 rounded-full bg-rose-400" id="secSuspiciousDot"></span>
+                </button>
+              </div>
+
+              <div class="relative">
+                <i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 text-xs"></i>
+                <input type="text" id="secTrafficSearchInput" oninput="onSecSearchInput(this.value)" placeholder="Search IP, Port, Process..." class="bg-surface-950 border border-slate-800 rounded-xl pl-8 pr-3 py-1 text-xs text-slate-200 placeholder-slate-500 focus:outline-none focus:border-cyan-500 w-44 sm:w-56 font-mono transition">
+              </div>
+            </div>
+          </div>
+
+          <div class="overflow-x-auto">
+            <table class="w-full text-left text-xs">
+              <thead class="bg-surface-950/70 border-b border-slate-800/80 text-slate-400 font-mono text-[11px] uppercase tracking-wider">
+                <tr>
+                  <th class="py-3 px-4">Remote Endpoint (IP & Geo)</th>
+                  <th class="py-3 px-4">Direction & Target Service</th>
+                  <th class="py-3 px-4">Protocol & State</th>
+                  <th class="py-3 px-4">Process / Daemon</th>
+                  <th class="py-3 px-4">Threat Assessment</th>
+                  <th class="py-3 px-4 text-right">Defense Actions</th>
+                </tr>
+              </thead>
+              <tbody id="secTrafficTableBody" class="divide-y divide-slate-800/50 font-mono">
+                <!-- Dynamically populated live connections -->
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- Auth Forensics & IP Blocklist -->
+        <section class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          <div class="lg:col-span-2 bg-surface-950 border border-slate-800/80 rounded-2xl shadow-sm flex flex-col overflow-hidden">
+            <div class="p-4 border-b border-slate-800 bg-surface-900/60 flex items-center justify-between">
+              <div class="flex items-center gap-2.5">
+                <div class="flex items-center gap-1.5">
+                  <span class="w-2.5 h-2.5 rounded-full bg-rose-500"></span>
+                  <span class="w-2.5 h-2.5 rounded-full bg-amber-500"></span>
+                  <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
+                </div>
+                <span class="text-xs font-mono font-bold text-slate-200 tracking-wider">AUTH & ACCESS FORENSICS STREAM (/var/log/auth.log)</span>
+              </div>
+              <span class="text-[10px] font-mono text-slate-400">Realtime Host Auth Audit</span>
+            </div>
+
+            <div class="p-3 bg-black/60 font-mono text-xs max-h-72 overflow-y-auto space-y-2 scrollbar-thin" id="secAuthEventsContainer">
+              <!-- Dynamic stream rows -->
+            </div>
+            
+            <div class="p-2.5 px-4 bg-surface-900/40 border-t border-slate-800 flex items-center justify-between text-[11px] font-mono text-slate-500">
+              <span>Auto-detects failed passwords, invalid users, and sudo commands</span>
+              <span class="text-emerald-400">Aegis Cyber Defense Core</span>
+            </div>
+          </div>
+
+          <div class="bg-surface-900/90 border border-slate-800/80 rounded-2xl p-5 shadow-sm flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-3">
+                <h3 class="text-sm font-bold text-white tracking-wide flex items-center gap-2">
+                  <i class="fa-solid fa-ban text-rose-400"></i> Active IP Blocklist
+                </h3>
+                <span class="px-2 py-0.5 rounded text-[10px] font-mono bg-rose-500/15 text-rose-300 border border-rose-500/30" id="secBlocklistCountBadge">0 IPs</span>
+              </div>
+              <p class="text-xs text-slate-400 mb-4">Manual or automated dropped perimeter IPs with kernel iptables enforcement.</p>
+
+              <div class="flex items-center gap-2 mb-4">
+                <input type="text" id="secManualBlockIpInput" placeholder="Enter IP e.g. 185.220.101.5" class="bg-surface-950 border border-slate-800 rounded-xl px-3 py-1.5 text-xs text-slate-200 placeholder-slate-500 focus:outline-none focus:border-rose-500 font-mono w-full">
+                <button onclick="secBlockManualIp()" class="px-3 py-1.5 bg-rose-600/20 hover:bg-rose-600/30 text-rose-400 hover:text-rose-300 border border-rose-500/30 rounded-xl text-xs font-semibold whitespace-nowrap transition">
+                  Block IP
+                </button>
+              </div>
+
+              <div class="space-y-2 max-h-48 overflow-y-auto pr-1 scrollbar-thin" id="secBlocklistContainer">
+                <!-- Dynamically populated blocked IPs -->
+              </div>
+            </div>
+
+            <div class="mt-4 pt-3 border-t border-slate-800/80 flex items-center justify-between text-[11px] font-mono text-slate-400">
+              <span>Perimeter Defense: <b class="text-emerald-400">ARMED</b></span>
+              <span>Permanent By Aidil Andriandas</span>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- =================================================================== -->
+      <!-- TAB 2: JAIL MATRIX (FAIL2BAN AUTOMATED BRUTE-FORCE JAILING)          -->
+      <!-- =================================================================== -->
+      <div id="secSubTabContent_jail" class="space-y-6 hidden">
+        <div class="bg-gradient-to-r from-rose-950/80 via-surface-900 to-surface-950 border border-rose-500/30 rounded-2xl p-5 shadow-sm flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+          <div class="flex items-center gap-3.5">
+            <div class="w-12 h-12 rounded-2xl bg-rose-500/15 border border-rose-500/30 flex items-center justify-center text-rose-400 font-bold shrink-0 text-xl shadow-inner">
+              <i class="fa-solid fa-handcuffs"></i>
+            </div>
+            <div>
+              <h3 class="text-base font-bold text-white tracking-wide flex items-center gap-2">
+                Aegis Fail2ban Jail Matrix
+                <span class="px-2 py-0.5 rounded text-[10px] font-mono bg-emerald-500/15 text-emerald-300 border border-emerald-500/30">ENGINE ACTIVE</span>
+              </h3>
+              <p class="text-xs text-slate-300 mt-0.5">Automated brute-force perimeter defense: Any IP with &ge; 5 failed logins within 10 minutes is jailed for 1 hour with instant Telegram alert dispatch.</p>
+            </div>
+          </div>
+          <div class="flex items-center gap-3 shrink-0 text-xs font-mono">
+            <span class="text-slate-400">Auto-Ban Threshold: <b class="text-rose-400">5 Fails / 10m</b></span>
+            <span class="text-slate-400">Jail Duration: <b class="text-amber-400">60 Minutes</b></span>
+          </div>
+        </div>
+
+        <section class="bg-surface-900/90 border border-slate-800/80 rounded-2xl shadow-sm overflow-hidden">
+          <div class="p-4 sm:p-5 border-b border-slate-800/80 flex items-center justify-between">
+            <h4 class="text-sm font-bold text-white tracking-wide flex items-center gap-2">
+              <i class="fa-solid fa-lock text-rose-400"></i> Active Jailed Inmates & Attacking IPs
+              <span class="px-2 py-0.5 rounded text-[10px] font-mono bg-rose-500/15 text-rose-300 border border-rose-500/30" id="secJailTableCountBadge">0 Inmates</span>
+            </h4>
+            <span class="text-xs text-slate-400 font-mono">Auto-Release Countdown Active</span>
+          </div>
+
+          <div class="overflow-x-auto">
+            <table class="w-full text-left text-xs">
+              <thead class="bg-surface-950/70 border-b border-slate-800/80 text-slate-400 font-mono text-[11px] uppercase tracking-wider">
+                <tr>
+                  <th class="py-3 px-4">Attacker IP & Origin</th>
+                  <th class="py-3 px-4">Failed Attempts</th>
+                  <th class="py-3 px-4">Offense Reason</th>
+                  <th class="py-3 px-4">Time Remaining In Jail</th>
+                  <th class="py-3 px-4 text-right">Pardon / Release</th>
+                </tr>
+              </thead>
+              <tbody id="secJailTableBody" class="divide-y divide-slate-800/50 font-mono">
+                <!-- Dynamically populated jailed IPs -->
+              </tbody>
+            </table>
+          </div>
+        </section>
+      </div>
+
+      <!-- =================================================================== -->
+      <!-- TAB 3: RECON RADAR & PORT SCAN DETECTOR                              -->
+      <!-- =================================================================== -->
+      <div id="secSubTabContent_recon" class="space-y-6 hidden">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          <!-- Tactical Canvas Radar -->
+          <div class="bg-surface-950 border border-slate-800/80 rounded-2xl p-5 shadow-sm flex flex-col items-center justify-center relative overflow-hidden">
+            <div class="absolute top-3 left-4 flex items-center gap-2 text-xs font-mono font-bold text-amber-400">
+              <span class="w-2 h-2 rounded-full bg-amber-400 animate-ping"></span>
+              <span>SYN / NMAP RECON RADAR</span>
+            </div>
+            <div class="w-64 h-64 relative my-4 flex items-center justify-center">
+              <canvas id="secReconRadarCanvas" width="256" height="256" class="w-64 h-64"></canvas>
+            </div>
+            <p class="text-[11px] text-slate-400 font-mono text-center">Continuous real-time multi-port probe sweep detector</p>
+          </div>
+
+          <!-- Detected Recon Incidents Table -->
+          <div class="lg:col-span-2 bg-surface-900/90 border border-slate-800/80 rounded-2xl shadow-sm flex flex-col justify-between overflow-hidden">
+            <div>
+              <div class="p-4 sm:p-5 border-b border-slate-800/80 flex items-center justify-between">
+                <h4 class="text-sm font-bold text-white tracking-wide flex items-center gap-2">
+                  <i class="fa-solid fa-radar text-amber-400"></i> Active Reconnaissance & Port Scanners
+                  <span class="px-2 py-0.5 rounded text-[10px] font-mono bg-amber-500/15 text-amber-300 border border-amber-500/30" id="secReconTableCountBadge">0 Incidents</span>
+                </h4>
+                <span class="text-xs text-slate-400 font-mono">Last 10 Minutes</span>
+              </div>
+              <div class="overflow-x-auto">
+                <table class="w-full text-left text-xs">
+                  <thead class="bg-surface-950/70 border-b border-slate-800/80 text-slate-400 font-mono text-[11px] uppercase tracking-wider">
+                    <tr>
+                      <th class="py-3 px-4">Probing IP & Origin</th>
+                      <th class="py-3 px-4">Target Ports Swept</th>
+                      <th class="py-3 px-4">Detected At</th>
+                      <th class="py-3 px-4 text-right">Defense Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody id="secReconTableBody" class="divide-y divide-slate-800/50 font-mono">
+                    <!-- Dynamically populated recon alerts -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="p-3 bg-surface-950/60 border-t border-slate-800 text-[11px] font-mono text-slate-400 flex items-center justify-between">
+              <span>Automatic trigger: 4+ unique ports probed within a 15-second window</span>
+              <span class="text-amber-400">Zero-Tolerance Policy</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- =================================================================== -->
+      <!-- TAB 4: GEOIP GLOBAL RADAR & ORIGIN DISTRIBUTION                      -->
+      <!-- =================================================================== -->
+      <div id="secSubTabContent_geo" class="space-y-6 hidden">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          <!-- Country Breakdown Cards -->
+          <div class="bg-surface-900/90 border border-slate-800/80 rounded-2xl p-5 shadow-sm flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-3">
+                <h4 class="text-sm font-bold text-white tracking-wide flex items-center gap-2">
+                  <i class="fa-solid fa-earth-americas text-cyan-400"></i> Traffic Origin Breakdown
+                </h4>
+                <span class="text-xs font-mono text-cyan-400">GeoIP Cache</span>
+              </div>
+              <p class="text-xs text-slate-400 mb-4">Live distribution of client connections by source nation and network territory.</p>
+              
+              <div id="secCountryDistContainer" class="space-y-3">
+                <!-- Dynamically populated country chips -->
+              </div>
+            </div>
+
+            <div class="mt-4 pt-3 border-t border-slate-800/80 flex items-center justify-between text-[11px] font-mono text-slate-400">
+              <span>Geo-Fence Policy: <b class="text-cyan-400">MONITOR ALL</b></span>
+              <span>Aegis Global Watch</span>
+            </div>
+          </div>
+
+          <!-- Tactical Global Cyber Attack & Origin Map (Engineered by Aidil Andriandas) -->
+          <div class="lg:col-span-2 bg-gradient-to-b from-surface-950 via-surface-900 to-surface-950 border border-slate-800/80 hover:border-cyan-500/40 rounded-2xl p-5 shadow-2xl flex flex-col justify-between relative overflow-hidden group transition-all duration-300">
+            <!-- Header Toolbar & Legend -->
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-3 relative z-10">
+              <div>
+                <div class="flex items-center gap-2.5">
+                  <span class="relative flex h-2.5 w-2.5">
+                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                    <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-400"></span>
+                  </span>
+                  <h4 class="text-sm font-extrabold text-white tracking-wider flex items-center gap-2">
+                    GLOBAL CYBER PERIMETER & TRAFFIC RADAR
+                  </h4>
+                  <span class="px-2 py-0.5 rounded text-[10px] font-mono bg-cyan-500/15 text-cyan-300 border border-cyan-500/30">
+                    REALTIME 60FPS
+                  </span>
+                </div>
+                <p class="text-[11px] text-slate-400 font-mono mt-0.5">
+                  Ballistic trajectory arcs & photon stream converging on Central NOC Hub
+                </p>
+              </div>
+
+              <!-- Interactive Legend Pills -->
+              <div class="flex items-center gap-1.5 flex-wrap text-[10px] font-mono">
+                <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-emerald-500/10 text-emerald-400 border border-emerald-500/25">
+                  <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span> Central Hub
+                </span>
+                <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-purple-500/10 text-purple-400 border border-purple-500/25">
+                  <span class="w-1.5 h-1.5 rounded-full bg-purple-400"></span> WireGuard VPN
+                </span>
+                <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-cyan-500/10 text-cyan-400 border border-cyan-500/25">
+                  <span class="w-1.5 h-1.5 rounded-full bg-cyan-400"></span> Cluster Fleet
+                </span>
+                <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-amber-500/10 text-amber-400 border border-amber-500/25">
+                  <span class="w-1.5 h-1.5 rounded-full bg-amber-400"></span> External WAN
+                </span>
+              </div>
+            </div>
+
+            <!-- Canvas Container with Cyber Frame -->
+            <div class="h-[380px] sm:h-[420px] relative w-full flex items-center justify-center bg-slate-950 rounded-xl border border-slate-800/80 shadow-inner overflow-hidden">
+              <canvas id="secGeoWorldCanvas" class="w-full h-full cursor-crosshair"></canvas>
+              
+              <!-- Floating Cyber HUD Badges on Canvas -->
+              <div class="absolute top-3 left-3 pointer-events-none flex flex-col gap-1 text-[10px] font-mono">
+                <span class="bg-surface-950/80 backdrop-blur px-2.5 py-1 rounded-md border border-slate-800 text-slate-300 flex items-center gap-1.5 shadow-sm">
+                  <i class="fa-solid fa-location-crosshairs text-emerald-400"></i>
+                  <span>HUB: INDONESIA (10.10.10.9)</span>
+                </span>
+                <span class="bg-surface-950/80 backdrop-blur px-2.5 py-1 rounded-md border border-slate-800 text-slate-400 flex items-center gap-1.5 shadow-sm">
+                  <i class="fa-solid fa-satellite text-cyan-400"></i>
+                  <span>PERIMETER: ZERO-TRUST ACTIVE</span>
+                </span>
+              </div>
+
+              <div class="absolute top-3 right-3 pointer-events-none text-right text-[10px] font-mono hidden sm:block">
+                <span class="bg-surface-950/80 backdrop-blur px-2.5 py-1 rounded-md border border-slate-800 text-cyan-300 shadow-sm" id="secGeoCanvasNodeCount">
+                  6 Active Nodes Synchronized
+                </span>
+              </div>
+            </div>
+
+            <!-- Card Bottom Bar -->
+            <div class="mt-3 pt-2.5 border-t border-slate-800/80 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-400 font-mono gap-2">
+              <div class="flex items-center gap-2 text-[11px]">
+                <i class="fa-solid fa-shield-halved text-emerald-400 text-xs"></i>
+                <span>Aegis Cyber Defense Core • Anti-Recon & Geo-Fence Watch</span>
+              </div>
+              <span class="text-cyan-400 text-[11px]">Architect: Aidil Andriandas</span>
+            </div>
+          </div>            <div class="mt-3 pt-2 border-t border-slate-800/80 flex items-center justify-between text-xs text-slate-400 font-mono">
+              <span>Encrypted VPN tunnels & LAN cluster nodes highlighted in Cyan/Purple</span>
+              <span class="text-emerald-400">Perimeter Synchronized</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- =================================================================== -->
+      <!-- TAB 5: LINUX OS & SSH HARDENING AUDITOR (CIS BENCHMARK)              -->
+      <!-- =================================================================== -->
+      <div id="secSubTabContent_hardening" class="space-y-6 hidden">
+        <!-- Scorecard Header -->
+        <div class="bg-gradient-to-r from-blue-950/80 via-surface-900 to-surface-950 border border-blue-500/30 rounded-2xl p-5 shadow-sm flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+          <div class="flex items-center gap-4">
+            <div class="w-16 h-16 rounded-2xl bg-blue-500/15 border border-blue-500/30 flex flex-col items-center justify-center text-blue-400 font-mono shrink-0 shadow-inner">
+              <span class="text-xl font-black" id="secHardeningScoreNumber">--</span>
+              <span class="text-[9px] text-blue-300 font-bold">SCORE</span>
+            </div>
+            <div>
+              <div class="flex items-center gap-2">
+                <h3 class="text-base font-bold text-white tracking-wide">Linux Host & SSH Hardening Auditor</h3>
+                <span id="secHardeningGradeBadge" class="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-blue-500/20 text-blue-300 border border-blue-500/40">AUDITING...</span>
+              </div>
+              <p class="text-xs text-slate-300 mt-1">Evaluates host SSH daemon configuration, kernel SYN cookie defense, ICMP protection, and anti-spoofing reverse path routing based on CIS Linux Benchmark standards.</p>
+            </div>
+          </div>
+          <button onclick="secRemediateHardening()" class="px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white rounded-xl text-xs font-semibold flex items-center gap-2 transition shadow-md shrink-0">
+            <i class="fa-solid fa-bolt text-xs"></i>
+            <span>1-Click Apply Kernel Defenses</span>
+          </button>
+        </div>
+
+        <!-- Checklist Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" id="secHardeningCardsContainer">
+          <!-- Dynamically populated hardening checks -->
+        </div>
+      </div>
+
+      <!-- =================================================================== -->
+      <!-- TAB 6: FILE INTEGRITY MONITORING (FIM / ANTI-TAMPERING SHIELD)       -->
+      <!-- =================================================================== -->
+      <div id="secSubTabContent_fim" class="space-y-6 hidden">
+        <div class="bg-gradient-to-r from-purple-950/80 via-surface-900 to-surface-950 border border-purple-500/30 rounded-2xl p-5 shadow-sm flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+          <div class="flex items-center gap-3.5">
+            <div class="w-12 h-12 rounded-2xl bg-purple-500/15 border border-purple-500/30 flex items-center justify-center text-purple-400 font-bold shrink-0 text-xl shadow-inner">
+              <i class="fa-solid fa-fingerprint"></i>
+            </div>
+            <div>
+              <div class="flex items-center gap-2">
+                <h3 class="text-base font-bold text-white tracking-wide">Aegis File Integrity Monitor (FIM)</h3>
+                <span id="secFimOverallStatusBadge" class="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/40">SECURE</span>
+              </div>
+              <p class="text-xs text-slate-300 mt-0.5">Continuous cryptographic SHA-256 baseline monitoring on critical system files (/etc/passwd, /etc/shadow, /etc/sudoers, sshd_config, authorized_keys) to detect rootkits and backdoors.</p>
+            </div>
+          </div>
+          <button onclick="secUpdateFimBaseline()" class="px-4 py-2 bg-purple-600/20 hover:bg-purple-600/30 text-purple-300 hover:text-white border border-purple-500/40 rounded-xl text-xs font-semibold flex items-center gap-2 transition shrink-0">
+            <i class="fa-solid fa-arrows-rotate text-xs"></i>
+            <span>Update Cryptographic Baseline</span>
+          </button>
+        </div>
+
+        <section class="bg-surface-900/90 border border-slate-800/80 rounded-2xl shadow-sm overflow-hidden">
+          <div class="p-4 sm:p-5 border-b border-slate-800/80 flex items-center justify-between">
+            <h4 class="text-sm font-bold text-white tracking-wide flex items-center gap-2">
+              <i class="fa-solid fa-file-shield text-purple-400"></i> Monitored Host System Files
+            </h4>
+            <span class="text-xs text-slate-400 font-mono">Real-Time SHA-256 Verification</span>
+          </div>
+
+          <div class="overflow-x-auto">
+            <table class="w-full text-left text-xs">
+              <thead class="bg-surface-950/70 border-b border-slate-800/80 text-slate-400 font-mono text-[11px] uppercase tracking-wider">
+                <tr>
+                  <th class="py-3 px-4">System File Path</th>
+                  <th class="py-3 px-4">Integrity Status</th>
+                  <th class="py-3 px-4">Current Hash Snippet</th>
+                  <th class="py-3 px-4">Baseline Hash Snippet</th>
+                  <th class="py-3 px-4 text-right">File Size</th>
+                </tr>
+              </thead>
+              <tbody id="secFimTableBody" class="divide-y divide-slate-800/50 font-mono">
+                <!-- Dynamically populated FIM rows -->
+              </tbody>
+            </table>
+          </div>
+        </section>
+      </div>
+
+      <!-- =================================================================== -->
+      <!-- TAB 7: DOCKER CONTAINER SECURITY & HARDENING AUDITOR                -->
+      <!-- =================================================================== -->
+      <div id="secSubTabContent_docker" class="space-y-6 hidden">
+        <div class="bg-gradient-to-r from-sky-950/80 via-surface-900 to-surface-950 border border-sky-500/30 rounded-2xl p-5 shadow-sm flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+          <div class="flex items-center gap-3.5">
+            <div class="w-12 h-12 rounded-2xl bg-sky-500/15 border border-sky-500/30 flex items-center justify-center text-sky-400 font-bold shrink-0 text-2xl shadow-inner">
+              <i class="fa-brands fa-docker"></i>
+            </div>
+            <div>
+              <div class="flex items-center gap-2">
+                <h3 class="text-base font-bold text-white tracking-wide">Aegis Docker Security & Vulnerability Auditor</h3>
+                <span id="secDockerOverallScoreBadge" class="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-sky-500/20 text-sky-300 border border-sky-500/40">SCORE: --/100</span>
+              </div>
+              <p class="text-xs text-slate-300 mt-0.5">Automated CIS-aligned container breakout & privilege escalation inspection. Detects privileged flags, Docker socket mounts, default root execution, and unconstrained memory boundaries.</p>
+            </div>
+          </div>
+          <button onclick="fetchSecDockerAudit()" class="px-4 py-2 bg-sky-600/20 hover:bg-sky-600/30 text-sky-300 hover:text-white border border-sky-500/40 rounded-xl text-xs font-semibold flex items-center gap-2 transition shrink-0">
+            <i class="fa-solid fa-rotate text-xs"></i>
+            <span>Rescan Containers</span>
+          </button>
+        </div>
+
+        <!-- Containers List -->
+        <div id="secDockerContainersList" class="space-y-4">
+          <!-- Dynamically populated container audit cards -->
+        </div>
+      </div>
+
+      <!-- =================================================================== -->
+      <!-- TAB 8: PROCESS HUNTER & RESOURCE TOP-TALKER                         -->
+      <!-- =================================================================== -->
+      <div id="secSubTabContent_process" class="space-y-6 hidden">
+        <div class="bg-gradient-to-r from-rose-950/80 via-surface-900 to-surface-950 border border-rose-500/30 rounded-2xl p-5 shadow-sm flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+          <div class="flex items-center gap-3.5">
+            <div class="w-12 h-12 rounded-2xl bg-rose-500/15 border border-rose-500/30 flex items-center justify-center text-rose-400 font-bold shrink-0 text-xl shadow-inner">
+              <i class="fa-solid fa-crosshairs"></i>
+            </div>
+            <div>
+              <div class="flex items-center gap-2">
+                <h3 class="text-base font-bold text-white tracking-wide">Aegis Process Hunter & Top-Talker</h3>
+                <span class="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-rose-500/20 text-rose-300 border border-rose-500/40">LIVE KERNEL VIEW</span>
+              </div>
+              <p class="text-xs text-slate-300 mt-0.5">Real-time host process surveillance. Inspect CPU/RAM hogs, discover rogue zombie processes, and execute emergency 1-Click process terminations.</p>
+            </div>
+          </div>
+          <div class="flex items-center gap-2">
+            <button onclick="fetchProcessHunter()" class="px-4 py-2 bg-rose-600/20 hover:bg-rose-600/30 text-rose-300 hover:text-white border border-rose-500/40 rounded-xl text-xs font-semibold flex items-center gap-2 transition shrink-0">
+              <i class="fa-solid fa-rotate text-xs"></i>
+              <span>Refresh Processes</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Metrics Row -->
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+          <div class="bg-surface-950 p-4 rounded-xl border border-slate-800 flex items-center justify-between">
+            <div>
+              <span class="text-[10px] text-slate-400 font-mono uppercase">Total Processes</span>
+              <p class="text-xl font-bold text-white font-mono" id="secProcTotalCount">0</p>
+            </div>
+            <i class="fa-solid fa-microchip text-slate-600 text-xl"></i>
+          </div>
+          <div class="bg-surface-950 p-4 rounded-xl border border-slate-800 flex items-center justify-between">
+            <div>
+              <span class="text-[10px] text-slate-400 font-mono uppercase">Active Running</span>
+              <p class="text-xl font-bold text-emerald-400 font-mono" id="secProcRunningCount">0</p>
+            </div>
+            <i class="fa-solid fa-play text-emerald-500/40 text-xl"></i>
+          </div>
+          <div class="bg-surface-950 p-4 rounded-xl border border-slate-800 flex items-center justify-between">
+            <div>
+              <span class="text-[10px] text-slate-400 font-mono uppercase">Zombie Processes 🧟</span>
+              <p class="text-xl font-bold text-white font-mono" id="secProcZombieCount">0</p>
+            </div>
+            <i class="fa-solid fa-skull text-slate-600 text-xl"></i>
+          </div>
+          <div class="bg-surface-950 p-4 rounded-xl border border-slate-800 flex items-center justify-between">
+            <div>
+              <span class="text-[10px] text-slate-400 font-mono uppercase">Top CPU Consumer</span>
+              <p class="text-sm font-bold text-amber-300 font-mono truncate" id="secProcTopCpu">None</p>
+            </div>
+            <i class="fa-solid fa-fire text-amber-500/40 text-xl"></i>
+          </div>
+        </div>
+
+        <!-- Filters & Search -->
+        <div class="flex items-center justify-between gap-3 flex-wrap bg-surface-950 p-3 rounded-2xl border border-slate-800">
+          <div class="flex items-center gap-2 flex-wrap text-xs font-mono">
+            <button onclick="filterProcessHunter('all')" id="secProcFilter_all" class="px-3 py-1 rounded-lg bg-blue-600 text-white font-semibold">All</button>
+            <button onclick="filterProcessHunter('high_cpu')" id="secProcFilter_high_cpu" class="px-3 py-1 rounded-lg text-slate-400 hover:text-white">High CPU (>5%)</button>
+            <button onclick="filterProcessHunter('high_mem')" id="secProcFilter_high_mem" class="px-3 py-1 rounded-lg text-slate-400 hover:text-white">High RAM (>5%)</button>
+            <button onclick="filterProcessHunter('zombie')" id="secProcFilter_zombie" class="px-3 py-1 rounded-lg text-slate-400 hover:text-rose-400">Zombies</button>
+          </div>
+          <div class="relative">
+            <i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 text-xs"></i>
+            <input type="text" id="secProcSearchInput" oninput="onProcSearchInput(this.value)" placeholder="Search PID, Name, Command..." class="bg-surface-900 border border-slate-800 rounded-xl pl-8 pr-3 py-1 text-xs text-slate-200 placeholder-slate-500 focus:outline-none focus:border-rose-500 w-52 sm:w-64 font-mono transition">
+          </div>
+        </div>
+
+        <!-- Process Table -->
+        <section class="bg-surface-900/90 border border-slate-800/80 rounded-2xl shadow-sm overflow-hidden">
+          <div class="overflow-x-auto">
+            <table class="w-full text-left text-xs">
+              <thead class="bg-surface-950/70 border-b border-slate-800/80 text-slate-400 font-mono text-[11px] uppercase tracking-wider">
+                <tr>
+                  <th class="py-3 px-4">PID & Status</th>
+                  <th class="py-3 px-4">Process Name & Command</th>
+                  <th class="py-3 px-4">User</th>
+                  <th class="py-3 px-4">CPU %</th>
+                  <th class="py-3 px-4">Memory Usage</th>
+                  <th class="py-3 px-4">Threads</th>
+                  <th class="py-3 px-4 text-right">Actions</th>
+                </tr>
+              </thead>
+              <tbody id="secProcTableBody" class="divide-y divide-slate-800/50 font-mono">
+                <!-- Dynamically populated process rows -->
+              </tbody>
+            </table>
+          </div>
+        </section>
+      </div>
+
+      <!-- =================================================================== -->
+      <!-- TAB 9: C2 BOTNET & CRYPTO-MINING OUTBOUND SHIELD                    -->
+      <!-- =================================================================== -->
+      <div id="secSubTabContent_c2" class="space-y-6 hidden">
+        <div class="bg-gradient-to-r from-emerald-950/80 via-surface-900 to-surface-950 border border-emerald-500/30 rounded-2xl p-5 shadow-sm flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+          <div class="flex items-center gap-3.5">
+            <div class="w-12 h-12 rounded-2xl bg-emerald-500/15 border border-emerald-500/30 flex items-center justify-center text-emerald-400 font-bold shrink-0 text-xl shadow-inner">
+              <i class="fa-solid fa-shield-virus"></i>
+            </div>
+            <div>
+              <div class="flex items-center gap-2">
+                <h3 class="text-base font-bold text-white tracking-wide">C2 Botnet & Crypto-Mining Defense Shield</h3>
+                <span id="secC2StatusBadge" class="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/40">SECURE</span>
+              </div>
+              <p class="text-xs text-slate-300 mt-0.5">Deep inspection of outbound TCP sockets, Stratum protocol ports, and memory heuristic signatures against Monero/Bitcoin cryptojacking malware (XMRig, Kinsing, kdevtmpfsi).</p>
+            </div>
+          </div>
+          <button onclick="fetchSecC2Miner()" class="px-4 py-2 bg-emerald-600/20 hover:bg-emerald-600/30 text-emerald-300 hover:text-white border border-emerald-500/40 rounded-xl text-xs font-semibold flex items-center gap-2 transition shrink-0">
+            <i class="fa-solid fa-radar text-xs"></i>
+            <span>Scan C2 & Miners</span>
+          </button>
+        </div>
+
+        <!-- Threat Alert Container -->
+        <div id="secC2ThreatAlertContainer">
+          <!-- Populated if threats exist -->
+        </div>
+
+        <!-- Signatures & Ports Watchlist Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="bg-surface-950 border border-slate-800 p-5 rounded-2xl">
+            <h4 class="text-xs font-bold text-slate-300 uppercase tracking-wider mb-3 flex items-center gap-2">
+              <i class="fa-solid fa-network-wired text-emerald-400"></i> Monitored Mining Pool Ports
+            </h4>
+            <div class="flex flex-wrap gap-1.5" id="secC2MonitoredPorts">
+              <span class="px-2 py-1 rounded bg-surface-900 border border-slate-800 text-[11px] font-mono text-slate-300">Port 3333 (Stratum)</span>
+              <span class="px-2 py-1 rounded bg-surface-900 border border-slate-800 text-[11px] font-mono text-slate-300">Port 4444 (XMRig)</span>
+              <span class="px-2 py-1 rounded bg-surface-900 border border-slate-800 text-[11px] font-mono text-slate-300">Port 5555</span>
+              <span class="px-2 py-1 rounded bg-surface-900 border border-slate-800 text-[11px] font-mono text-slate-300">Port 7777</span>
+              <span class="px-2 py-1 rounded bg-surface-900 border border-slate-800 text-[11px] font-mono text-slate-300">Port 8333 (Bitcoin)</span>
+              <span class="px-2 py-1 rounded bg-surface-900 border border-slate-800 text-[11px] font-mono text-slate-300">Port 14444</span>
+              <span class="px-2 py-1 rounded bg-surface-900 border border-slate-800 text-[11px] font-mono text-slate-300">Port 18080 (Monero P2P)</span>
+              <span class="px-2 py-1 rounded bg-surface-900 border border-slate-800 text-[11px] font-mono text-slate-300">Port 45700</span>
+            </div>
+          </div>
+
+          <div class="bg-surface-950 border border-slate-800 p-5 rounded-2xl">
+            <h4 class="text-xs font-bold text-slate-300 uppercase tracking-wider mb-3 flex items-center gap-2">
+              <i class="fa-solid fa-bug text-emerald-400"></i> Malware & Cryptojacking Signatures
+            </h4>
+            <div class="flex flex-wrap gap-1.5" id="secC2MonitoredSignatures">
+              <span class="px-2 py-1 rounded bg-surface-900 border border-slate-800 text-[11px] font-mono text-slate-300">xmrig</span>
+              <span class="px-2 py-1 rounded bg-surface-900 border border-slate-800 text-[11px] font-mono text-slate-300">kworkerds</span>
+              <span class="px-2 py-1 rounded bg-surface-900 border border-slate-800 text-[11px] font-mono text-slate-300">minerd</span>
+              <span class="px-2 py-1 rounded bg-surface-900 border border-slate-800 text-[11px] font-mono text-slate-300">kdevtmpfsi</span>
+              <span class="px-2 py-1 rounded bg-surface-900 border border-slate-800 text-[11px] font-mono text-slate-300">kinsing</span>
+              <span class="px-2 py-1 rounded bg-surface-900 border border-slate-800 text-[11px] font-mono text-slate-300">pwnrig</span>
+              <span class="px-2 py-1 rounded bg-surface-900 border border-slate-800 text-[11px] font-mono text-slate-300">stratum</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- =================================================================== -->
+      <!-- TAB 10: HYPERVISOR PERIMETER (PROXMOX VE 10.10.10.2)                -->
+      <!-- =================================================================== -->
+      <div id="secSubTabContent_perimeter" class="space-y-6 hidden">
+        <!-- Top Status Banner -->
+        <div class="bg-gradient-to-r from-cyan-950/80 via-surface-900 to-surface-950 border border-cyan-500/30 rounded-2xl p-5 shadow-sm flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+          <div class="flex items-center gap-3.5">
+            <div class="w-12 h-12 rounded-2xl bg-cyan-500/15 border border-cyan-500/30 flex items-center justify-center text-cyan-400 font-bold shrink-0 text-xl shadow-inner">
+              <i class="fa-solid fa-network-wired"></i>
+            </div>
+            <div>
+              <div class="flex items-center gap-2">
+                <h3 class="text-base font-bold text-white tracking-wide">Hypervisor Perimeter Firewall</h3>
+                <span class="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-cyan-500/20 text-cyan-300 border border-cyan-500/40">CLUSTER-WIDE ACTIVE</span>
+                <span class="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/40">8 VMs SHIELDED</span>
+              </div>
+              <p class="text-xs text-slate-300 mt-0.5">Hardware & Virtual Link-Layer Bridge (<code class="text-cyan-300 font-mono">ebtables</code>) & Kernel Netfilter (<code class="text-cyan-300 font-mono">iptables</code>) on Proxmox VE Master Node (<code class="text-white font-mono">10.10.10.2</code>). Blocked threats are neutralized before reaching ANY virtual machine.</p>
+            </div>
+          </div>
+          <div class="flex items-center gap-2">
+            <button onclick="syncSecPerimeterRules()" class="px-4 py-2 bg-cyan-600/20 hover:bg-cyan-600/30 text-cyan-300 hover:text-white border border-cyan-500/40 rounded-xl text-xs font-semibold flex items-center gap-2 transition shrink-0">
+              <i class="fa-solid fa-arrows-rotate text-xs" id="secPerimeterSyncSpinner"></i>
+              <span>Re-sync Hypervisor Rules</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Perimeter Details KPIs -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div class="bg-surface-950 border border-slate-800 p-4 rounded-2xl">
+            <div class="text-[11px] font-bold uppercase text-slate-400 mb-1 flex items-center gap-1.5">
+              <i class="fa-solid fa-server text-cyan-400"></i> Hypervisor Node
+            </div>
+            <div class="text-lg font-mono font-bold text-white" id="secPerimeterNode">pve (10.10.10.2)</div>
+            <div class="text-[10px] font-mono text-slate-400 mt-1" id="secPerimeterOs">Proxmox VE 9.2.2 (Kernel 7.0.2-6-pve)</div>
+          </div>
+
+          <div class="bg-surface-950 border border-slate-800 p-4 rounded-2xl">
+            <div class="text-[11px] font-bold uppercase text-slate-400 mb-1 flex items-center gap-1.5">
+              <i class="fa-solid fa-bridge text-blue-400"></i> Active Bridge & Scope
+            </div>
+            <div class="text-lg font-mono font-bold text-white">vmbr0 (10.10.10.0/24)</div>
+            <div class="text-[10px] font-mono text-slate-400 mt-1">Gateway: 10.10.10.1 • L2/L3 Interception</div>
+          </div>
+
+          <div class="bg-surface-950 border border-slate-800 p-4 rounded-2xl">
+            <div class="text-[11px] font-bold uppercase text-slate-400 mb-1 flex items-center gap-1.5">
+              <i class="fa-solid fa-shield text-emerald-400"></i> Shielded Workloads
+            </div>
+            <div class="text-lg font-mono font-bold text-emerald-400" id="secPerimeterVmCount">8 Virtual Machines</div>
+            <div class="text-[10px] font-mono text-emerald-300/80 mt-1">100% Cluster-Wide Immunity</div>
+          </div>
+
+          <div class="bg-surface-950 border border-slate-800 p-4 rounded-2xl">
+            <div class="text-[11px] font-bold uppercase text-slate-400 mb-1 flex items-center gap-1.5">
+              <i class="fa-solid fa-ban text-rose-400"></i> Hypervisor Drop Rules
+            </div>
+            <div class="text-lg font-mono font-bold text-rose-400" id="secPerimeterRuleCount">0 Active Rules</div>
+            <div class="text-[10px] font-mono text-slate-400 mt-1">Synced to AEGIS_CLUSTER_DROP</div>
+          </div>
+        </div>
+
+        <!-- Cluster Virtual Machines Protection Matrix -->
+        <div class="bg-surface-950 border border-slate-800 rounded-2xl p-5">
+          <div class="flex items-center justify-between mb-4 flex-wrap gap-2">
+            <div>
+              <h4 class="text-sm font-bold text-white flex items-center gap-2">
+                <i class="fa-solid fa-cubes text-cyan-400"></i> Protected Cluster Virtual Machines
+              </h4>
+              <p class="text-xs text-slate-400 mt-0.5">All incoming and outgoing traffic to these guest VMs passes through the Aegis Hypervisor Perimeter Firewall on bridge <code class="text-slate-300">vmbr0</code>.</p>
+            </div>
+            <span class="px-2.5 py-1 rounded-lg text-xs font-mono bg-cyan-500/10 text-cyan-300 border border-cyan-500/30">
+              Zero-Trust Drop Layer
+            </span>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3.5" id="secPerimeterVmsGrid">
+            <!-- Populated dynamically with VM cards -->
+          </div>
+        </div>
+
+        <!-- Architectural Explainer Banner -->
+        <div class="p-4 rounded-2xl bg-surface-900/60 border border-slate-800 text-xs text-slate-300 font-mono space-y-2">
+          <div class="text-slate-200 font-bold flex items-center gap-2">
+            <i class="fa-solid fa-circle-info text-cyan-400"></i> How Proxmox VE Hypervisor Perimeter Defense Operates:
+          </div>
+          <p class="text-slate-400 leading-relaxed">
+            1. <strong>Bridge Link-Layer Filtering (L2):</strong> When you or Fail2ban block an IP in Aegis, the engine executes <code class="text-cyan-300">ebtables -A AEGIS_CLUSTER_DROP -p IPv4 --ip-src/dst &lt;IP&gt; -j DROP</code> directly on the Proxmox Hypervisor (<code class="text-white">10.10.10.2</code>).<br>
+            2. <strong>Universal VM Shield:</strong> Because every virtual machine interface (<code class="text-slate-300">tap103i0</code> through <code class="text-slate-300">tap110i0</code>) is bridged through <code class="text-slate-300">vmbr0</code>, the hypervisor drops all packets before they can reach the kernel of <strong>Database, immich, Ceritakota, Portfolio, Pentest, or any other VM</strong>.<br>
+            3. <strong>Centralized Defense:</strong> Blocking once in Aegis NOC protects the entire physical server and all virtualized workloads simultaneously.
+          </p>
+          <div class="pt-2 text-[11px] text-slate-500 flex items-center justify-between border-t border-slate-800/80">
+            <span>Security Engineering & Architecture: <strong>AIDIL ANDRIANDAS</strong></span>
+            <span>Hypervisor Target: <strong>root@10.10.10.2 (Port 22 / pve)</strong></span>
+          </div>
+        </div>
+      </div>
+
+    </div> <!-- /#securityTrafficView -->
+
+    <!-- Aegis AI Security Copilot Investigation Modal -->
+    <div id="secAiModal" class="fixed inset-0 bg-black/85 backdrop-blur-md z-50 hidden flex items-center justify-center p-3 sm:p-4 animate-fade-in">
+      <div class="bg-surface-900 border border-cyan-500/40 rounded-2xl max-w-2xl w-full flex flex-col shadow-2xl relative overflow-hidden">
+        <!-- Header -->
+        <div class="p-5 border-b border-slate-800 bg-gradient-to-r from-surface-950 to-blue-950/50 flex items-center justify-between">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-cyan-500/15 border border-cyan-500/30 flex items-center justify-center text-cyan-400 font-bold shrink-0">
+              <i class="fa-solid fa-microchip-ai text-lg"></i>
+            </div>
+            <div>
+              <h3 class="text-base font-bold text-white tracking-wide flex items-center gap-2">
+                Aegis AI Security Copilot
+                <span class="px-2 py-0.5 rounded text-[10px] font-mono bg-cyan-500/20 text-cyan-300 border border-cyan-500/40">INVESTIGATION</span>
+              </h3>
+              <p class="text-xs text-slate-400 font-mono" id="secAiModalSubtitle">Analyzing target threat telemetry...</p>
+            </div>
+          </div>
+          <button onclick="closeSecAiModal()" class="w-8 h-8 rounded-lg bg-surface-800 hover:bg-surface-700 text-slate-400 hover:text-white flex items-center justify-center transition">
+            <i class="fa-solid fa-xmark text-sm"></i>
+          </button>
+        </div>
+
+        <!-- Body -->
+        <div class="p-6 space-y-4 max-h-[75vh] overflow-y-auto font-sans scrollbar-thin text-xs">
+          <!-- Loading Spinner -->
+          <div id="secAiModalLoading" class="py-12 flex flex-col items-center justify-center gap-3">
+            <i class="fa-solid fa-circle-notch fa-spin text-3xl text-cyan-400"></i>
+            <span class="font-mono text-slate-400">Aegis AI is dissecting packet telemetry & threat patterns...</span>
+          </div>
+
+          <!-- Content Result Container -->
+          <div id="secAiModalResult" class="space-y-4 hidden font-mono">
+            <!-- Executive Summary Card -->
+            <div class="p-4 rounded-xl bg-surface-950 border border-slate-800 space-y-2">
+              <div class="flex items-center justify-between">
+                <span class="text-slate-400 font-bold uppercase tracking-wider text-[11px]">Executive Summary</span>
+                <span id="secAiRiskBadge" class="px-2 py-0.5 rounded text-[10px] font-bold border">HIGH RISK</span>
+              </div>
+              <p class="text-slate-200 text-xs leading-relaxed" id="secAiSummaryText">...</p>
+            </div>
+
+            <!-- Attack Vector & Actor Profile -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+              <div class="p-3.5 rounded-xl bg-surface-950/80 border border-slate-800">
+                <span class="text-slate-400 font-bold block mb-1">Threat Actor Profile:</span>
+                <span class="text-slate-200" id="secAiActorText">...</span>
+              </div>
+              <div class="p-3.5 rounded-xl bg-surface-950/80 border border-slate-800">
+                <span class="text-slate-400 font-bold block mb-1">Attack Vector:</span>
+                <span class="text-slate-200" id="secAiVectorText">...</span>
+              </div>
+            </div>
+
+            <!-- Remediation Steps -->
+            <div class="p-4 rounded-xl bg-surface-950 border border-slate-800 space-y-2">
+              <span class="text-emerald-400 font-bold uppercase tracking-wider text-[11px] block">Recommended Tactical Remediation:</span>
+              <ul class="space-y-1.5 list-disc list-inside text-slate-300" id="secAiStepsList">
+                <!-- Dynamically populated steps -->
+              </ul>
+            </div>
+
+            <!-- Suggested Bash Command -->
+            <div class="p-3 rounded-xl bg-black/80 border border-slate-800 flex items-center justify-between gap-2">
+              <div class="overflow-x-auto text-[11px] text-cyan-300 font-mono" id="secAiBashCommand">
+                sudo iptables -I INPUT ...
+              </div>
+              <button onclick="copyIpToClipboard(document.getElementById('secAiBashCommand').innerText, this)" class="px-2.5 py-1 rounded-lg bg-surface-800 hover:bg-slate-700 text-slate-300 text-[10px] whitespace-nowrap transition">
+                Copy Command
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="p-4 border-t border-slate-800 bg-surface-950/80 flex items-center justify-between text-xs font-mono">
+          <span class="text-slate-500" id="secAiModelTag">Model: Aegis SOC Engine</span>
+          <button onclick="closeSecAiModal()" class="px-4 py-1.5 rounded-xl bg-surface-800 hover:bg-surface-700 text-white font-semibold transition">
+            Close
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Process Kill Confirmation Modal -->
+    <div id="secProcKillModal" class="fixed inset-0 bg-black/85 backdrop-blur-md z-50 hidden flex items-center justify-center p-3 sm:p-4 animate-fade-in">
+      <div class="bg-surface-900 border border-rose-500/40 rounded-2xl max-w-md w-full flex flex-col shadow-2xl relative overflow-hidden">
+        <div class="p-5 border-b border-slate-800 bg-surface-950 flex items-center justify-between">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-rose-500/15 border border-rose-500/30 flex items-center justify-center text-rose-400 font-bold shrink-0">
+              <i class="fa-solid fa-triangle-exclamation"></i>
+            </div>
+            <div>
+              <h3 class="text-base font-bold text-white">Terminate Process</h3>
+              <p class="text-xs text-slate-400 font-mono">Emergency Process Killer</p>
+            </div>
+          </div>
+          <button onclick="closeProcKillModal()" class="text-slate-400 hover:text-white transition">
+            <i class="fa-solid fa-xmark text-lg"></i>
+          </button>
+        </div>
+        <div class="p-5 space-y-4">
+          <p class="text-xs text-slate-300 leading-relaxed font-sans">
+            Are you sure you want to terminate the following process?
+          </p>
+          <div class="p-3 rounded-xl bg-surface-950 border border-slate-800 font-mono text-xs space-y-1.5">
+            <div class="flex justify-between"><span class="text-slate-500">PID:</span> <span id="secProcKillPid" class="text-white font-bold">-</span></div>
+            <div class="flex justify-between"><span class="text-slate-500">Name:</span> <span id="secProcKillName" class="text-rose-300 font-bold">-</span></div>
+            <div class="text-[11px] text-slate-400 truncate mt-1 pt-1 border-t border-slate-800/80" id="secProcKillCmd">-</div>
+          </div>
+          <p class="text-[11px] text-amber-400/90 bg-amber-500/10 p-2.5 rounded-lg border border-amber-500/20 font-sans">
+            ⚠️ Warning: Terminating system processes may interrupt running applications. SIGTERM sends a graceful quit signal; SIGKILL forces instant unrecoverable termination.
+          </p>
+        </div>
+        <div class="p-4 bg-surface-950 border-t border-slate-800 flex items-center justify-end gap-2 font-mono">
+          <button onclick="closeProcKillModal()" class="px-3.5 py-1.5 rounded-xl text-xs font-semibold text-slate-400 hover:text-white transition">
+            Cancel
+          </button>
+          <button onclick="executeProcKill('TERM')" class="px-3.5 py-1.5 rounded-xl text-xs font-semibold bg-amber-600/30 hover:bg-amber-600/50 text-amber-300 border border-amber-500/40 transition">
+            SIGTERM (Graceful)
+          </button>
+          <button onclick="executeProcKill('KILL')" class="px-3.5 py-1.5 rounded-xl text-xs font-semibold bg-rose-600 hover:bg-rose-500 text-white transition shadow-sm">
+            SIGKILL (Force -9)
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Permanent System Architect & Creator Footer -->
+    <footer class="mt-10 pt-6 pb-6 border-t border-slate-800/80 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono text-slate-500">
+      <div class="flex items-center gap-2.5">
+        <span class="w-6 h-6 rounded-lg bg-cyan-500/10 border border-cyan-500/25 flex items-center justify-center text-cyan-400 text-xs">
+          🛡️
+        </span>
+        <div>
+          <span class="font-bold text-slate-300 tracking-wider">AEGIS NOC OBSERVABILITY</span>
+          <span class="text-slate-600 mx-1.5">•</span>
+          <span class="text-slate-400">High-Fidelity Telemetry & AI Automation Suite</span>
+        </div>
+      </div>
+      <div class="flex items-center gap-2 bg-surface-900/90 px-3.5 py-1.5 rounded-xl border border-slate-800/90 shadow-sm">
+        <span class="text-slate-400">Engineered & Developed by</span>
+        <span class="font-extrabold text-cyan-300 tracking-wider bg-cyan-500/10 px-2 py-0.5 rounded border border-cyan-500/25">AIDIL ANDRIANDAS</span>
+      </div>
+    </footer>
   </main>
 
   <!-- Alert Bot Settings Modal (NOC Incident Bot Integrator) -->
@@ -1919,13 +3004,13 @@
           </div>
           <div>
             <div class="flex items-center gap-2">
-              <h3 class="text-base font-bold text-white tracking-wide">Sentinel AI Homelab Copilot</h3>
+              <h3 class="text-base font-bold text-white tracking-wide">Aegis AI - Smart Homelab Advisor</h3>
               <span class="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-purple-500/20 text-purple-300 border border-purple-500/40">24/7 ADVISOR</span>
               <span class="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 flex items-center gap-1">
                 <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span> ACTIVE
               </span>
             </div>
-            <p class="text-xs text-slate-400">Analisis performa otomatis, optimasi alokasi RAM Proxmox, dan pemantauan 24 jam via Telegram</p>
+            <p class="text-xs text-slate-400">Analisis performa otomatis, optimasi alokasi RAM Proxmox, dan pemantauan 24 jam via Telegram • <span class="text-purple-300 font-mono font-medium">Engineered by Aidil Andriandas</span></p>
           </div>
         </div>
         <button onclick="closeAiCopilotModal()" class="w-8 h-8 rounded-lg bg-surface-800 hover:bg-slate-700 text-slate-400 hover:text-white flex items-center justify-center transition border border-slate-700">
@@ -2077,10 +3162,10 @@
               Otomasi Pemantauan & Peringatan 24 Jam
             </h4>
 
-            <!-- Toggle 1: Copilot Master -->
+            <!-- Toggle 1: Aegis Master -->
             <label class="flex items-center justify-between cursor-pointer group">
               <div>
-                <div class="font-semibold text-xs text-white group-hover:text-purple-300 transition">Aktifkan Autonomous AI Copilot Engine</div>
+                <div class="font-semibold text-xs text-white group-hover:text-purple-300 transition">Aktifkan Autonomous Aegis AI Engine</div>
                 <div class="text-[11px] text-slate-400">Observer otomatis memantau telemetry di background thread 24 jam</div>
               </div>
               <input type="checkbox" id="aiConfigCopilotEnabled" class="w-4 h-4 rounded text-purple-600 bg-surface-900 border-slate-700 focus:ring-0">
@@ -2241,7 +3326,7 @@
       <div class="flex items-center justify-between gap-3 px-6 py-4 border-t border-slate-800 bg-surface-900/90 backdrop-blur">
         <div class="text-[11px] font-mono text-slate-500 flex items-center gap-2">
           <span class="w-2 h-2 rounded-full bg-purple-400 animate-pulse"></span>
-          <span>Sentinel AI Observer: <b class="text-slate-300">Aktif 24/7 pada srv-host-node (10.10.10.9)</b></span>
+          <span>Aegis AI Observer: <b class="text-slate-300">Aktif 24/7 pada srv-host-node (10.10.10.9)</b></span>
         </div>
         <button onclick="closeAiCopilotModal()" class="px-4 py-2 rounded-xl bg-surface-800 text-slate-300 font-semibold hover:bg-surface-700 transition text-xs border border-slate-700">
           Tutup
@@ -2268,7 +3353,7 @@
                 v2.0 Full Suite
               </span>
             </div>
-            <p class="text-xs text-slate-400">Deploy or update the lightweight Sentinel telemetry & control daemon with 1 shell command</p>
+            <p class="text-xs text-slate-400">Deploy or update the lightweight Aegis telemetry & control daemon with 1 shell command</p>
           </div>
         </div>
         <button onclick="closeAddNodeModal()" class="w-8 h-8 rounded-lg bg-surface-800 hover:bg-surface-700 text-slate-400 hover:text-white flex items-center justify-center transition">
@@ -2444,7 +3529,7 @@
           <div class="flex items-center gap-2.5">
             <div class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping"></div>
             <span class="text-slate-300 font-mono text-xs" id="nodeListenStatus">
-              Sentinel Receiver active on Port 8888 • Auto-pairing with new nodes
+              Aegis Receiver active on Port 8888 • Auto-pairing with new nodes
             </span>
           </div>
           <span class="px-2 py-0.5 rounded text-[10px] font-mono bg-blue-500/10 text-blue-400 border border-blue-500/30">
@@ -2457,7 +3542,7 @@
       <!-- Modal Footer -->
       <div class="flex items-center justify-between px-6 py-3 border-t border-slate-800 bg-surface-900/90 backdrop-blur z-10">
         <span class="text-[11px] text-slate-500 font-mono">
-          Sentinel NOC Infrastructure Engine
+          Aegis NOC Infrastructure Engine
         </span>
         <button onclick="closeAddNodeModal()" class="px-5 py-2 rounded-xl bg-surface-800 hover:bg-surface-700 text-white font-semibold transition-all text-xs">
           Tutup
@@ -2695,7 +3780,7 @@
       <!-- Modal Footer -->
       <div class="flex items-center justify-between px-6 py-3 border-t border-slate-800 bg-surface-900/90 backdrop-blur z-10">
         <span class="text-[11px] text-slate-500 font-mono">
-          Sentinel NOC • Proxmox VE Integration Engine
+          Aegis NOC • Proxmox VE Integration Engine
         </span>
         <button onclick="closeVmModal()" class="px-5 py-2 rounded-xl bg-surface-800 hover:bg-surface-700 text-white font-semibold transition-all text-xs">
           Tutup
@@ -2719,7 +3804,7 @@
           </div>
           <div>
             <div class="flex items-center gap-2">
-              <h3 class="text-sm font-bold text-white font-mono">SENTINEL WEB SHELL</h3>
+              <h3 class="text-sm font-bold text-white font-mono">AEGIS WEB SHELL</h3>
               <span class="px-2 py-0.5 text-[10px] font-mono font-bold rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/30">
                 ROOT SESSION
               </span>
@@ -2763,7 +3848,7 @@
       <!-- Terminal Output Screen -->
       <div id="terminalScreen" class="flex-1 bg-[#090b0e] p-4 overflow-y-auto font-mono text-xs text-slate-200 space-y-3 scrollbar-thin select-text">
         <div class="text-slate-500">
-          <div>Sentinel Interactive Terminal v2.0 • Ready</div>
+          <div>Aegis Interactive Terminal v2.0 • Engineered by Aidil Andriandas • Ready</div>
           <div>Connected to daemon host. Type commands below and press <kbd class="px-1 py-0.5 rounded bg-surface-800 text-slate-300">Enter</kbd>.</div>
           <div class="text-slate-600">---------------------------------------------------------------------------------</div>
         </div>
@@ -2983,6 +4068,9 @@
     }
 
     let selectedServerId = null;
+    try {
+      selectedServerId = localStorage.getItem('aegis_selected_server_id') || null;
+    } catch(e) {}
     let registeredNodesCache = [];
     let clusterNodesCache = [];
 
@@ -3025,11 +4113,15 @@
 
     function selectNode(nodeId) {
       selectedServerId = nodeId;
+      try {
+        if (nodeId) localStorage.setItem('aegis_selected_server_id', nodeId);
+        else localStorage.removeItem('aegis_selected_server_id');
+      } catch(e) {}
       const menu = document.getElementById('nodeDropdownMenu');
       if (menu) menu.classList.add('hidden');
       const chev = document.getElementById('nodeChevron');
       if (chev) chev.classList.remove('rotate-180');
-      if (currentDashboardView === 'cluster') {
+      if (currentDashboardView === 'cluster' || currentDashboardView === 'security') {
         switchDashboardView('single');
       } else {
         fetchDashboard();
@@ -4776,7 +5868,7 @@
           box.classList.remove('hidden');
           if (res.ok && data.status === 'success') {
             box.className = "px-6 py-2.5 text-xs font-mono border-b bg-emerald-500/10 border-emerald-500/30 text-emerald-300 flex items-center justify-between";
-            box.innerHTML = `<span><i class="fa-solid fa-circle-check mr-2 text-emerald-400"></i> Laporan AI Copilot berhasil dikirimkan ke Telegram (@cigak_bot)!</span>
+            box.innerHTML = `<span><i class="fa-solid fa-circle-check mr-2 text-emerald-400"></i> Laporan Aegis AI berhasil dikirimkan ke Telegram (@cigak_bot)!</span>
                              <button onclick="document.getElementById('aiDispatchResultBox').classList.add('hidden')" class="text-emerald-400 hover:text-white"><i class="fa-solid fa-xmark"></i></button>`;
           } else {
             box.className = "px-6 py-2.5 text-xs font-mono border-b bg-rose-500/10 border-rose-500/30 text-rose-300 flex items-center justify-between";
@@ -4808,7 +5900,7 @@
         const res = await fetch('/api/v1/ai/dispatch-telegram', { method: 'POST' });
         const data = await res.json();
         if (res.ok && data.status === 'success') {
-          alert("✅ Laporan Analisis Sentinel AI Homelab Copilot berhasil dikirim ke Telegram!");
+          alert("✅ Laporan Analisis Aegis AI berhasil dikirim ke Telegram!");
         } else {
           alert(`⚠️ Pengiriman Telegram: ${data.message || 'Gagal'}`);
         }
@@ -5438,7 +6530,7 @@
           <text x="${nocX - 70}" y="${nocY + 5}" fill="#a5f3fc" font-size="15" text-anchor="middle">🛡️</text>
 
           <text x="${nocX - 42}" y="${nocY - 6}" fill="#ffffff" font-size="12" font-family="sans-serif" font-weight="bold">${sentinelNode.hostname || 'aidil (NOC)'}</text>
-          <text x="${nocX - 42}" y="${nocY + 8}" fill="#22d3ee" font-size="10" font-family="monospace">${sentinelNode.ip} • Sentinel</text>
+          <text x="${nocX - 42}" y="${nocY + 8}" fill="#22d3ee" font-size="10" font-family="monospace">${sentinelNode.ip} • Aegis NOC</text>
           <text x="${nocX - 42}" y="${nocY + 20}" fill="#94a3b8" font-size="9" font-family="monospace">CPU ${(sentinelNode.cpu_pct || 0).toFixed(0)}% • RAM ${(sentinelNode.ram_pct || 0).toFixed(0)}%</text>
 
           <circle cx="${nocX + 84}" cy="${nocY}" r="4.5" fill="${nocStatusColor}" />
@@ -5862,31 +6954,1902 @@
       }, 4500);
     }
 
-    // Cluster Fleet Matrix Management
-    let currentDashboardView = 'single'; // 'single' or 'cluster'
+    // Dashboard View Mode Management: 'single', 'cluster', or 'security'
+    let currentDashboardView = 'single';
+    let secTrafficTimer = null;
+    let secAutoRefresh = true;
+    let secCurrentFilter = 'all';
+    let secCurrentSearch = '';
+    let secConnectionsCache = [];
+    let secTrafficChartInstance = null;
 
     function switchDashboardView(view) {
       currentDashboardView = view;
+      try {
+        localStorage.setItem('aegis_active_dashboard_view', view);
+      } catch(e) {}
       const singleEl = document.getElementById('singleNodeView');
       const clusterEl = document.getElementById('clusterFleetView');
+      const securityEl = document.getElementById('securityTrafficView');
       const btnSingle = document.getElementById('viewBtnSingle');
       const btnCluster = document.getElementById('viewBtnCluster');
+      const btnSecurity = document.getElementById('viewBtnSecurity');
       const hostSub = document.getElementById('hostSubtitle');
 
+      // Stop security polling if leaving security view
+      if (view !== 'security' && secTrafficTimer) {
+        clearInterval(secTrafficTimer);
+        secTrafficTimer = null;
+      }
+
+      // Reset all buttons to inactive
+      const inactiveBtnClass = "px-3.5 py-1.5 font-semibold rounded-lg text-slate-400 hover:text-white transition-all flex items-center gap-1.5";
+      if (btnSingle) btnSingle.className = inactiveBtnClass;
+      if (btnCluster) btnCluster.className = inactiveBtnClass;
+      if (btnSecurity) btnSecurity.className = inactiveBtnClass;
+
+      // Hide all main containers
+      if (singleEl) singleEl.classList.add('hidden');
+      if (clusterEl) clusterEl.classList.add('hidden');
+      if (securityEl) securityEl.classList.add('hidden');
+
       if (view === 'cluster') {
-        singleEl.classList.add('hidden');
-        clusterEl.classList.remove('hidden');
-        btnSingle.className = "px-3.5 py-1.5 font-semibold rounded-lg text-slate-400 hover:text-white transition-all flex items-center gap-2";
-        btnCluster.className = "px-3.5 py-1.5 font-semibold rounded-lg bg-blue-600 text-white transition-all flex items-center gap-2 shadow-sm";
+        if (clusterEl) clusterEl.classList.remove('hidden');
+        if (btnCluster) btnCluster.className = "px-3.5 py-1.5 font-semibold rounded-lg bg-blue-600 text-white transition-all flex items-center gap-1.5 shadow-sm";
         if (hostSub) hostSub.innerText = "Cluster Fleet Overview";
         fetchClusterOverview();
+      } else if (view === 'security') {
+        if (securityEl) securityEl.classList.remove('hidden');
+        if (btnSecurity) btnSecurity.className = "px-3.5 py-1.5 font-semibold rounded-lg bg-emerald-600 text-white transition-all flex items-center gap-1.5 shadow-sm";
+        if (hostSub) hostSub.innerText = "Aegis Cyber Shield • Real-Time Traffic & Defense";
+        fetchSecurityTraffic();
+        if (secAutoRefresh && !secTrafficTimer) {
+          secTrafficTimer = setInterval(fetchSecurityTraffic, 2000);
+        }
       } else {
-        clusterEl.classList.add('hidden');
-        singleEl.classList.remove('hidden');
-        btnSingle.className = "px-3.5 py-1.5 font-semibold rounded-lg bg-blue-600 text-white transition-all flex items-center gap-2 shadow-sm";
-        btnCluster.className = "px-3.5 py-1.5 font-semibold rounded-lg text-slate-400 hover:text-white transition-all flex items-center gap-2";
+        if (singleEl) singleEl.classList.remove('hidden');
+        if (btnSingle) btnSingle.className = "px-3.5 py-1.5 font-semibold rounded-lg bg-blue-600 text-white transition-all flex items-center gap-1.5 shadow-sm";
+        if (hostSub) hostSub.innerText = "Central NOC Infrastructure Telemetry";
         fetchDashboard();
       }
+    }
+
+    function toggleSecurityAutoRefresh() {
+      secAutoRefresh = !secAutoRefresh;
+      const dot = document.getElementById('secAutoRefreshDot');
+      const label = document.getElementById('secAutoRefreshLabel');
+      if (secAutoRefresh) {
+        if (dot) dot.className = "w-2 h-2 rounded-full bg-emerald-400 animate-pulse";
+        if (label) label.innerText = "Auto: 2s";
+        if (!secTrafficTimer && currentDashboardView === 'security') {
+          secTrafficTimer = setInterval(fetchSecurityTraffic, 2000);
+        }
+        showToast("Auto-refresh traffic scan enabled (2s)", "info");
+      } else {
+        if (dot) dot.className = "w-2 h-2 rounded-full bg-slate-500";
+        if (label) label.innerText = "Paused";
+        if (secTrafficTimer) {
+          clearInterval(secTrafficTimer);
+          secTrafficTimer = null;
+        }
+        showToast("Auto-refresh paused", "info");
+      }
+    }
+
+    async function fetchSecurityTraffic() {
+      const spinner = document.getElementById('secRefreshSpinner');
+      if (spinner) spinner.classList.add('fa-spin');
+      try {
+        const res = await fetch('/api/v1/security/traffic/live');
+        if (!res.ok) throw new Error(`HTTP error ${res.status}`);
+        const data = await res.json();
+        renderSecurityTrafficDashboard(data);
+      } catch (err) {
+        console.error("Error fetching security traffic:", err);
+      } finally {
+        if (spinner) {
+          setTimeout(() => spinner.classList.remove('fa-spin'), 350);
+        }
+      }
+    }
+
+    let currentSecSubTab = 'traffic';
+    let secRadarAngle = 0;
+    let secRadarAnimationId = null;
+
+    function switchSecSubTab(tab) {
+      currentSecSubTab = tab;
+      try {
+        localStorage.setItem('aegis_active_sec_subtab', tab);
+      } catch(e) {}
+      const tabs = ['traffic', 'jail', 'recon', 'geo', 'hardening', 'fim', 'docker', 'process', 'c2', 'perimeter'];
+      
+      tabs.forEach(t => {
+        const btn = document.getElementById(`secTabBtn_${t}`);
+        const content = document.getElementById(`secSubTabContent_${t}`);
+        if (t === tab) {
+          if (btn) {
+            btn.className = "px-3.5 py-1.5 font-bold rounded-xl bg-emerald-600 text-white shadow-sm transition flex items-center gap-2 shrink-0";
+          }
+          if (content) content.classList.remove('hidden');
+        } else {
+          if (btn) {
+            btn.className = "px-3.5 py-1.5 font-bold rounded-xl text-slate-400 hover:text-white transition flex items-center gap-2 shrink-0";
+          }
+          if (content) content.classList.add('hidden');
+        }
+      });
+
+      if (tab === 'recon') {
+        startTacticalRadar();
+      } else if (tab === 'geo') {
+        drawGeoWorldMap();
+      } else if (tab === 'docker') {
+        fetchSecDockerAudit();
+      } else if (tab === 'process') {
+        fetchProcessHunter();
+      } else if (tab === 'c2') {
+        fetchSecC2Miner();
+      } else if (tab === 'perimeter') {
+        fetchSecPerimeter();
+      }
+    }
+
+    function renderSecurityTrafficDashboard(data) {
+      if (!data) return;
+      
+      // Update Top Status & Score
+      const statusBadge = document.getElementById('secShieldStatusBadge');
+      const statusText = document.getElementById('secShieldStatusText');
+      const defenseScore = document.getElementById('secDefenseScore');
+      const threatScoreLabel = document.getElementById('secThreatScoreLabel');
+      
+      if (statusText) statusText.innerText = data.shield_status || "OPTIMAL DEFENSE";
+      if (defenseScore) defenseScore.innerText = `${data.threat_score || 100}/100`;
+      
+      if (threatScoreLabel) {
+        if (data.threat_score >= 85) {
+          threatScoreLabel.innerText = "SECURE";
+          threatScoreLabel.className = "text-xs text-emerald-400 font-mono font-bold";
+        } else if (data.threat_score >= 60) {
+          threatScoreLabel.innerText = "ELEVATED";
+          threatScoreLabel.className = "text-xs text-amber-400 font-mono font-bold";
+        } else {
+          threatScoreLabel.innerText = "ATTACK ALERT";
+          threatScoreLabel.className = "text-xs text-rose-400 font-mono font-bold";
+        }
+      }
+
+      // Update KPI 1: Inbound Throughput
+      const rate = data.traffic_rate || {};
+      const rxEl = document.getElementById('secRxKbps');
+      const txEl = document.getElementById('secTxKbps');
+      const rxPps = document.getElementById('secRxPps');
+      const totalRx = document.getElementById('secTotalRx');
+      const rxDrops = document.getElementById('secRxDrops');
+      
+      if (rxEl) rxEl.innerText = formatBandwidthRate(rate.rx_kbps || 0);
+      if (txEl) txEl.innerText = formatBandwidthRate(rate.tx_kbps || 0);
+      if (rxPps) rxPps.innerText = `${rate.rx_pps || 0} pps`;
+      if (totalRx) totalRx.innerText = `${((rate.total_rx_bytes || 0) / (1024 * 1024)).toFixed(1)} MB Total`;
+      if (rxDrops) rxDrops.innerText = `${rate.rx_drop || 0}`;
+
+      // Update KPI 2: Sockets Breakdown
+      const sum = data.summary || {};
+      const totalSockets = document.getElementById('secTotalSockets');
+      const activeInbound = document.getElementById('secActiveInbound');
+      const establishedCount = document.getElementById('secEstablishedCount');
+      const timeWaitCount = document.getElementById('secTimeWaitCount');
+      const listenCount = document.getElementById('secListenCount');
+      
+      const states = data.states_distribution || {};
+      if (totalSockets) totalSockets.innerText = `${sum.total_sockets || 0} Sockets`;
+      if (activeInbound) activeInbound.innerText = `${sum.active_inbound || 0}`;
+      if (establishedCount) establishedCount.innerText = `${states['ESTABLISHED'] || 0}`;
+      if (timeWaitCount) timeWaitCount.innerText = `${states['TIME-WAIT'] || states['TIME_WAIT'] || 0}`;
+      if (listenCount) listenCount.innerText = `${states['LISTEN'] || 0}`;
+
+      // Update KPI 3: Origins
+      const lanCount = document.getElementById('secLanCount');
+      const clusterSubnet = document.getElementById('secClusterSubnetCount');
+      const wanCount = document.getElementById('secWanCount');
+      if (lanCount) lanCount.innerText = `${(sum.lan_count || 0) + (sum.vpn_count || 0)}`;
+      if (clusterSubnet) clusterSubnet.innerText = `${sum.lan_count || 0}`;
+      if (wanCount) wanCount.innerText = `${sum.wan_count || 0}`;
+
+      // Update KPI 4: Threat Defense
+      const blockedBadge = document.getElementById('secBlockedBadge');
+      const failedAuthCount = document.getElementById('secFailedAuthCount');
+      const jailedKpi = document.getElementById('secJailedKpi');
+      if (blockedBadge) blockedBadge.innerText = `${sum.blocked_count || 0} Blocked`;
+      if (failedAuthCount) failedAuthCount.innerText = `${sum.failed_auth_count || 0}`;
+      if (jailedKpi) jailedKpi.innerText = `${sum.jailed_count || 0}`;
+
+      // Update Sub-Nav Badges
+      const subJailBadge = document.getElementById('secSubNavJailBadge');
+      const subReconBadge = document.getElementById('secSubNavReconBadge');
+      const subHardeningBadge = document.getElementById('secSubNavHardeningBadge');
+      const subFimBadge = document.getElementById('secSubNavFimBadge');
+      const subDockerBadge = document.getElementById('secSubNavDockerBadge');
+      const subC2Badge = document.getElementById('secSubNavC2Badge');
+
+      if (subJailBadge) subJailBadge.innerText = sum.jailed_count || 0;
+      if (subReconBadge) subReconBadge.innerText = sum.recon_count || 0;
+      if (subHardeningBadge && data.hardening) subHardeningBadge.innerText = `${data.hardening.hardening_score || 0}%`;
+      if (subFimBadge && data.fim) {
+        subFimBadge.innerText = data.fim.overall_status || 'INTACT';
+        subFimBadge.className = (data.fim.overall_status === 'SECURE')
+          ? "px-1.5 py-0.2 rounded text-[10px] bg-purple-500/15 text-purple-300 border border-purple-500/30"
+          : "px-1.5 py-0.2 rounded text-[10px] bg-rose-500/20 text-rose-300 border border-rose-500/40 animate-pulse font-bold";
+      }
+      if (subDockerBadge && data.docker_audit) {
+        subDockerBadge.innerText = `${data.docker_audit.overall_score || 0}%`;
+        subDockerBadge.className = (data.docker_audit.overall_score >= 80)
+          ? "px-1.5 py-0.2 rounded text-[10px] bg-sky-500/15 text-sky-300 border border-sky-500/30 font-bold"
+          : "px-1.5 py-0.2 rounded text-[10px] bg-amber-500/20 text-amber-300 border border-amber-500/40 font-bold";
+      }
+      if (subC2Badge && data.c2_miner) {
+        const c2Threats = data.c2_miner.threats_count || 0;
+        subC2Badge.innerText = c2Threats > 0 ? `${c2Threats} ALERT` : 'CLEAN';
+        subC2Badge.className = (c2Threats === 0)
+          ? "px-1.5 py-0.2 rounded text-[10px] bg-emerald-500/15 text-emerald-300 border border-emerald-500/30"
+          : "px-1.5 py-0.2 rounded text-[10px] bg-rose-500/20 text-rose-300 border border-rose-500/40 animate-pulse font-bold";
+      }
+
+      // Update Recon Alert Banner
+      const reconBanner = document.getElementById('secReconAlertBanner');
+      const reconAlerts = data.recon_alerts || [];
+      if (reconBanner) {
+        if (reconAlerts.length > 0) {
+          reconBanner.classList.remove('hidden');
+          const msg = document.getElementById('secReconAlertMessage');
+          if (msg) {
+            const topAlert = reconAlerts[0];
+            msg.innerText = `IP ${topAlert.ip} (${topAlert.flag} ${topAlert.country}) probed ${topAlert.ports_probed.length} ports [${topAlert.ports_probed.join(', ')}] in <15s!`;
+          }
+        } else {
+          reconBanner.classList.add('hidden');
+        }
+      }
+
+      // 1. Render Traffic Chart
+      renderSecTrafficChart(rate.history || []);
+
+      // 2. Render Target Services
+      renderSecServices(data.services_distribution || {}, sum.active_inbound || 1);
+
+      // 3. Cache connections & Render Table
+      secConnectionsCache = data.connections || [];
+      renderSecTrafficTable();
+
+      // 4. Render Auth Forensics Stream
+      renderSecAuthEvents(data.security_events || []);
+
+      // 5. Render Blocklist
+      renderSecBlocklist(data.blocklist || []);
+
+      // 6. Render Jail Matrix
+      renderSecJailTable(data.jail_matrix || []);
+
+      // 7. Render Recon Table
+      renderSecReconTable(reconAlerts);
+
+      // 8. Render Country Origins Distribution
+      renderSecCountryDist(data.country_distribution || []);
+
+      // 9. Render Hardening Cards
+      renderSecHardeningCards(data.hardening || {});
+
+      // 10. Render FIM Table
+      renderSecFimTable(data.fim || {});
+
+      // 11. Render Docker Audit
+      if (data.docker_audit) renderSecDockerAudit(data.docker_audit);
+
+      // 12. Render C2 Miner Shield
+      if (data.c2_miner) renderSecC2Miner(data.c2_miner);
+
+      // 13. Render Hypervisor Perimeter
+      if (data.perimeter_shield) renderSecPerimeter(data.perimeter_shield);
+    }
+
+    function formatBandwidthRate(kbps) {
+      if (kbps >= 1024) {
+        return `${(kbps / 1024).toFixed(2)} MB/s`;
+      }
+      return `${kbps.toFixed(1)} KB/s`;
+    }
+
+    function renderSecTrafficChart(history) {
+      const canvas = document.getElementById('secTrafficChart');
+      if (!canvas) return;
+      
+      const labels = history.map(h => h.time || '');
+      const rxData = history.map(h => h.rx_kbps || 0);
+      const txData = history.map(h => h.tx_kbps || 0);
+
+      if (!secTrafficChartInstance) {
+        const ctx = canvas.getContext('2d');
+        
+        const gradRx = ctx.createLinearGradient(0, 0, 0, 200);
+        gradRx.addColorStop(0, 'rgba(16, 185, 129, 0.4)');
+        gradRx.addColorStop(1, 'rgba(16, 185, 129, 0.0)');
+
+        const gradTx = ctx.createLinearGradient(0, 0, 0, 200);
+        gradTx.addColorStop(0, 'rgba(6, 182, 212, 0.4)');
+        gradTx.addColorStop(1, 'rgba(6, 182, 212, 0.0)');
+
+        secTrafficChartInstance = new Chart(ctx, {
+          type: 'line',
+          data: {
+            labels: labels,
+            datasets: [
+              {
+                label: 'RX Inbound (KB/s)',
+                data: rxData,
+                borderColor: '#10B981',
+                backgroundColor: gradRx,
+                borderWidth: 2,
+                fill: true,
+                tension: 0.35,
+                pointRadius: 0,
+                pointHitRadius: 8
+              },
+              {
+                label: 'TX Outbound (KB/s)',
+                data: txData,
+                borderColor: '#06B6D4',
+                backgroundColor: gradTx,
+                borderWidth: 2,
+                fill: true,
+                tension: 0.35,
+                pointRadius: 0,
+                pointHitRadius: 8
+              }
+            ]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            animation: false,
+            interaction: { intersect: false, mode: 'index' },
+            plugins: {
+              legend: { display: false },
+              tooltip: {
+                backgroundColor: '#0f172a',
+                titleColor: '#e2e8f0',
+                bodyColor: '#94a3b8',
+                borderColor: '#334155',
+                borderWidth: 1,
+                padding: 10
+              }
+            },
+            scales: {
+              x: {
+                grid: { color: 'rgba(51, 65, 85, 0.25)' },
+                ticks: { color: '#64748b', font: { family: 'JetBrains Mono', size: 10 } }
+              },
+              y: {
+                beginAtZero: true,
+                grid: { color: 'rgba(51, 65, 85, 0.25)' },
+                ticks: {
+                  color: '#64748b',
+                  font: { family: 'JetBrains Mono', size: 10 },
+                  callback: function(v) { return v + ' KB/s'; }
+                }
+              }
+            }
+          }
+        });
+      } else {
+        secTrafficChartInstance.data.labels = labels;
+        secTrafficChartInstance.data.datasets[0].data = rxData;
+        secTrafficChartInstance.data.datasets[1].data = txData;
+        secTrafficChartInstance.update('none');
+      }
+    }
+
+    function renderSecServices(services, totalInbound) {
+      const container = document.getElementById('secServicesContainer');
+      if (!container) return;
+      
+      const entries = Object.entries(services);
+      if (entries.length === 0) {
+        container.innerHTML = `
+          <div class="p-4 rounded-xl bg-surface-950/60 border border-slate-800 text-center text-slate-500 font-mono text-xs">
+            No active inbound socket hits recorded
+          </div>
+        `;
+        return;
+      }
+
+      entries.sort((a, b) => b[1] - a[1]);
+      const maxCount = Math.max(...entries.map(e => e[1]), 1);
+      
+      container.innerHTML = entries.slice(0, 5).map(([svc, count]) => {
+        const pct = Math.min(Math.round((count / maxCount) * 100), 100);
+        return `
+          <div class="space-y-1">
+            <div class="flex items-center justify-between text-xs font-mono">
+              <span class="text-slate-300 font-medium truncate max-w-[180px]">${svc}</span>
+              <span class="text-cyan-400 font-bold">${count} sockets</span>
+            </div>
+            <div class="w-full bg-slate-950 rounded-full h-1.5 overflow-hidden border border-slate-800">
+              <div class="bg-gradient-to-r from-blue-500 to-cyan-400 h-full rounded-full transition-all duration-300" style="width: ${pct}%"></div>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function setSecTrafficFilter(filter) {
+      secCurrentFilter = filter;
+      const btnAll = document.getElementById('secFilterBtnAll');
+      const btnInbound = document.getElementById('secFilterBtnInbound');
+      const btnOutbound = document.getElementById('secFilterBtnOutbound');
+      const btnWan = document.getElementById('secFilterBtnWan');
+      const btnLan = document.getElementById('secFilterBtnLan');
+      const btnSuspicious = document.getElementById('secFilterBtnSuspicious');
+
+      const inactive = "px-3 py-1 rounded-lg text-slate-400 hover:text-white transition flex items-center gap-1";
+      const active = "px-3 py-1 rounded-lg bg-blue-600 text-white font-semibold transition flex items-center gap-1";
+
+      if (btnAll) btnAll.className = (filter === 'all') ? active : inactive;
+      if (btnInbound) btnInbound.className = (filter === 'inbound') ? active : inactive;
+      if (btnOutbound) btnOutbound.className = (filter === 'outbound') ? active : inactive;
+      if (btnWan) btnWan.className = (filter === 'wan') ? active : inactive;
+      if (btnLan) btnLan.className = (filter === 'lan') ? active : inactive;
+      if (btnSuspicious) {
+        btnSuspicious.className = (filter === 'suspicious') 
+          ? "px-3 py-1 rounded-lg bg-rose-600 text-white font-semibold transition flex items-center gap-1"
+          : "px-3 py-1 rounded-lg text-slate-400 hover:text-rose-400 transition flex items-center gap-1";
+      }
+
+      renderSecTrafficTable();
+    }
+
+    function onSecSearchInput(val) {
+      secCurrentSearch = (val || '').toLowerCase().trim();
+      renderSecTrafficTable();
+    }
+
+    function renderSecTrafficTable() {
+      const tbody = document.getElementById('secTrafficTableBody');
+      const badge = document.getElementById('secFilteredCountBadge');
+      if (!tbody) return;
+
+      let conns = secConnectionsCache || [];
+
+      if (secCurrentFilter === 'inbound') {
+        conns = conns.filter(c => c.direction === 'INBOUND');
+      } else if (secCurrentFilter === 'outbound') {
+        conns = conns.filter(c => c.direction === 'OUTBOUND');
+      } else if (secCurrentFilter === 'wan') {
+        conns = conns.filter(c => c.net_category === 'wan');
+      } else if (secCurrentFilter === 'lan') {
+        conns = conns.filter(c => c.net_category === 'lan' || c.net_category === 'vpn');
+      } else if (secCurrentFilter === 'suspicious') {
+        conns = conns.filter(c => c.is_suspicious || c.threat_level === 'HIGH' || c.threat_level === 'BLOCKED' || c.threat_level === 'JAILED');
+      }
+
+      if (secCurrentSearch) {
+        conns = conns.filter(c => 
+          (c.peer_ip && c.peer_ip.toLowerCase().includes(secCurrentSearch)) ||
+          (c.service && c.service.toLowerCase().includes(secCurrentSearch)) ||
+          (c.local_port && String(c.local_port).includes(secCurrentSearch)) ||
+          (c.process && c.process.toLowerCase().includes(secCurrentSearch)) ||
+          (c.geo_country && c.geo_country.toLowerCase().includes(secCurrentSearch))
+        );
+      }
+
+      if (badge) badge.innerText = `${conns.length} Connections`;
+
+      if (conns.length === 0) {
+        tbody.innerHTML = `
+          <tr>
+            <td colspan="6" class="py-8 text-center text-slate-500 font-mono">
+              <i class="fa-solid fa-radar text-xl mb-2 opacity-40"></i>
+              <p>No active connections matching current security filters</p>
+            </td>
+          </tr>
+        `;
+        return;
+      }
+
+      tbody.innerHTML = conns.map(c => {
+        let stateBadgeClass = "bg-slate-800 text-slate-300 border-slate-700";
+        if (c.state === 'ESTABLISHED') stateBadgeClass = "bg-emerald-500/15 text-emerald-400 border-emerald-500/30";
+        else if (c.state === 'TIME-WAIT' || c.state === 'TIME_WAIT') stateBadgeClass = "bg-amber-500/15 text-amber-300 border-amber-500/30";
+        else if (c.state === 'LISTEN') stateBadgeClass = "bg-blue-500/15 text-blue-400 border-blue-500/30";
+        else if (c.state === 'SYN_RECV') stateBadgeClass = "bg-rose-500/20 text-rose-400 border-rose-500/40 animate-pulse";
+
+        let threatBadgeClass = "bg-emerald-500/10 text-emerald-400 border-emerald-500/30";
+        if (c.threat_level === 'HIGH') threatBadgeClass = "bg-rose-500/20 text-rose-400 border-rose-500/40";
+        else if (c.threat_level === 'ELEVATED') threatBadgeClass = "bg-amber-500/15 text-amber-300 border-amber-500/30";
+        else if (c.threat_level === 'SAFE') threatBadgeClass = "bg-emerald-500/15 text-emerald-300 border-emerald-500/30 font-semibold";
+        else if (c.threat_level === 'BLOCKED' || c.threat_level === 'JAILED') threatBadgeClass = "bg-red-950 text-red-400 border-red-800 font-bold";
+
+        // Direction Badge
+        let dirBadge = '';
+        if (c.direction === 'OUTBOUND') {
+          dirBadge = `<span class="px-1.5 py-0.5 rounded text-[9px] font-bold bg-blue-500/20 text-blue-300 border border-blue-500/30 flex items-center gap-1 w-fit"><i class="fa-solid fa-arrow-up-right-from-square text-[8px]"></i>OUTBOUND</span>`;
+        } else if (c.direction === 'LISTEN') {
+          dirBadge = `<span class="px-1.5 py-0.5 rounded text-[9px] font-bold bg-slate-500/20 text-slate-300 border border-slate-500/30 flex items-center gap-1 w-fit"><i class="fa-solid fa-ear-listen text-[8px]"></i>LISTEN</span>`;
+        } else {
+          dirBadge = `<span class="px-1.5 py-0.5 rounded text-[9px] font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 flex items-center gap-1 w-fit"><i class="fa-solid fa-arrow-down-left-and-up-right-to-center text-[8px]"></i>INBOUND</span>`;
+        }
+
+        let actions = [];
+        if (c.peer_ip && !['*', '0.0.0.0', '127.0.0.1'].includes(c.peer_ip)) {
+          // AI Investigate Button
+          actions.push(`
+            <button onclick="openSecAiModal('${c.peer_ip}', 'socket_inspection', 'Service: ${c.service}, Direction: ${c.direction || 'Inbound'}, State: ${c.state}, Port: ${c.local_port}')" class="px-2 py-1 text-[10px] font-semibold bg-cyan-500/15 hover:bg-cyan-500/25 text-cyan-300 border border-cyan-500/30 rounded-lg transition" title="Ask Aegis AI">
+              <i class="fa-solid fa-microchip-ai text-[9px] mr-1"></i> AI
+            </button>
+          `);
+
+          if (c.is_verified || c.threat_level === 'SAFE') {
+            actions.push(`
+              <span class="px-2 py-1 text-[10px] font-semibold text-emerald-400 bg-emerald-500/10 border border-emerald-500/25 rounded-lg flex items-center gap-1 cursor-default" title="Vital system service - protected from blocking">
+                <i class="fa-solid fa-lock text-[9px]"></i> Protected
+              </span>
+            `);
+          } else if (c.is_jailed) {
+            actions.push(`
+              <button onclick="secReleaseJail('${c.peer_ip}')" class="px-2 py-1 text-[10px] font-semibold bg-amber-500/20 text-amber-300 border border-amber-500/40 rounded-lg transition" title="Pardon from Jail">
+                Pardon
+              </button>
+            `);
+          } else if (c.is_blocked) {
+            actions.push(`
+              <button onclick="secUnblockIp('${c.peer_ip}')" class="px-2 py-1 text-[10px] font-semibold bg-emerald-500/15 hover:bg-emerald-500/25 text-emerald-300 border border-emerald-500/30 rounded-lg transition">
+                Unblock
+              </button>
+            `);
+          } else {
+            actions.push(`
+              <button onclick="secBlockIp('${c.peer_ip}', 'Threat blocked from live traffic inspector')" class="px-2 py-1 text-[10px] font-semibold bg-rose-500/15 hover:bg-rose-500/25 text-rose-300 border border-rose-500/30 rounded-lg transition">
+                Block
+              </button>
+            `);
+          }
+        }
+
+        return `
+          <tr class="hover:bg-surface-800/40 transition">
+            <td class="py-2.5 px-4">
+              <div class="flex items-center gap-2">
+                <span class="text-base">${c.geo_flag || '🌐'}</span>
+                <div>
+                  <div class="text-slate-200 font-bold flex items-center gap-1.5">
+                    <span>${c.peer_ip}:${c.peer_port || 0}</span>
+                  </div>
+                  <span class="text-[10px] text-slate-400 font-sans">${c.geo_country || c.net_label}</span>
+                </div>
+              </div>
+            </td>
+            <td class="py-2.5 px-4">
+              <div class="flex flex-col gap-0.5">
+                <div class="flex items-center gap-1.5 flex-wrap">
+                  ${dirBadge}
+                  <span class="text-white font-medium">${c.service}</span>
+                </div>
+                <span class="text-[10px] text-slate-400 font-mono">
+                  ${c.direction === 'OUTBOUND' 
+                    ? `local :${c.local_port} &rarr; remote :${c.peer_port || 443}` 
+                    : (c.direction === 'LISTEN' ? `listening on :${c.local_port}` : `target port :${c.local_port}`)}
+                </span>
+              </div>
+            </td>
+            <td class="py-2.5 px-4">
+              <div class="flex items-center gap-1.5">
+                <span class="px-1.5 py-0.2 rounded text-[10px] bg-slate-800 text-slate-300 border border-slate-700">${c.proto}</span>
+                <span class="px-2 py-0.5 rounded-full text-[10px] border ${stateBadgeClass}">${c.state}</span>
+              </div>
+            </td>
+            <td class="py-2.5 px-4 text-slate-300">
+              <span class="font-sans text-[11px]">${c.process || '-'}</span>
+            </td>
+            <td class="py-2.5 px-4">
+              <div class="flex flex-col">
+                <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] border w-fit ${threatBadgeClass}">
+                  <i class="fa-solid fa-shield-halved text-[9px]"></i>
+                  <span>${c.threat_level}</span>
+                </span>
+                <span class="text-[10px] text-slate-500 font-sans mt-0.5">${c.threat_reason}</span>
+              </div>
+            </td>
+            <td class="py-2.5 px-4 text-right">
+              <div class="flex items-center justify-end gap-1.5">
+                ${actions.join('')}
+              </div>
+            </td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    // TAB 2: JAIL MATRIX RENDERER
+    function renderSecJailTable(jailed) {
+      const tbody = document.getElementById('secJailTableBody');
+      const badge = document.getElementById('secJailTableCountBadge');
+      if (!tbody) return;
+
+      if (badge) badge.innerText = `${jailed.length} Inmates`;
+
+      if (!jailed || jailed.length === 0) {
+        tbody.innerHTML = `
+          <tr>
+            <td colspan="5" class="py-8 text-center text-slate-500 font-mono">
+              <i class="fa-solid fa-handcuffs text-xl mb-2 opacity-40"></i>
+              <p>Perimeter clear. No IP currently jailed in Fail2ban Matrix.</p>
+            </td>
+          </tr>
+        `;
+        return;
+      }
+
+      tbody.innerHTML = jailed.map(j => {
+        return `
+          <tr class="hover:bg-surface-800/40 transition">
+            <td class="py-3 px-4">
+              <div class="flex items-center gap-2">
+                <span class="text-lg">${j.flag || '🌐'}</span>
+                <div>
+                  <span class="text-white font-bold">${j.ip}</span>
+                  <span class="text-[10px] text-slate-400 block">${j.country || 'Unknown'} (${j.isp || '-'})</span>
+                </div>
+              </div>
+            </td>
+            <td class="py-3 px-4">
+              <span class="px-2 py-0.5 rounded text-[10px] bg-rose-500/20 text-rose-300 border border-rose-500/40 font-bold">
+                ${j.attempts} Fails
+              </span>
+            </td>
+            <td class="py-3 px-4 text-slate-300">
+              <span class="text-xs font-sans">${j.reason}</span>
+            </td>
+            <td class="py-3 px-4">
+              <div class="flex items-center gap-1.5 text-amber-400 font-mono font-bold text-xs">
+                <i class="fa-regular fa-clock text-[10px]"></i>
+                <span>${j.time_remaining_str}</span>
+              </div>
+            </td>
+            <td class="py-3 px-4 text-right">
+              <button onclick="secReleaseJail('${j.ip}')" class="px-3 py-1 rounded-lg bg-emerald-600/20 hover:bg-emerald-600/30 text-emerald-400 border border-emerald-500/30 text-xs font-semibold transition">
+                Pardon & Release
+              </button>
+            </td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    async function secReleaseJail(ip) {
+      if (!confirm(`Release and pardon IP ${ip} from the Fail2ban Jail Matrix?`)) return;
+      try {
+        const res = await fetch('/api/v1/security/jail/release', {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify({ ip: ip })
+        });
+        const data = await res.json();
+        showToast(data.message || `IP ${ip} released`, 'success');
+        fetchSecurityTraffic();
+      } catch (e) {
+        showToast(`Error releasing IP: ${e}`, 'error');
+      }
+    }
+
+    // TAB 3: RECON TABLE RENDERER
+    function renderSecReconTable(reconAlerts) {
+      const tbody = document.getElementById('secReconTableBody');
+      const badge = document.getElementById('secReconTableCountBadge');
+      if (!tbody) return;
+
+      if (badge) badge.innerText = `${reconAlerts.length} Incidents`;
+
+      if (!reconAlerts || reconAlerts.length === 0) {
+        tbody.innerHTML = `
+          <tr>
+            <td colspan="4" class="py-8 text-center text-slate-500 font-mono">
+              <i class="fa-solid fa-radar text-xl mb-2 opacity-40"></i>
+              <p>Recon radar clear. No active port scanning or sweeps detected.</p>
+            </td>
+          </tr>
+        `;
+        return;
+      }
+
+      tbody.innerHTML = reconAlerts.map(a => {
+        const portsStr = (a.ports_probed || []).join(', ');
+        return `
+          <tr class="hover:bg-surface-800/40 transition">
+            <td class="py-3 px-4">
+              <div class="flex items-center gap-2">
+                <span class="text-base">${a.flag || '🌐'}</span>
+                <div>
+                  <span class="text-rose-400 font-bold">${a.ip}</span>
+                  <span class="text-[10px] text-slate-400 block">${a.country}</span>
+                </div>
+              </div>
+            </td>
+            <td class="py-3 px-4">
+              <span class="px-2 py-0.5 rounded text-[10px] bg-amber-500/15 text-amber-300 border border-amber-500/30">
+                Ports: ${portsStr}
+              </span>
+            </td>
+            <td class="py-3 px-4 text-slate-400 font-mono text-[11px]">
+              ${a.time_str}
+            </td>
+            <td class="py-3 px-4 text-right">
+              <div class="flex items-center justify-end gap-1.5">
+                <button onclick="openSecAiModal('${a.ip}', 'port_scan', 'Probed ports: ${portsStr}')" class="px-2 py-1 text-[10px] font-semibold bg-cyan-500/15 text-cyan-300 border border-cyan-500/30 rounded-lg">
+                  AI Explain
+                </button>
+                <button onclick="secBlockIp('${a.ip}', 'Port scan reconnaissance')" class="px-2 py-1 text-[10px] font-semibold bg-rose-500/20 text-rose-300 border border-rose-500/40 rounded-lg">
+                  Auto-Jail
+                </button>
+              </div>
+            </td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    // TACTICAL RADAR CANVAS DRAWING
+    function startTacticalRadar() {
+      if (secRadarAnimationId) return;
+      const canvas = document.getElementById('secReconRadarCanvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      const w = canvas.width;
+      const h = canvas.height;
+      const cx = w / 2;
+      const cy = h / 2;
+      const r = Math.min(cx, cy) - 10;
+
+      function renderFrame() {
+        if (currentSecSubTab !== 'recon') {
+          secRadarAnimationId = null;
+          return;
+        }
+
+        ctx.clearRect(0, 0, w, h);
+
+        // Dark background
+        ctx.fillStyle = "#030712";
+        ctx.fillRect(0, 0, w, h);
+
+        // Concentric circles
+        ctx.strokeStyle = "rgba(16, 185, 129, 0.25)";
+        ctx.lineWidth = 1;
+        for (let i = 1; i <= 4; i++) {
+          ctx.beginPath();
+          ctx.arc(cx, cy, (r / 4) * i, 0, Math.PI * 2);
+          ctx.stroke();
+        }
+
+        // Crosshairs
+        ctx.beginPath();
+        ctx.moveTo(cx, cy - r);
+        ctx.lineTo(cx, cy + r);
+        ctx.moveTo(cx - r, cy);
+        ctx.lineTo(cx + r, cy);
+        ctx.stroke();
+
+        // Sweeping beam
+        secRadarAngle += 0.035;
+        const sweepGrad = ctx.createConicGradient(secRadarAngle, cx, cy);
+        sweepGrad.addColorStop(0, "rgba(16, 185, 129, 0.4)");
+        sweepGrad.addColorStop(0.15, "rgba(16, 185, 129, 0.0)");
+        sweepGrad.addColorStop(1, "rgba(16, 185, 129, 0.0)");
+
+        ctx.fillStyle = sweepGrad;
+        ctx.beginPath();
+        ctx.arc(cx, cy, r, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Pulsing targets (simulated blips)
+        const blips = [
+          { x: cx + 45, y: cy - 35, color: "#F59E0B" },
+          { x: cx - 60, y: cy + 40, color: "#10B981" },
+          { x: cx + 20, y: cy + 70, color: "#EF4444" }
+        ];
+
+        blips.forEach(b => {
+          ctx.fillStyle = b.color;
+          ctx.beginPath();
+          ctx.arc(b.x, b.y, 3, 0, Math.PI * 2);
+          ctx.fill();
+        });
+
+        secRadarAnimationId = requestAnimationFrame(renderFrame);
+      }
+
+      secRadarAnimationId = requestAnimationFrame(renderFrame);
+    }
+
+    // TAB 4: COUNTRY ORIGIN & GLOBAL MAP
+    function renderSecCountryDist(dist) {
+      const container = document.getElementById('secCountryDistContainer');
+      if (!container) return;
+
+      if (!dist || dist.length === 0) {
+        container.innerHTML = `<div class="p-3 text-slate-500 font-mono text-center text-xs">No active remote traffic origin data</div>`;
+        return;
+      }
+
+      container.innerHTML = dist.map(d => {
+        return `
+          <div class="space-y-1">
+            <div class="flex items-center justify-between text-xs font-mono">
+              <span class="flex items-center gap-2 text-slate-200">
+                <span class="text-base">${d.flag}</span>
+                <span>${d.name} (${d.code})</span>
+              </span>
+              <span class="text-cyan-400 font-bold">${d.count} (${d.pct}%)</span>
+            </div>
+            <div class="w-full bg-slate-950 rounded-full h-1.5 overflow-hidden border border-slate-800">
+              <div class="bg-gradient-to-r from-blue-500 to-cyan-400 h-full rounded-full" style="width: ${d.pct}%"></div>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    let secGeoAnimationId = null;
+    let secGeoPhotonProgress = 0;
+    let secGeoPulseRadius = 0;
+
+    // High-Resolution World Continent Dot Matrix (Latitude/Longitude normalized to 0..1)
+    const WORLD_CONTINENTS_COORDS = [
+      // North America
+      [0.15,0.22],[0.18,0.20],[0.21,0.20],[0.24,0.22],[0.27,0.24],[0.19,0.26],[0.22,0.26],[0.25,0.28],[0.18,0.32],[0.21,0.32],[0.24,0.34],[0.20,0.38],[0.23,0.40],[0.26,0.38],[0.28,0.36],[0.21,0.44],[0.23,0.48],
+      // South America
+      [0.28,0.56],[0.31,0.54],[0.33,0.58],[0.30,0.62],[0.32,0.66],[0.31,0.72],[0.29,0.78],[0.28,0.84],
+      // Europe & UK
+      [0.46,0.22],[0.48,0.20],[0.50,0.22],[0.52,0.24],[0.54,0.22],[0.47,0.26],[0.49,0.28],[0.52,0.28],[0.54,0.28],[0.48,0.32],[0.51,0.34],[0.53,0.33],
+      // Africa
+      [0.48,0.42],[0.51,0.40],[0.54,0.42],[0.50,0.46],[0.53,0.48],[0.56,0.48],[0.51,0.54],[0.53,0.58],[0.55,0.62],[0.54,0.68],[0.53,0.74],
+      // Asia & Middle East
+      [0.58,0.25],[0.61,0.24],[0.64,0.22],[0.68,0.23],[0.72,0.22],[0.76,0.23],[0.80,0.24],[0.84,0.26],
+      [0.60,0.30],[0.63,0.32],[0.67,0.30],[0.71,0.32],[0.75,0.32],[0.79,0.34],[0.83,0.36],
+      [0.58,0.36],[0.62,0.38],[0.66,0.40],[0.70,0.42],[0.74,0.42],[0.77,0.40],[0.80,0.42],[0.83,0.44],
+      [0.64,0.46],[0.68,0.48],[0.72,0.48],[0.75,0.48],
+      // Southeast Asia & Indonesia Archipelago
+      [0.74,0.56],[0.76,0.55],[0.78,0.58],[0.75,0.63],[0.77,0.63],[0.79,0.64],[0.81,0.64],[0.83,0.63],[0.76,0.66],[0.78,0.66],
+      // Australia & NZ
+      [0.82,0.74],[0.85,0.72],[0.88,0.74],[0.84,0.78],[0.87,0.80],[0.89,0.82],[0.92,0.84]
+    ];
+
+    function drawGeoWorldMap() {
+      if (secGeoAnimationId) {
+        cancelAnimationFrame(secGeoAnimationId);
+        secGeoAnimationId = null;
+      }
+
+      const canvas = document.getElementById('secGeoWorldCanvas');
+      if (!canvas) return;
+
+      const dpr = window.devicePixelRatio || 1;
+      const rect = canvas.getBoundingClientRect();
+      const cssW = rect.width || 600;
+      const cssH = rect.height || 380;
+
+      canvas.width = cssW * dpr;
+      canvas.height = cssH * dpr;
+
+      const ctx = canvas.getContext('2d');
+      ctx.scale(dpr, dpr);
+
+      // Define our strategic nodes with guaranteed collision-free label placements
+      function getNodes() {
+        const hubX = cssW * 0.77;
+        const hubY = cssH * 0.64;
+
+        return [
+          {
+            id: 'hub',
+            name: 'Central NOC (10.10.10.9)',
+            tag: 'AEGIS HUB',
+            x: hubX,
+            y: hubY,
+            color: '#10B981',
+            glowColor: 'rgba(16, 185, 129, 0.4)',
+            icon: '🛡️',
+            labelAlign: 'bottom',
+            isHub: true
+          },
+          {
+            id: 'vpn',
+            name: 'WireGuard VPN (10.50.0.1)',
+            tag: 'ENCRYPTED TUNNEL',
+            x: cssW * 0.64,
+            y: cssH * 0.48,
+            color: '#A855F7',
+            glowColor: 'rgba(168, 85, 247, 0.4)',
+            icon: '🔒',
+            labelAlign: 'top',
+            isHub: false
+          },
+          {
+            id: 'lan',
+            name: 'Cluster Fleet (10.10.10.x)',
+            tag: '8 WORKLOADS',
+            x: cssW * 0.88,
+            y: cssH * 0.82,
+            color: '#06B6D4',
+            glowColor: 'rgba(6, 182, 212, 0.4)',
+            icon: '⚡',
+            labelAlign: 'top',
+            isHub: false
+          },
+          {
+            id: 'nl',
+            name: 'Netherlands WAN (185.x.x.x)',
+            tag: 'EXTERNAL HIT',
+            x: cssW * 0.50,
+            y: cssH * 0.24,
+            color: '#F59E0B',
+            glowColor: 'rgba(245, 158, 11, 0.4)',
+            icon: '🇳🇱',
+            labelAlign: 'top',
+            isHub: false
+          },
+          {
+            id: 'cf',
+            name: 'Cloudflare Edge (1.1.1.1)',
+            tag: 'DNS ANYCAST',
+            x: cssW * 0.26,
+            y: cssH * 0.36,
+            color: '#38BDF8',
+            glowColor: 'rgba(56, 189, 248, 0.4)',
+            icon: '🌐',
+            labelAlign: 'top',
+            isHub: false
+          },
+          {
+            id: 'google',
+            name: 'Google DNS (8.8.8.8)',
+            tag: 'WAN PROBE',
+            x: cssW * 0.38,
+            y: cssH * 0.18,
+            color: '#818CF8',
+            glowColor: 'rgba(129, 140, 248, 0.4)',
+            icon: '📡',
+            labelAlign: 'bottom',
+            isHub: false
+          }
+        ];
+      }
+
+      function animateMap() {
+        if (currentSecSubTab !== 'geo' || currentDashboardView !== 'security') {
+          secGeoAnimationId = null;
+          return;
+        }
+
+        ctx.clearRect(0, 0, cssW, cssH);
+
+        // 1. Deep Space Tactical Gradient Background
+        const bgGrad = ctx.createRadialGradient(cssW * 0.5, cssH * 0.5, 50, cssW * 0.5, cssH * 0.5, cssW * 0.7);
+        bgGrad.addColorStop(0, "#070c18");
+        bgGrad.addColorStop(1, "#03060d");
+        ctx.fillStyle = bgGrad;
+        ctx.fillRect(0, 0, cssW, cssH);
+
+        // 2. Subtle Coordinate Grid Lines
+        ctx.strokeStyle = "rgba(51, 65, 85, 0.20)";
+        ctx.lineWidth = 1;
+        const gridStep = 45;
+        for (let x = 0; x <= cssW; x += gridStep) {
+          ctx.beginPath();
+          ctx.moveTo(x, 0);
+          ctx.lineTo(x, cssH);
+          ctx.stroke();
+        }
+        for (let y = 0; y <= cssH; y += gridStep) {
+          ctx.beginPath();
+          ctx.moveTo(0, y);
+          ctx.lineTo(cssW, y);
+          ctx.stroke();
+        }
+
+        // 3. Render World Continents Dotted Matrix
+        ctx.fillStyle = "rgba(56, 189, 248, 0.22)";
+        WORLD_CONTINENTS_COORDS.forEach(([normX, normY]) => {
+          const ptX = normX * cssW;
+          const ptY = normY * cssH;
+          ctx.beginPath();
+          ctx.arc(ptX, ptY, 1.8, 0, Math.PI * 2);
+          ctx.fill();
+        });
+
+        const nodes = getNodes();
+        const hub = nodes[0];
+
+        // 4. Sonar Radar Pulse Waves radiating from Central NOC Hub
+        secGeoPulseRadius = (secGeoPulseRadius + 0.6) % 110;
+        for (let r = 0; r < 3; r++) {
+          const radius = (secGeoPulseRadius + r * 35) % 110;
+          const alpha = Math.max(0, 1 - (radius / 110)) * 0.35;
+          ctx.strokeStyle = `rgba(16, 185, 129, ${alpha})`;
+          ctx.lineWidth = 1.5;
+          ctx.beginPath();
+          ctx.arc(hub.x, hub.y, radius, 0, Math.PI * 2);
+          ctx.stroke();
+        }
+
+        // 5. Draw Curved Ballistic Arcs & Animated Traveling Photons
+        secGeoPhotonProgress = (secGeoPhotonProgress + 0.008) % 1;
+
+        nodes.slice(1).forEach((node, idx) => {
+          // Curved Bezier Control Point (curves upwards over the map)
+          const midX = (node.x + hub.x) / 2;
+          const midY = Math.min(node.y, hub.y) - (cssH * 0.16);
+
+          // Draw Arc Background Glow
+          ctx.strokeStyle = node.glowColor;
+          ctx.lineWidth = 2.5;
+          ctx.beginPath();
+          ctx.moveTo(node.x, node.y);
+          ctx.quadraticCurveTo(midX, midY, hub.x, hub.y);
+          ctx.stroke();
+
+          // Draw Arc Core Dashed Line
+          ctx.strokeStyle = node.color;
+          ctx.lineWidth = 1.2;
+          ctx.setLineDash([4, 4]);
+          ctx.beginPath();
+          ctx.moveTo(node.x, node.y);
+          ctx.quadraticCurveTo(midX, midY, hub.x, hub.y);
+          ctx.stroke();
+          ctx.setLineDash([]);
+
+          // Calculate Traveling Photon Position along quadratic curve
+          // B(t) = (1-t)^2 P0 + 2(1-t)t P1 + t^2 P2
+          const t = (secGeoPhotonProgress + (idx * 0.22)) % 1;
+          const it = 1 - t;
+          const photonX = (it * it * node.x) + (2 * it * t * midX) + (t * t * hub.x);
+          const photonY = (it * it * node.y) + (2 * it * t * midY) + (t * t * hub.y);
+
+          // Glowing Photon Head
+          const photonGrad = ctx.createRadialGradient(photonX, photonY, 0, photonX, photonY, 8);
+          photonGrad.addColorStop(0, '#FFFFFF');
+          photonGrad.addColorStop(0.4, node.color);
+          photonGrad.addColorStop(1, 'rgba(0,0,0,0)');
+          ctx.fillStyle = photonGrad;
+          ctx.beginPath();
+          ctx.arc(photonX, photonY, 6, 0, Math.PI * 2);
+          ctx.fill();
+        });
+
+        // 6. Draw Nodes with Modern Cyber Badges (Guaranteed NO Text Overlaps!)
+        nodes.forEach(node => {
+          // Node Outer Glow Ring
+          ctx.fillStyle = node.glowColor;
+          ctx.beginPath();
+          ctx.arc(node.x, node.y, node.isHub ? 10 : 8, 0, Math.PI * 2);
+          ctx.fill();
+
+          // Node Solid Center
+          ctx.fillStyle = node.color;
+          ctx.beginPath();
+          ctx.arc(node.x, node.y, node.isHub ? 5 : 4, 0, Math.PI * 2);
+          ctx.fill();
+
+          // Node White Core
+          ctx.fillStyle = "#FFFFFF";
+          ctx.beginPath();
+          ctx.arc(node.x, node.y, 1.8, 0, Math.PI * 2);
+          ctx.fill();
+
+          // Draw Cyber Pill Badge
+          const title = `${node.icon} ${node.name}`;
+          const subtitle = node.tag;
+          ctx.font = "bold 10px 'JetBrains Mono', monospace";
+          const tw1 = ctx.measureText(title).width;
+          ctx.font = "9px 'JetBrains Mono', monospace";
+          const tw2 = ctx.measureText(subtitle).width;
+          const badgeW = Math.max(tw1, tw2) + 16;
+          const badgeH = 26;
+
+          // Compute badge position based on alignment
+          let badgeX = node.x - (badgeW / 2);
+          let badgeY = (node.labelAlign === 'bottom') ? node.y + 14 : node.y - badgeH - 12;
+
+          // Keep inside canvas bounds
+          badgeX = Math.max(8, Math.min(cssW - badgeW - 8, badgeX));
+          badgeY = Math.max(8, Math.min(cssH - badgeH - 8, badgeY));
+
+          // Draw Badge Container (Glassmorphism Dark)
+          ctx.fillStyle = "rgba(10, 15, 29, 0.88)";
+          ctx.strokeStyle = node.isHub ? "rgba(16, 185, 129, 0.6)" : "rgba(51, 65, 85, 0.8)";
+          ctx.lineWidth = 1;
+          
+          // Rounded rect
+          ctx.beginPath();
+          const cr = 6;
+          ctx.moveTo(badgeX + cr, badgeY);
+          ctx.lineTo(badgeX + badgeW - cr, badgeY);
+          ctx.quadraticCurveTo(badgeX + badgeW, badgeY, badgeX + badgeW, badgeY + cr);
+          ctx.lineTo(badgeX + badgeW, badgeY + badgeH - cr);
+          ctx.quadraticCurveTo(badgeX + badgeW, badgeY + badgeH, badgeX + badgeW - cr, badgeY + badgeH);
+          ctx.lineTo(badgeX + cr, badgeY + badgeH);
+          ctx.quadraticCurveTo(badgeX, badgeY + badgeH, badgeX, badgeY + badgeH - cr);
+          ctx.lineTo(badgeX, badgeY + cr);
+          ctx.quadraticCurveTo(badgeX, badgeY, badgeX + cr, badgeY);
+          ctx.closePath();
+          ctx.fill();
+          ctx.stroke();
+
+          // Text lines inside badge
+          ctx.fillStyle = "#F8FAFC";
+          ctx.font = "bold 10px 'JetBrains Mono', monospace";
+          ctx.fillText(title, badgeX + 8, badgeY + 11);
+
+          ctx.fillStyle = node.color;
+          ctx.font = "9px 'JetBrains Mono', monospace";
+          ctx.fillText(subtitle, badgeX + 8, badgeY + 22);
+        });
+
+        secGeoAnimationId = requestAnimationFrame(animateMap);
+      }
+
+      secGeoAnimationId = requestAnimationFrame(animateMap);
+    }
+
+    // TAB 5: HARDENING CARDS RENDERER    // TAB 5: HARDENING CARDS RENDERER
+    function renderSecHardeningCards(hardening) {
+      const container = document.getElementById('secHardeningCardsContainer');
+      const scoreNum = document.getElementById('secHardeningScoreNumber');
+      const gradeBadge = document.getElementById('secHardeningGradeBadge');
+      if (!container) return;
+
+      const score = hardening.hardening_score || 80;
+      if (scoreNum) scoreNum.innerText = `${score}%`;
+      if (gradeBadge) {
+        gradeBadge.innerText = `${hardening.grade || 'COMPLIANT'} (${hardening.pass_count || 0}/${hardening.total_checks || 0} PASS)`;
+        gradeBadge.className = (score >= 85)
+          ? "px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/40"
+          : "px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-amber-500/20 text-amber-300 border border-amber-500/40";
+      }
+
+      const checks = hardening.checks || [];
+      container.innerHTML = checks.map(c => {
+        let statusBadge = "bg-emerald-500/15 text-emerald-400 border-emerald-500/30";
+        if (c.status === 'WARN') statusBadge = "bg-amber-500/15 text-amber-300 border-amber-500/30";
+        else if (c.status === 'FAIL') statusBadge = "bg-rose-500/20 text-rose-300 border-rose-500/40";
+        else if (c.status === 'INFO') statusBadge = "bg-blue-500/15 text-blue-300 border-blue-500/30";
+
+        return `
+          <div class="p-4 rounded-xl bg-surface-950 border border-slate-800 space-y-2 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between">
+                <span class="text-[10px] text-slate-500 uppercase font-mono font-bold">${c.category}</span>
+                <span class="px-2 py-0.5 rounded text-[10px] font-mono font-bold border ${statusBadge}">${c.status}</span>
+              </div>
+              <h5 class="text-white font-bold text-xs mt-1">${c.title}</h5>
+              <p class="text-[11px] text-slate-400 mt-1 font-sans">${c.desc}</p>
+            </div>
+            <div class="pt-2 border-t border-slate-800/80 text-[10px] font-mono text-cyan-300">
+              ${c.value}
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    async function secRemediateHardening() {
+      try {
+        const res = await fetch('/api/v1/security/hardening/remediate', { method: 'POST' });
+        const data = await res.json();
+        if (data.status === 'success') {
+          showToast('Kernel defenses & SYN Flood protection successfully applied!', 'success');
+          fetchSecurityTraffic();
+        } else {
+          showToast(`Remediation error: ${data.message}`, 'error');
+        }
+      } catch (e) {
+        showToast(`Remediation failed: ${e}`, 'error');
+      }
+    }
+
+    // TAB 6: FIM TABLE RENDERER
+    function renderSecFimTable(fim) {
+      const tbody = document.getElementById('secFimTableBody');
+      const overallBadge = document.getElementById('secFimOverallStatusBadge');
+      if (!tbody) return;
+
+      if (overallBadge) {
+        overallBadge.innerText = (fim.overall_status === 'SECURE') ? "6/6 FILES SECURE" : "TAMPERING DETECTED";
+        overallBadge.className = (fim.overall_status === 'SECURE')
+          ? "px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/40"
+          : "px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-rose-500/20 text-rose-300 border border-rose-500/40 animate-pulse";
+      }
+
+      const records = fim.records || [];
+      if (records.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="5" class="py-6 text-center text-slate-500 font-mono text-xs">No FIM file baseline records loaded</td></tr>`;
+        return;
+      }
+
+      tbody.innerHTML = records.map(r => {
+        const statusBadge = (r.status === 'INTACT')
+          ? "bg-emerald-500/15 text-emerald-400 border-emerald-500/30"
+          : "bg-rose-500/20 text-rose-300 border-rose-500/40 font-bold";
+
+        return `
+          <tr class="hover:bg-surface-800/40 transition">
+            <td class="py-3 px-4 font-bold text-white">${r.path}</td>
+            <td class="py-3 px-4">
+              <span class="px-2 py-0.5 rounded text-[10px] border ${statusBadge}">${r.status}</span>
+            </td>
+            <td class="py-3 px-4 text-cyan-300">${r.current_hash_snippet}</td>
+            <td class="py-3 px-4 text-slate-400">${r.baseline_hash_snippet}</td>
+            <td class="py-3 px-4 text-right text-slate-400">${r.size_bytes} B</td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    async function secUpdateFimBaseline() {
+      if (!confirm("Are you sure you want to update the cryptographic SHA-256 FIM baseline to the current file states?")) return;
+      try {
+        const res = await fetch('/api/v1/security/fim/baseline', { method: 'POST' });
+        const data = await res.json();
+        showToast(data.message || 'Baseline updated', 'success');
+        fetchSecurityTraffic();
+      } catch (e) {
+        showToast(`Error updating baseline: ${e}`, 'error');
+      }
+    }
+
+    // MODAL: AEGIS AI SECURITY COPILOT
+    async function openSecAiModal(ip, threatType, context) {
+      const modal = document.getElementById('secAiModal');
+      const sub = document.getElementById('secAiModalSubtitle');
+      const loading = document.getElementById('secAiModalLoading');
+      const result = document.getElementById('secAiModalResult');
+      if (!modal) return;
+
+      modal.classList.remove('hidden');
+      if (loading) loading.classList.remove('hidden');
+      if (result) result.classList.add('hidden');
+      if (sub) sub.innerText = `Investigating target: ${ip} (${threatType})`;
+
+      try {
+        const res = await fetch('/api/v1/security/ai-analyze', {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify({ ip: ip, threat_type: threatType, context: context })
+        });
+        const data = await res.json();
+
+        if (loading) loading.classList.add('hidden');
+        if (result) result.classList.remove('hidden');
+
+        document.getElementById('secAiSummaryText').innerText = data.summary || 'No summary available';
+        document.getElementById('secAiActorText').innerText = data.threat_actor_profile || 'Unknown Botnet';
+        document.getElementById('secAiVectorText').innerText = data.attack_vector || 'Unauthorized Recon';
+        document.getElementById('secAiBashCommand').innerText = data.bash_command || `sudo iptables -I INPUT -s ${ip} -j DROP`;
+        document.getElementById('secAiModelTag').innerText = `Model: ${data.ai_source || 'Aegis Cyber Core'}`;
+
+        const riskBadge = document.getElementById('secAiRiskBadge');
+        if (riskBadge) {
+          riskBadge.innerText = `${data.risk_level || 'HIGH'} RISK`;
+          riskBadge.className = (data.risk_level === 'CRITICAL' || data.risk_level === 'HIGH')
+            ? "px-2 py-0.5 rounded text-[10px] font-bold bg-rose-500/20 text-rose-300 border border-rose-500/40"
+            : "px-2 py-0.5 rounded text-[10px] font-bold bg-amber-500/20 text-amber-300 border border-amber-500/40";
+        }
+
+        const stepsList = document.getElementById('secAiStepsList');
+        if (stepsList) {
+          const steps = data.remediation_steps || ['Enforce firewall block rule'];
+          stepsList.innerHTML = steps.map(s => `<li>${s}</li>`).join('');
+        }
+      } catch (e) {
+        if (loading) loading.classList.add('hidden');
+        if (result) result.classList.remove('hidden');
+        document.getElementById('secAiSummaryText').innerText = `Error connecting to Aegis AI: ${e}`;
+      }
+    }
+
+    function closeSecAiModal() {
+      const modal = document.getElementById('secAiModal');
+      if (modal) modal.classList.add('hidden');
+    }
+
+    // =========================================================================
+    // MODULE 7: DOCKER CONTAINER SECURITY AUDITOR
+    // =========================================================================
+    async function fetchSecDockerAudit() {
+      const container = document.getElementById('secDockerContainersList');
+      if (container) {
+        container.innerHTML = `
+          <div class="p-8 text-center text-slate-500 font-mono text-xs">
+            <i class="fa-solid fa-spinner fa-spin text-xl mb-2 text-sky-400"></i>
+            <p>Auditing container runtime privileges, socket bindings, and isolation posture...</p>
+          </div>
+        `;
+      }
+      try {
+        const res = await fetch('/api/v1/security/docker-audit');
+        const data = await res.json();
+        renderSecDockerAudit(data);
+      } catch (e) {
+        if (container) container.innerHTML = `<div class="p-4 text-center text-rose-400 font-mono text-xs">Error auditing containers: ${e}</div>`;
+      }
+    }
+
+    function renderSecDockerAudit(data) {
+      if (!data) return;
+      const scoreBadge = document.getElementById('secDockerOverallScoreBadge');
+      if (scoreBadge) {
+        scoreBadge.innerText = `SCORE: ${data.overall_score || 0}/100`;
+        scoreBadge.className = (data.overall_score >= 80)
+          ? "px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/40"
+          : "px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-amber-500/20 text-amber-300 border border-amber-500/40";
+      }
+
+      const container = document.getElementById('secDockerContainersList');
+      if (!container) return;
+
+      const containers = data.containers || [];
+      if (containers.length === 0) {
+        container.innerHTML = `
+          <div class="p-8 rounded-2xl bg-surface-950 border border-slate-800 text-center text-slate-500 font-mono text-xs">
+            <i class="fa-brands fa-docker text-2xl mb-2 opacity-40"></i>
+            <p>${data.message || 'No Docker containers found on host.'}</p>
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = containers.map(c => {
+        let ratingBadgeClass = "bg-emerald-500/15 text-emerald-300 border-emerald-500/30";
+        if (c.rating_color === 'rose') ratingBadgeClass = "bg-rose-500/20 text-rose-300 border-rose-500/40 animate-pulse";
+        else if (c.rating_color === 'amber') ratingBadgeClass = "bg-amber-500/20 text-amber-300 border-amber-500/40";
+
+        let badges = [];
+        if (c.is_privileged) badges.push(`<span class="px-2 py-0.5 rounded text-[9px] font-bold bg-rose-500/20 text-rose-300 border border-rose-500/40">⚠️ PRIVILEGED HOST</span>`);
+        if (c.docker_sock_mounted) badges.push(`<span class="px-2 py-0.5 rounded text-[9px] font-bold bg-amber-500/20 text-amber-300 border border-amber-500/40">SOCK MOUNTED</span>`);
+        if (c.is_root) badges.push(`<span class="px-2 py-0.5 rounded text-[9px] font-bold bg-amber-500/15 text-amber-300 border border-amber-500/30">ROOT USER</span>`);
+        if (c.pid_mode === 'host') badges.push(`<span class="px-2 py-0.5 rounded text-[9px] font-bold bg-purple-500/20 text-purple-300 border border-purple-500/30">PID HOST</span>`);
+        if (!c.has_resource_limits) badges.push(`<span class="px-2 py-0.5 rounded text-[9px] font-bold bg-slate-800 text-slate-400 border border-slate-700">NO LIMITS</span>`);
+
+        let findingsHtml = (c.findings || []).map(f => {
+          let lvlClass = f.level === 'CRITICAL' ? 'text-rose-400' : (f.level === 'HIGH' ? 'text-amber-400' : 'text-blue-400');
+          return `
+            <div class="p-2.5 rounded-xl bg-surface-950 border border-slate-800/80 text-xs font-mono space-y-1">
+              <div class="flex items-center gap-2">
+                <span class="font-bold ${lvlClass}">[${f.level}] ${f.title}</span>
+              </div>
+              <p class="text-[11px] text-slate-300 font-sans">${f.desc}</p>
+              <p class="text-[11px] text-cyan-300/90 font-mono bg-cyan-950/30 p-1.5 rounded border border-cyan-800/40">💡 Fix: ${f.fix}</p>
+            </div>
+          `;
+        }).join('');
+
+        return `
+          <div class="p-5 rounded-2xl bg-surface-900 border border-slate-800 shadow-sm space-y-3">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-slate-800/80">
+              <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-sky-500/15 border border-sky-500/30 flex items-center justify-center text-sky-400 font-bold shrink-0">
+                  <i class="fa-brands fa-docker text-lg"></i>
+                </div>
+                <div>
+                  <div class="flex items-center gap-2">
+                    <span class="text-white font-bold text-sm">${c.name}</span>
+                    <span class="px-2 py-0.5 rounded text-[10px] font-mono border ${ratingBadgeClass}">${c.status_rating} (${c.score}/100)</span>
+                  </div>
+                  <span class="text-[11px] text-slate-400 font-mono">${c.image} &bull; ${c.status_str}</span>
+                </div>
+              </div>
+              <div class="flex items-center gap-1.5 flex-wrap font-mono">
+                ${badges.join('')}
+              </div>
+            </div>
+
+            <!-- Findings -->
+            <div class="space-y-2">
+              <h5 class="text-[11px] font-bold text-slate-400 font-mono uppercase tracking-wider">Security Hardening Analysis (${(c.findings || []).length} Observations):</h5>
+              ${findingsHtml || '<p class="text-xs text-emerald-400 font-mono">✅ Fully hardened container. No high-risk breakout vectors detected.</p>'}
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    // =========================================================================
+    // MODULE 8: PROCESS HUNTER & RESOURCE TOP-TALKER
+    // =========================================================================
+    let secProcessCache = [];
+    let secProcCurrentFilter = 'all';
+    let secProcSearchQuery = '';
+    let pendingKillPid = null;
+    let pendingKillName = '';
+
+    async function fetchProcessHunter() {
+      const tbody = document.getElementById('secProcTableBody');
+      if (tbody && secProcessCache.length === 0) {
+        tbody.innerHTML = `
+          <tr>
+            <td colspan="7" class="py-8 text-center text-slate-500 font-mono text-xs">
+              <i class="fa-solid fa-spinner fa-spin text-xl mb-2 text-rose-400"></i>
+              <p>Scanning host kernel process table...</p>
+            </td>
+          </tr>
+        `;
+      }
+      try {
+        const res = await fetch('/api/v1/process/hunter?limit=80');
+        const data = await res.json();
+        renderProcessHunter(data);
+      } catch (e) {
+        if (tbody) tbody.innerHTML = `<tr><td colspan="7" class="py-4 text-center text-rose-400 font-mono text-xs">Error: ${e}</td></tr>`;
+      }
+    }
+
+    function renderProcessHunter(data) {
+      if (!data) return;
+      document.getElementById('secProcTotalCount').innerText = data.total || 0;
+      document.getElementById('secProcRunningCount').innerText = data.running || 0;
+      document.getElementById('secProcZombieCount').innerText = data.zombies || 0;
+      
+      const topCpu = data.top_cpu_process;
+      if (topCpu) {
+        document.getElementById('secProcTopCpu').innerText = `${topCpu.name} (${topCpu.cpu_percent}%)`;
+      }
+
+      secProcessCache = data.processes || [];
+      renderFilteredProcesses();
+    }
+
+    function filterProcessHunter(filter) {
+      secProcCurrentFilter = filter;
+      ['all', 'high_cpu', 'high_mem', 'zombie'].forEach(f => {
+        const btn = document.getElementById(`secProcFilter_${f}`);
+        if (btn) {
+          btn.className = (f === filter)
+            ? "px-3 py-1 rounded-lg bg-blue-600 text-white font-semibold transition"
+            : "px-3 py-1 rounded-lg text-slate-400 hover:text-white transition";
+        }
+      });
+      renderFilteredProcesses();
+    }
+
+    function onProcSearchInput(val) {
+      secProcSearchQuery = (val || '').toLowerCase().trim();
+      renderFilteredProcesses();
+    }
+
+    function renderFilteredProcesses() {
+      const tbody = document.getElementById('secProcTableBody');
+      if (!tbody) return;
+
+      let list = secProcessCache || [];
+      if (secProcCurrentFilter === 'high_cpu') {
+        list = list.filter(p => p.cpu_percent >= 5.0);
+      } else if (secProcCurrentFilter === 'high_mem') {
+        list = list.filter(p => p.memory_percent >= 5.0);
+      } else if (secProcCurrentFilter === 'zombie') {
+        list = list.filter(p => p.status === 'ZOMBIE' || p.status.includes('Z'));
+      }
+
+      if (secProcSearchQuery) {
+        list = list.filter(p => 
+          String(p.pid).includes(secProcSearchQuery) ||
+          p.name.toLowerCase().includes(secProcSearchQuery) ||
+          p.user.toLowerCase().includes(secProcSearchQuery) ||
+          (p.cmdline && p.cmdline.toLowerCase().includes(secProcSearchQuery))
+        );
+      }
+
+      if (list.length === 0) {
+        tbody.innerHTML = `
+          <tr>
+            <td colspan="7" class="py-8 text-center text-slate-500 font-mono text-xs">
+              <i class="fa-solid fa-crosshairs text-xl mb-2 opacity-40"></i>
+              <p>No processes match the current filter query.</p>
+            </td>
+          </tr>
+        `;
+        return;
+      }
+
+      tbody.innerHTML = list.map(p => {
+        let statusBadge = "bg-slate-800 text-slate-400 border-slate-700";
+        if (p.status === 'RUNNING') statusBadge = "bg-emerald-500/20 text-emerald-300 border-emerald-500/40 font-bold";
+        else if (p.status.includes('ZOMBIE') || p.status === 'Z') statusBadge = "bg-rose-500/20 text-rose-300 border-rose-500/40 animate-pulse font-bold";
+
+        const cpuColor = p.cpu_percent > 20 ? 'text-rose-400 font-bold' : (p.cpu_percent > 5 ? 'text-amber-300 font-bold' : 'text-slate-300');
+        const memColor = p.memory_percent > 15 ? 'text-rose-400 font-bold' : (p.memory_percent > 5 ? 'text-amber-300 font-bold' : 'text-slate-300');
+
+        return `
+          <tr class="hover:bg-surface-800/40 transition">
+            <td class="py-2.5 px-4">
+              <div class="flex items-center gap-2">
+                <span class="text-white font-bold">${p.pid}</span>
+                <span class="px-1.5 py-0.2 rounded text-[9px] border ${statusBadge}">${p.status}</span>
+              </div>
+            </td>
+            <td class="py-2.5 px-4">
+              <div class="flex flex-col">
+                <span class="text-white font-medium">${p.name}</span>
+                <span class="text-[10px] text-slate-500 font-sans truncate max-w-xs" title="${p.cmdline}">${p.cmdline}</span>
+              </div>
+            </td>
+            <td class="py-2.5 px-4 text-slate-300 font-mono">${p.user}</td>
+            <td class="py-2.5 px-4 ${cpuColor}">
+              <div class="flex items-center gap-2">
+                <span>${p.cpu_percent}%</span>
+                <div class="w-12 bg-slate-800 h-1.5 rounded-full overflow-hidden hidden sm:block">
+                  <div class="bg-rose-500 h-full rounded-full" style="width: ${Math.min(p.cpu_percent, 100)}%"></div>
+                </div>
+              </div>
+            </td>
+            <td class="py-2.5 px-4 ${memColor}">
+              <div class="flex items-center gap-2">
+                <span>${p.memory_mb} MB (${p.memory_percent}%)</span>
+              </div>
+            </td>
+            <td class="py-2.5 px-4 text-slate-400 font-mono">${p.threads}</td>
+            <td class="py-2.5 px-4 text-right">
+              <div class="flex items-center justify-end gap-1.5">
+                <button onclick="openSecAiModal('127.0.0.1', 'process_forensics', 'PID: ${p.pid}, Name: ${p.name}, CPU: ${p.cpu_percent}%, Mem: ${p.memory_mb}MB, Cmd: ${p.cmdline}')" class="px-2 py-1 text-[10px] font-semibold bg-cyan-500/15 hover:bg-cyan-500/25 text-cyan-300 border border-cyan-500/30 rounded-lg transition" title="AI Forensics">
+                  <i class="fa-solid fa-microchip-ai text-[9px]"></i> AI
+                </button>
+                ${p.is_critical ? `
+                  <span class="px-2 py-1 text-[10px] font-semibold text-slate-500 bg-slate-900 border border-slate-800 rounded-lg cursor-not-allowed" title="Protected System Daemon">Core</span>
+                ` : `
+                  <button onclick="openProcKillModal(${p.pid}, '${p.name}', '${(p.cmdline || '').replace(/'/g, "\\'")}')" class="px-2 py-1 text-[10px] font-semibold bg-rose-500/15 hover:bg-rose-500/25 text-rose-300 border border-rose-500/30 rounded-lg transition" title="Kill Process">
+                    <i class="fa-solid fa-skull text-[9px] mr-1"></i>Kill
+                  </button>
+                `}
+              </div>
+            </td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    function openProcKillModal(pid, name, cmd) {
+      pendingKillPid = pid;
+      pendingKillName = name;
+      document.getElementById('secProcKillPid').innerText = pid;
+      document.getElementById('secProcKillName').innerText = name;
+      document.getElementById('secProcKillCmd').innerText = cmd || `[${name}]`;
+      const modal = document.getElementById('secProcKillModal');
+      if (modal) modal.classList.remove('hidden');
+    }
+
+    function closeProcKillModal() {
+      pendingKillPid = null;
+      pendingKillName = '';
+      const modal = document.getElementById('secProcKillModal');
+      if (modal) modal.classList.add('hidden');
+    }
+
+    async function executeProcKill(signal) {
+      if (!pendingKillPid) return;
+      const pid = pendingKillPid;
+      closeProcKillModal();
+      
+      try {
+        const res = await fetch('/api/v1/process/kill', {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify({ pid: pid, signal: signal || 'TERM' })
+        });
+        const data = await res.json();
+        if (data.status === 'success') {
+          showToast(data.message || `PID ${pid} terminated`, 'success');
+          fetchProcessHunter();
+        } else {
+          showToast(data.message || 'Failed to terminate process', 'error');
+        }
+      } catch (e) {
+        showToast(`Error killing process: ${e}`, 'error');
+      }
+    }
+
+    // =========================================================================
+    // MODULE 9: C2 BOTNET & CRYPTO-MINING OUTBOUND SHIELD
+    // =========================================================================
+    async function fetchSecC2Miner() {
+      const container = document.getElementById('secC2ThreatAlertContainer');
+      if (container) {
+        container.innerHTML = `
+          <div class="p-4 text-center text-slate-500 font-mono text-xs">
+            <i class="fa-solid fa-spinner fa-spin text-xl mb-2 text-emerald-400"></i>
+            <p>Scanning outbound sockets and memory signatures for Monero/Bitcoin cryptominer malware...</p>
+          </div>
+        `;
+      }
+      try {
+        const res = await fetch('/api/v1/security/c2-miner');
+        const data = await res.json();
+        renderSecC2Miner(data);
+      } catch (e) {
+        if (container) container.innerHTML = `<div class="p-4 text-center text-rose-400 font-mono text-xs">Error scanning C2/Miners: ${e}</div>`;
+      }
+    }
+
+    function renderSecC2Miner(data) {
+      if (!data) return;
+      const badge = document.getElementById('secC2StatusBadge');
+      if (badge) {
+        badge.innerText = data.status || 'SECURE';
+        badge.className = (data.threats_count === 0)
+          ? "px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/40"
+          : "px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-rose-500/20 text-rose-300 border border-rose-500/40 animate-pulse";
+      }
+
+      const container = document.getElementById('secC2ThreatAlertContainer');
+      if (!container) return;
+
+      const threats = data.threats || [];
+      if (threats.length === 0) {
+        container.innerHTML = `
+          <div class="p-5 rounded-2xl bg-surface-950/80 border border-emerald-500/30 flex items-center gap-3.5 text-xs font-mono">
+            <div class="w-10 h-10 rounded-xl bg-emerald-500/15 border border-emerald-500/30 flex items-center justify-center text-emerald-400 shrink-0 text-lg">
+              <i class="fa-solid fa-shield-check"></i>
+            </div>
+            <div>
+              <p class="text-white font-bold">Perimeter Clean & Secure</p>
+              <p class="text-[11px] text-slate-400 font-sans">Zero outbound connections to known Monero/Bitcoin mining pool ports (3333, 4444, 5555, 7777, 8333) and zero cryptojacking process signatures found in host memory.</p>
+            </div>
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = threats.map(t => {
+        return `
+          <div class="p-4 rounded-xl bg-rose-950/40 border border-rose-500/40 flex items-center justify-between gap-3 text-xs font-mono animate-pulse">
+            <div class="flex items-center gap-3">
+              <i class="fa-solid fa-triangle-exclamation text-rose-400 text-lg"></i>
+              <div>
+                <span class="text-rose-300 font-bold">[${t.type}] ${t.message}</span>
+                <p class="text-[11px] text-slate-400 font-sans">Process: ${t.process || '-'} &bull; Target: ${t.ip || '-'}:${t.port || '-'}</p>
+              </div>
+            </div>
+            ${t.ip ? `
+              <button onclick="secBlockIp('${t.ip}', 'C2 Cryptomining Pool blocked')" class="px-3 py-1.5 rounded-lg bg-rose-600 hover:bg-rose-500 text-white font-semibold transition shrink-0">
+                Block IP
+              </button>
+            ` : ''}
+          </div>
+        `;
+      }).join('');
+    }
+
+    // =========================================================================
+    // MODULE 10: HYPERVISOR PERIMETER FIREWALL (PROXMOX VE 10.10.10.2)
+    // =========================================================================
+    async function fetchSecPerimeter() {
+      try {
+        const res = await fetch('/api/v1/security/perimeter');
+        const data = await res.json();
+        renderSecPerimeter(data);
+      } catch (e) {
+        console.error("Error fetching perimeter data:", e);
+      }
+    }
+
+    function renderSecPerimeter(p) {
+      if (!p) return;
+      const nodeEl = document.getElementById('secPerimeterNode');
+      const osEl = document.getElementById('secPerimeterOs');
+      const vmCountEl = document.getElementById('secPerimeterVmCount');
+      const ruleCountEl = document.getElementById('secPerimeterRuleCount');
+      const gridEl = document.getElementById('secPerimeterVmsGrid');
+      
+      if (nodeEl) nodeEl.innerText = `${p.hypervisor_node || 'pve'} (${p.hypervisor_ip || '10.10.10.2'})`;
+      if (osEl) osEl.innerText = p.hypervisor_os || 'Proxmox VE (Kernel 7.0.2-6-pve)';
+      if (vmCountEl) vmCountEl.innerText = `${p.total_vms || 8} Virtual Machines`;
+      if (ruleCountEl) ruleCountEl.innerText = `${p.cluster_blocked_rules || 0} Drop Rules`;
+
+      const subBadge = document.getElementById('secSubNavPerimeterBadge');
+      if (subBadge) {
+        subBadge.innerText = `${p.total_vms || 8} VMs`;
+      }
+
+      if (gridEl && p.protected_vms) {
+        gridEl.innerHTML = p.protected_vms.map(vm => {
+          const isNoc = vm.is_noc;
+          return `
+            <div class="p-3.5 rounded-xl ${isNoc ? 'bg-gradient-to-b from-cyan-950/40 to-surface-900 border border-cyan-500/40 shadow-sm' : 'bg-surface-900/90 border border-slate-800 hover:border-emerald-500/40'} transition flex flex-col justify-between">
+              <div class="flex items-start justify-between gap-2 mb-2">
+                <div class="flex items-center gap-2">
+                  <div class="w-7 h-7 rounded-lg ${isNoc ? 'bg-cyan-500/20 text-cyan-400' : 'bg-emerald-500/20 text-emerald-400'} flex items-center justify-center text-xs font-mono font-bold">
+                    ${vm.vmid}
+                  </div>
+                  <div>
+                    <div class="text-xs font-bold text-white font-mono">${escapeHtml(vm.name)}</div>
+                    <div class="text-[10px] text-slate-400 font-mono">${vm.status.toUpperCase()}</div>
+                  </div>
+                </div>
+                <span class="px-1.5 py-0.5 rounded text-[9px] font-mono font-bold ${isNoc ? 'bg-cyan-500/20 text-cyan-300 border border-cyan-500/40' : 'bg-emerald-500/15 text-emerald-300 border border-emerald-500/30'}">
+                  ${isNoc ? 'NOC CENTRAL' : 'SHIELDED'}
+                </span>
+              </div>
+              <div class="text-[10px] font-mono text-slate-400 border-t border-slate-800/80 pt-2 flex items-center justify-between">
+                <span>vmbr0 [tap${vm.vmid}i0]</span>
+                <span class="text-emerald-400 flex items-center gap-1">
+                  <i class="fa-solid fa-check text-[8px]"></i> L2/L3 Protected
+                </span>
+              </div>
+            </div>
+          `;
+        }).join('');
+      }
+    }
+
+    async function syncSecPerimeterRules() {
+      const spinner = document.getElementById('secPerimeterSyncSpinner');
+      if (spinner) spinner.classList.add('fa-spin');
+      try {
+        const resp = await fetch('/api/v1/security/perimeter/sync', { method: 'POST' });
+        const res = await resp.json();
+        showToast(res.status === 'success' ? `Hypervisor Perimeter re-synced! ${res.synced_count} IPs enforced on Proxmox VE.` : 'Sync failed', res.status === 'success' ? 'success' : 'error');
+        fetchSecurityTraffic();
+      } catch (e) {
+        showToast(`Sync error: ${e.message}`, 'error');
+      } finally {
+        if (spinner) spinner.classList.remove('fa-spin');
+      }
+    }
+
+    function renderSecAuthEvents(events) {
+      const container = document.getElementById('secAuthEventsContainer');
+      if (!container) return;
+
+      if (!events || events.length === 0) {
+        container.innerHTML = `
+          <div class="p-4 text-center text-slate-500 font-mono text-xs">
+            No recent auth incidents logged in /var/log/auth.log
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = events.map(e => {
+        let badgeColor = "bg-slate-800 text-slate-300 border-slate-700";
+        if (e.severity === 'HIGH' || e.severity === 'CRITICAL') badgeColor = "bg-rose-500/20 text-rose-300 border-rose-500/40";
+        else if (e.severity === 'MEDIUM') badgeColor = "bg-amber-500/20 text-amber-300 border-amber-500/40";
+        else if (e.severity === 'LOW') badgeColor = "bg-emerald-500/20 text-emerald-300 border-emerald-500/40";
+
+        let blockBtn = "";
+        if (e.ip && !['127.0.0.1', 'unknown', '0.0.0.0'].includes(e.ip)) {
+          if (!e.is_blocked && !e.is_jailed) {
+            blockBtn = `
+              <div class="flex items-center gap-1.5 shrink-0 ml-2">
+                <button onclick="openSecAiModal('${e.ip}', 'auth_event', '${e.message}')" class="text-[10px] text-cyan-400 hover:text-cyan-300 font-mono">
+                  AI Explain
+                </button>
+                <button onclick="secBlockIp('${e.ip}', 'Blocked from auth security log')" class="text-[10px] text-rose-400 hover:text-rose-300 underline font-mono">
+                  Block
+                </button>
+              </div>
+            `;
+          } else {
+            blockBtn = `<span class="text-[10px] text-slate-500 shrink-0 ml-2">[Neutralized]</span>`;
+          }
+        }
+
+        return `
+          <div class="p-2 rounded-lg bg-surface-900/80 border border-slate-800/80 flex items-center justify-between gap-3 text-xs">
+            <div class="flex items-center gap-2 overflow-hidden">
+              <span class="text-[10px] text-slate-500 shrink-0 font-mono">${e.timestamp}</span>
+              <span class="px-2 py-0.5 rounded text-[10px] font-mono border ${badgeColor} shrink-0">${e.badge}</span>
+              <span class="text-slate-200 truncate font-mono text-[11px]">${e.message}</span>
+              <span class="text-slate-400 font-mono text-[10px] shrink-0">(${e.ip})</span>
+            </div>
+            ${blockBtn}
+          </div>
+        `;
+      }).join('');
+    }
+
+    function renderSecBlocklist(blocklist) {
+      const container = document.getElementById('secBlocklistContainer');
+      const badge = document.getElementById('secBlocklistCountBadge');
+      if (!container) return;
+
+      if (badge) badge.innerText = `${blocklist.length} IPs`;
+
+      if (!blocklist || blocklist.length === 0) {
+        container.innerHTML = `
+          <div class="p-4 rounded-xl bg-surface-950/60 border border-slate-800 text-center text-slate-500 font-mono text-xs">
+            Perimeter clear. No blocked IPs in defense list.
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = blocklist.map(b => {
+        return `
+          <div class="p-2.5 rounded-xl bg-surface-950 border border-slate-800 flex items-center justify-between gap-2 text-xs font-mono">
+            <div class="overflow-hidden">
+              <div class="flex items-center gap-1.5">
+                <span class="text-xs">${b.flag || '🛡️'}</span>
+                <span class="text-white font-bold">${b.ip}</span>
+              </div>
+              <p class="text-[10px] text-slate-400 truncate mt-0.5">${b.reason || 'Perimeter Block'}</p>
+            </div>
+            <button onclick="secUnblockIp('${b.ip}')" class="px-2 py-1 text-[10px] rounded-lg bg-surface-850 hover:bg-slate-700 text-slate-300 hover:text-white border border-slate-700 transition shrink-0">
+              Unblock
+            </button>
+          </div>
+        `;
+      }).join('');
+    }
+
+    async function secBlockIp(ip, reason) {
+      if (!ip) return;
+
+      if (ip.startsWith("149.154.") || ip.startsWith("91.108.")) {
+        alert(`⚠️ PERINGATAN SISTEM: IP ${ip} adalah server resmi Telegram Messenger (api.telegram.org) yang dipakai oleh Bot Notifikasi server ke HP Anda.\n\nIP ini dilindungi oleh Aegis Shield dan tidak boleh di-block agar notifikasi bot Telegram Anda tidak mati!`);
+        return;
+      }
+      if (ip === "1.1.1.1" || ip === "8.8.8.8") {
+        alert(`⚠️ PERINGATAN: IP ${ip} adalah Public DNS Resolver. IP ini dilindungi dari pemblokiran.`);
+        return;
+      }
+
+      if (!confirm(`Are you sure you want to block IP ${ip} across the Aegis perimeter?`)) return;
+
+      try {
+        const res = await fetch('/api/v1/security/block-ip', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ ip: ip, reason: reason || 'Manual Aegis Defense Block' })
+        });
+        const data = await res.json();
+        if (data.status === 'success') {
+          showToast(data.message || `IP ${ip} blocked!`, 'success');
+          fetchSecurityTraffic();
+        } else {
+          showToast(data.message || 'Failed to block IP', 'error');
+        }
+      } catch (e) {
+        showToast(`Error blocking IP: ${e}`, 'error');
+      }
+    }
+
+    async function secUnblockIp(ip) {
+      if (!ip) return;
+      try {
+        const res = await fetch('/api/v1/security/unblock-ip', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ ip: ip })
+        });
+        const data = await res.json();
+        if (data.status === 'success') {
+          showToast(data.message || `IP ${ip} unblocked`, 'success');
+          fetchSecurityTraffic();
+        } else {
+          showToast(data.message || 'Failed to unblock IP', 'error');
+        }
+      } catch (e) {
+        showToast(`Error unblocking IP: ${e}`, 'error');
+      }
+    }
+
+    function secBlockManualIp() {
+      const input = document.getElementById('secManualBlockIpInput');
+      if (!input) return;
+      const ip = input.value.trim();
+      if (!ip) {
+        showToast('Please enter a valid IP address to block', 'warning');
+        return;
+      }
+      secBlockIp(ip, 'Manual perimeter defense block');
+      input.value = '';
     }
 
     function inspectNodeFromCluster(nodeId) {
@@ -6637,7 +9600,7 @@
       const screen = document.getElementById('terminalScreen');
       screen.innerHTML = `
         <div class="text-slate-500 text-xs">
-          <div>Sentinel Interactive Terminal • Cleared</div>
+          <div>Aegis Interactive Terminal • Cleared</div>
           <div class="text-slate-600">---------------------------------------------------------------------------------</div>
         </div>
       `;
@@ -7453,7 +10416,23 @@
     // Initialize Chart & High-frequency Polling
     window.addEventListener('load', () => {
       initCharts();
-      fetchDashboard();
+
+      // Restore active view & subtab from localStorage so page reload/restart stays on current view
+      let savedView = 'single';
+      try {
+        savedView = localStorage.getItem('aegis_active_dashboard_view') || 'single';
+      } catch(e) {}
+      
+      switchDashboardView(savedView);
+
+      if (savedView === 'security') {
+        let savedSub = 'traffic';
+        try {
+          savedSub = localStorage.getItem('aegis_active_sec_subtab') || 'traffic';
+        } catch(e) {}
+        switchSecSubTab(savedSub);
+      }
+
       fetchPowerEstimate();
       fetchSslCertificates();
       fetchProxmoxBackups();
@@ -7462,6 +10441,8 @@
       setInterval(() => {
         if (currentDashboardView === 'cluster') {
           fetchClusterOverview();
+        } else if (currentDashboardView === 'security') {
+          // Handled by secTrafficTimer when in security view
         } else {
           fetchDashboard();
         }
@@ -7536,7 +10517,7 @@
           <i class="fa-solid fa-triangle-exclamation"></i> Catatan Penting:
         </div>
         <p class="text-slate-300">
-          Jika Sentinel Agent masih berjalan di node remote tersebut, node akan otomatis mendaftar kembali pada sync berikutnya.
+          Jika Aegis Agent masih berjalan di node remote tersebut, node akan otomatis mendaftar kembali pada sync berikutnya.
         </p>
         <div class="pt-1">
           <span class="text-slate-400 block mb-1">Perintah untuk stop & uninstall agent di server remote:</span>

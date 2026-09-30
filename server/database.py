@@ -246,7 +246,7 @@ def init_db():
     if cursor.fetchone()["count"] == 0:
         cursor.execute("INSERT INTO web_probes (name, url) VALUES ('Immich Photo Hub', 'http://10.10.10.4:2283')")
         cursor.execute("INSERT INTO web_probes (name, url) VALUES ('Proxmox VE GUI', 'https://10.10.10.2:8006')")
-        cursor.execute("INSERT INTO web_probes (name, url) VALUES ('Sentinel NOC', 'http://10.10.10.9:8888')")
+        cursor.execute("INSERT INTO web_probes (name, url) VALUES ('Aegis NOC', 'http://10.10.10.9:8888')")
         cursor.execute("INSERT INTO web_probes (name, url) VALUES ('Cloudflare DNS', 'https://1.1.1.1')")
 
     # 1. SSL Certificates Monitoring Table
@@ -1208,7 +1208,7 @@ def get_demo_dashboard_data(target_server_id: str = None):
 
     probes = [
         {"id": 1, "name": "Production App (andriandas.id)", "url": "https://andriandas.id", "status_code": 200, "latency_ms": 114.2, "ssl_days": 68, "last_check": now},
-        {"id": 2, "name": "Sentinel NOC API", "url": "http://10.10.10.9:8888", "status_code": 200, "latency_ms": 2.4, "ssl_days": -1, "last_check": now},
+        {"id": 2, "name": "Aegis NOC API", "url": "http://10.10.10.9:8888", "status_code": 200, "latency_ms": 2.4, "ssl_days": -1, "last_check": now},
         {"id": 3, "name": "Payment Gateway Hook", "url": "https://api.payment.internal/health", "status_code": 200, "latency_ms": 78.5, "ssl_days": 184, "last_check": now}
     ]
 
@@ -1222,7 +1222,7 @@ def get_demo_dashboard_data(target_server_id: str = None):
         "disks": disks,
         "services": services,
         "containers": [
-            {"id": "c1", "name": "sentinel-dashboard", "image": "sentinel:latest", "status": "Up 14 hours", "state": "running", "created": "14 hours ago"},
+            {"id": "c1", "name": "aegis-dashboard", "image": "aegis:latest", "status": "Up 14 hours", "state": "running", "created": "14 hours ago"},
             {"id": "c2", "name": "mysql-production", "image": "mysql:8.0", "status": "Up 3 days", "state": "running", "created": "3 days ago"},
             {"id": "c3", "name": "nginx-proxy-manager", "image": "jc21/nginx-proxy-manager:latest", "status": "Up 5 days", "state": "running", "created": "5 days ago"},
             {"id": "c4", "name": "redis-queue", "image": "redis:alpine", "status": "Exited (1) 12 mins ago", "state": "exited", "created": "2 weeks ago"}
@@ -1243,10 +1243,10 @@ def get_demo_dashboard_data(target_server_id: str = None):
             {"proto": "TCP", "port": 3306, "ip": "127.0.0.1", "bind_type": "Localhost Only (127.0.0.1)", "service": "MySQL Production Database", "process": "mysqld", "pid": 879, "risk_level": "SAFE", "risk_desc": "Secure: Database is strictly isolated to loopback interface."},
             {"proto": "TCP", "port": 6379, "ip": "127.0.0.1", "bind_type": "Localhost Only (127.0.0.1)", "service": "Redis In-Memory Cache", "process": "redis-server", "pid": 1120, "risk_level": "SAFE", "risk_desc": "Secure: Redis socket bound to localhost only."},
             {"proto": "TCP", "port": 8006, "ip": "0.0.0.0 / [::]", "bind_type": "Public (0.0.0.0 / [::])", "service": "Proxmox VE Web Management", "process": "pveproxy", "pid": 1045, "risk_level": "LOW", "risk_desc": "Hypervisor management web console."},
-            {"proto": "TCP", "port": 8888, "ip": "0.0.0.0", "bind_type": "Public (0.0.0.0)", "service": "Sentinel NOC Dashboard", "process": "python3", "pid": 30667, "risk_level": "LOW", "risk_desc": "Observability management console."}
+            {"proto": "TCP", "port": 8888, "ip": "0.0.0.0", "bind_type": "Public (0.0.0.0)", "service": "Aegis NOC Dashboard", "process": "python3", "pid": 30667, "risk_level": "LOW", "risk_desc": "Observability management console."}
         ],
         "recent_actions": [
-            {"id": "act-demo-1", "action": "restart_container", "target": "sentinel-dashboard", "status": "SUCCESS", "result_msg": "Container restarted successfully.", "created_at": now - 3600},
+            {"id": "act-demo-1", "action": "restart_container", "target": "aegis-dashboard", "status": "SUCCESS", "result_msg": "Container restarted successfully.", "created_at": now - 3600},
             {"id": "act-demo-2", "action": "drop_caches", "target": "system", "status": "SUCCESS", "result_msg": "Pagecache and slab objects flushed. 1.4 GB freed.", "created_at": now - 18000}
         ]
     }

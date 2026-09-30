@@ -16,12 +16,13 @@ SERVICE_FILE="/etc/systemd/system/sentinel-agent.service"
 clear 2>/dev/null || true
 echo -e "\033[1;36m"
 echo "  ╔══════════════════════════════════════════════════════════════════╗"
-echo "  ║          🛡️  SENTINEL NOC - NODE AGENT AUTO-INSTALLER           ║"
+echo "  ║            🛡️  AEGIS NOC - NODE AGENT AUTO-INSTALLER             ║"
 echo "  ║      High-Fidelity Telemetry Daemon for Linux & Proxmox VE       ║"
+echo "  ║              Engineered by AIDIL ANDRIANDAS                      ║"
 echo "  ╚══════════════════════════════════════════════════════════════════╝"
 echo -e "\033[0m"
 
-echo -e "\033[1;34m[INFO]\033[0m Target Sentinel Server : \033[1;32m${SERVER_URL}\033[0m"
+echo -e "\033[1;34m[INFO]\033[0m Target Aegis Server    : \033[1;32m${SERVER_URL}\033[0m"
 echo -e "\033[1;34m[INFO]\033[0m Current Node Hostname  : \033[1;37m$(hostname)\033[0m"
 
 # 1. Check Root Privileges
@@ -60,7 +61,7 @@ echo -e "\033[1;34m[2/5]\033[0m Preparing directory \033[1;37m${INSTALL_DIR}\033
 mkdir -p "${INSTALL_DIR}"
 
 # 4. Download latest agent.py
-echo -e "\033[1;34m[3/5]\033[0m Downloading Sentinel Agent binary from \033[1;37m${AGENT_URL}\033[0m..."
+echo -e "\033[1;34m[3/5]\033[0m Downloading Aegis Agent binary from \033[1;37m${AGENT_URL}\033[0m..."
 if command -v curl &> /dev/null; then
     curl -sSL "${AGENT_URL}" -o "${INSTALL_DIR}/agent.py"
 elif command -v wget &> /dev/null; then
@@ -80,7 +81,7 @@ echo -e "      \033[1;32m✔ Agent script installed and permissions granted.\033
 echo -e "\033[1;34m[4/5]\033[0m Creating systemd service \033[1;37m${SERVICE_FILE}\033[0m..."
 cat <<EOF > "${SERVICE_FILE}"
 [Unit]
-Description=Sentinel NOC Infrastructure Monitoring Agent
+Description=Aegis NOC Infrastructure Monitoring Agent
 After=network.target
 
 [Service]
@@ -98,7 +99,7 @@ WantedBy=multi-user.target
 EOF
 
 # 6. Enable and Start Agent Service
-echo -e "\033[1;34m[5/5]\033[0m Starting & enabling Sentinel Agent daemon..."
+echo -e "\033[1;34m[5/5]\033[0m Starting & enabling Aegis Agent daemon..."
 systemctl daemon-reload
 systemctl enable --now sentinel-agent.service >/dev/null 2>&1
 
@@ -107,7 +108,7 @@ STATUS=$(systemctl is-active sentinel-agent.service 2>/dev/null || echo "unknown
 
 if [ "$STATUS" = "active" ]; then
     NODE_IP=$(hostname -I 2>/dev/null | awk '{print $1}')
-    echo -e "\n\033[1;32m  🎉 SUCCESS! Sentinel Agent is now ACTIVE and STREAMING!\033[0m"
+    echo -e "\n\033[1;32m  🎉 SUCCESS! Aegis Agent is now ACTIVE and STREAMING!\033[0m"
     echo -e "  ══════════════════════════════════════════════════════════════════"
     echo -e "  Node Name   : \033[1;37m$(hostname)\033[0m"
     echo -e "  Node IP     : \033[1;37m${NODE_IP:-127.0.0.1}\033[0m"
