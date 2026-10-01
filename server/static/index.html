@@ -607,7 +607,7 @@
               <span class="text-2xl font-bold font-mono text-white" id="gwLatency">--</span>
               <span class="text-xs text-slate-400 font-mono">ms</span>
             </div>
-            <div class="text-[10px] text-slate-500 font-mono mt-1">10.10.10.1 • Router Hop</div>
+            <div class="text-[10px] text-slate-500 font-mono mt-1">Gateway • Router Hop</div>
           </div>
 
           <!-- Cloudflare -->
@@ -1268,7 +1268,7 @@
                     INTERACTIVE VISUALIZER
                   </span>
                 </h3>
-                <p class="text-xs text-slate-400">Peta visual relasi arsitektur jaringan dari Gateway Router, Master PVE, hingga 8 Guest VM</p>
+                <p class="text-xs text-slate-400">Peta visual topologi jaringan secara dinamis dari Gateway (Internet) menuju seluruh Node Cluster</p>
               </div>
             </div>
           </div>
@@ -1310,7 +1310,7 @@
               </span>
             </div>
             <div class="text-slate-500">
-              Subnet: <b class="text-slate-300 font-bold">10.10.10.0/24</b> • Gateway: <b class="text-slate-300 font-bold">10.10.10.1</b>
+              Subnet: <b class="text-slate-300 font-bold">Local Subnet</b> • Gateway: <b class="text-slate-300 font-bold">Local Gateway</b>
             </div>
           </div>
         </div>
@@ -2342,7 +2342,7 @@
               <i class="fa-solid fa-bridge text-blue-400"></i> Active Bridge & Scope
             </div>
             <div class="text-lg font-mono font-bold text-white">vmbr0 (10.10.10.0/24)</div>
-            <div class="text-[10px] font-mono text-slate-400 mt-1">Gateway: 10.10.10.1 • L2/L3 Interception</div>
+            <div class="text-[10px] font-mono text-slate-400 mt-1">Gateway • L2/L3 Interception</div>
           </div>
 
           <div class="bg-surface-950 border border-slate-800 p-4 rounded-2xl">
@@ -6417,105 +6417,67 @@
       if (!svg) return;
 
       const safeNodes = nodes || [];
-      const pveNode = safeNodes.find(n => n.id === 'srv-pve' || n.hostname === 'pve') || {
-        id: 'srv-pve', hostname: 'srv-pve', ip: '10.10.10.9', is_online: true, cpu_pct: 12.4, ram_pct: 68.2
-      };
-      const sentinelNode = safeNodes.find(n => n.id === 'srv-host-node' || n.hostname === 'aidil') || {
-        id: 'srv-host-node', hostname: 'NOC Server', ip: '10.10.10.9', is_online: true, cpu_pct: 8.5, ram_pct: 35.1
-      };
-      
-      // Guest VMs (all nodes except PVE and Sentinel)
-      const guestVms = safeNodes.filter(n => n.id !== 'srv-pve' && n.id !== 'srv-host-node');
-      
-      // Fixed layout coordinates
-      const routerX = 500, routerY = 45;
-      const pveX = 300, pveY = 150;
-      const nocX = 700, nocY = 150;
+      if (safeNodes.length === 0) {
+          svg.innerHTML = '<text x="500" y="200" fill="#64748b" font-size="14" font-family="monospace" text-anchor="middle">No nodes connected yet.</text>';
+          return;
+      }
 
-      // Guest VM row at y = 295
-      const vmY = 295;
-      const vmCount = Math.max(guestVms.length, 8);
-      const startX = 60;
-      const endX = 940;
-      const stepX = (endX - startX) / Math.max(1, vmCount - 1);
+      const cloudX = 500, cloudY = 60;
+      
+      const startX = 100;
+      const endX = 900;
+      const nodeY = 280;
+      const stepX = safeNodes.length > 1 ? (endX - startX) / (safeNodes.length - 1) : 0;
 
-      // SVG Cable lines
       let cablesHtml = '';
-
-      // Cable 1: Gateway -> PVE
-      cablesHtml += `
-        <path d="M ${routerX} ${routerY + 22} C ${routerX} ${routerY + 60}, ${pveX} ${routerY + 60}, ${pveX} ${pveY - 25}" 
-              stroke="#3b82f6" stroke-width="2.5" fill="none" opacity="0.6" />
-        <path d="M ${routerX} ${routerY + 22} C ${routerX} ${routerY + 60}, ${pveX} ${routerY + 60}, ${pveX} ${pveY - 25}" 
-              stroke="#60a5fa" stroke-width="2" fill="none" stroke-dasharray="6 6" class="traffic-cable" />
-      `;
-
-      // Cable 2: Gateway -> Sentinel NOC
-      cablesHtml += `
-        <path d="M ${routerX} ${routerY + 22} C ${routerX} ${routerY + 60}, ${nocX} ${routerY + 60}, ${nocX} ${nocY - 25}" 
-              stroke="#06b6d4" stroke-width="2.5" fill="none" opacity="0.6" />
-        <path d="M ${routerX} ${routerY + 22} C ${routerX} ${routerY + 60}, ${nocX} ${routerY + 60}, ${nocX} ${nocY - 25}" 
-              stroke="#22d3ee" stroke-width="2" fill="none" stroke-dasharray="6 6" class="traffic-cable-fast" />
-      `;
-
-      // Cable 3: Sentinel NOC -> PVE (Telemetry Link)
-      cablesHtml += `
-        <path d="M ${nocX - 85} ${nocY} L ${pveX + 85} ${nocY}" 
-              stroke="#8b5cf6" stroke-width="2" stroke-dasharray="4 4" fill="none" opacity="0.8" class="traffic-cable" />
-        <rect x="475" y="${nocY - 10}" width="50" height="20" rx="6" fill="#0f172a" stroke="#8b5cf6" stroke-width="1" opacity="0.9"/>
-        <text x="500" y="${nocY + 3}" fill="#c084fc" font-size="9" font-family="monospace" text-anchor="middle" font-weight="bold">TELEMETRY</text>
-      `;
-
-      // Cables 4: PVE -> Guest VMs
-      guestVms.forEach((vm, idx) => {
-        const vmX = startX + (idx * stepX);
-        const isOnline = vm.is_online !== false;
-        const cableColor = isOnline ? "#f59e0b" : "#f43f5e";
-        const pulseColor = isOnline ? "#fbbf24" : "#fda4af";
-
-        cablesHtml += `
-          <path d="M ${pveX} ${pveY + 25} C ${pveX} ${pveY + 75}, ${vmX} ${vmY - 55}, ${vmX} ${vmY - 25}" 
-                stroke="${cableColor}" stroke-width="1.8" fill="none" opacity="0.45" />
-          <path d="M ${pveX} ${pveY + 25} C ${pveX} ${pveY + 75}, ${vmX} ${vmY - 55}, ${vmX} ${vmY - 25}" 
-                stroke="${pulseColor}" stroke-width="1.8" fill="none" stroke-dasharray="5 5" class="traffic-cable" />
-        `;
-      });
-
-      // SVG Nodes Rendering
       let nodesHtml = '';
 
-      // 1. Router Node (Center Top)
+      // Draw the central cloud node (Internet / Core Network)
       nodesHtml += `
-        <g class="cursor-pointer group">
-          <rect x="${routerX - 90}" y="${routerY - 22}" width="180" height="44" rx="12" 
-                fill="#0b1329" stroke="#3b82f6" stroke-width="1.5" class="transition-all filter drop-shadow-md group-hover:stroke-blue-400" />
-          <circle cx="${routerX - 66}" cy="${routerY}" r="13" fill="#1e3a8a" stroke="#3b82f6" stroke-width="1.5"/>
-          <text x="${routerX - 66}" y="${routerY + 4}" fill="#93c5fd" font-size="11" font-family="sans-serif" text-anchor="middle" font-weight="bold">⚡</text>
-          
-          <text x="${routerX - 44}" y="${routerY - 3}" fill="#ffffff" font-size="11" font-family="sans-serif" font-weight="bold">Gateway Router</text>
-          <text x="${routerX - 44}" y="${routerY + 11}" fill="#60a5fa" font-size="10" font-family="monospace">10.10.10.1 • Core</text>
-          
-          <circle cx="${routerX + 72}" cy="${routerY}" r="4" fill="#10b981" />
-          <circle cx="${routerX + 72}" cy="${routerY}" r="8" fill="#10b981" opacity="0.3" class="animate-ping" />
-        </g>
+          <rect x="${cloudX - 90}" y="${cloudY - 22}" width="180" height="44" rx="22" 
+                fill="#0f172a" stroke="#3b82f6" stroke-width="2" class="opacity-90"/>
+          <circle cx="${cloudX - 66}" cy="${cloudY}" r="13" fill="#1e3a8a" stroke="#3b82f6" stroke-width="1.5"/>
+          <text x="${cloudX - 66}" y="${cloudY + 4}" fill="#93c5fd" font-size="11" font-family="sans-serif" text-anchor="middle" font-weight="bold">⚡</text>
+          <text x="${cloudX - 44}" y="${cloudY - 3}" fill="#ffffff" font-size="11" font-family="sans-serif" font-weight="bold">Core Network</text>
+          <text x="${cloudX - 44}" y="${cloudY + 11}" fill="#60a5fa" font-size="10" font-family="monospace">Internet Gateway</text>
+          <circle cx="${cloudX + 72}" cy="${cloudY}" r="4" fill="#10b981" />
+          <circle cx="${cloudX + 72}" cy="${cloudY}" r="8" fill="#10b981" opacity="0.3" class="animate-ping" />
       `;
 
-      // 2. Master Hypervisor: Host / Hypervisor (300, 150)
-      const pveStatusColor = pveNode.is_online ? "#10b981" : "#f43f5e";
-      nodesHtml += `
-        <g class="cursor-pointer group" onclick="inspectNodeFromCluster('${pveNode.id}')">
-          <rect x="${pveX - 100}" y="${pveY - 28}" width="200" height="56" rx="14" 
-                fill="#0f172a" stroke="#f59e0b" stroke-width="1.8" class="transition-all filter drop-shadow-lg group-hover:stroke-amber-400 group-hover:brightness-110" />
+      safeNodes.forEach((node, i) => {
+          const nx = safeNodes.length === 1 ? 500 : startX + (i * stepX);
           
-          <rect x="${pveX - 88}" y="${pveY - 18}" width="36" height="36" rx="10" fill="#78350f" stroke="#f59e0b" stroke-width="1"/>
-          <text x="${pveX - 70}" y="${pveY + 5}" fill="#fde68a" font-size="15" text-anchor="middle">👑</text>
+          // Draw cable
+          cablesHtml += `
+            <path d="M ${cloudX} ${cloudY + 22} C ${cloudX} ${cloudY + 120}, ${nx} ${cloudY + 120}, ${nx} ${nodeY - 25}" 
+                  stroke="#06b6d4" stroke-width="2" fill="none" opacity="0.4" />
+            <path d="M ${cloudX} ${cloudY + 22} C ${cloudX} ${cloudY + 120}, ${nx} ${cloudY + 120}, ${nx} ${nodeY - 25}" 
+                  stroke="#22d3ee" stroke-width="1.5" fill="none" stroke-dasharray="6 6" class="traffic-cable-fast" />
+          `;
 
-          <text x="${pveX - 42}" y="${pveY - 6}" fill="#ffffff" font-size="12" font-family="sans-serif" font-weight="bold">${pveNode.hostname || 'srv-pve'}</text>
-          <text x="${pveX - 42}" y="${pveY + 8}" fill="#fbbf24" font-size="10" font-family="monospace">${pveNode.ip} • PVE Master</text>
-          <text x="${pveX - 42}" y="${pveY + 20}" fill="#94a3b8" font-size="9" font-family="monospace">CPU ${(pveNode.cpu_pct || 0).toFixed(0)}% • RAM ${(pveNode.ram_pct || 0).toFixed(0)}%</text>
+          // Draw node
+          const isOnline = node.is_online;
+          const statusColor = isOnline ? '#10b981' : '#f43f5e';
+          const bgFill = isOnline ? '#0f172a' : '#1e1b4b';
+          const borderColor = isOnline ? '#334155' : '#7f1d1d';
+          
+          nodesHtml += `
+            <rect x="${nx - 55}" y="${nodeY - 25}" width="110" height="55" rx="8" 
+                  fill="${bgFill}" stroke="${borderColor}" stroke-width="1.5" class="opacity-95" />
+            
+            <circle cx="${nx - 45}" cy="${nodeY - 14}" r="3" fill="${statusColor}" />
+            <text x="${nx - 36}" y="${nodeY - 10}" fill="#e2e8f0" font-size="11" font-family="sans-serif" font-weight="bold">${node.hostname || node.id}</text>
+            
+            <text x="${nx}" y="${nodeY + 4}" fill="#94a3b8" font-size="9" font-family="monospace" text-anchor="middle">${node.ip || 'Unknown IP'}</text>
+            
+            <text x="${nx}" y="${nodeY + 18}" fill="${isOnline ? '#0ea5e9' : '#f43f5e'}" font-size="9" font-family="monospace" text-anchor="middle">
+              ${isOnline ? `${(node.cpu_pct||0).toFixed(0)}% CPU • ${(node.ram_pct||0).toFixed(0)}% RAM` : 'OFFLINE'}
+            </text>
+          `;
+      });
 
-          <circle cx="${pveX + 84}" cy="${pveY}" r="4.5" fill="${pveStatusColor}" />
-          ${pveNode.is_online ? `<circle cx="${pveX + 84}" cy="${pveY}" r="8" fill="${pveStatusColor}" opacity="0.3" class="animate-ping" />` : ''}
+      svg.innerHTML = cablesHtml + nodesHtml;
+    }
         </g>
       `;
 
@@ -6999,6 +6961,7 @@
         if (hostSub) hostSub.innerText = "Cluster Fleet Overview";
         fetchClusterOverview();
       } else if (view === 'security') {
+        fetchSecurityWhitelist();
         if (securityEl) securityEl.classList.remove('hidden');
         if (btnSecurity) btnSecurity.className = "px-3.5 py-1.5 font-semibold rounded-lg bg-emerald-600 text-white transition-all flex items-center gap-1.5 shadow-sm";
         if (hostSub) hostSub.innerText = "Aegis Cyber Shield • Real-Time Traffic & Defense";
@@ -7036,6 +6999,69 @@
       }
     }
 
+    async function secAddWhitelistIp() {
+      const ip = document.getElementById('secWhitelistIpInput').value.trim();
+      if (!ip) return;
+      try {
+        const res = await fetch('/api/v1/security/whitelist', {
+          method: 'POST',
+          headers: {'Content-Type':'application/json'},
+          body: JSON.stringify({ip: ip, note: 'Manual Web UI'})
+        });
+        const data = await res.json();
+        if (data.status === 'success') {
+          showToast(data.message, 'success');
+          document.getElementById('secWhitelistIpInput').value = '';
+          fetchSecurityWhitelist();
+        } else {
+          showToast(data.message, 'error');
+        }
+      } catch (err) {
+        showToast("Gagal request whitelist: " + err.message, "error");
+      }
+    }
+
+    async function secRemoveWhitelistIp(ip) {
+      if (!confirm(`Cabut ${ip} dari whitelist?`)) return;
+      try {
+        const res = await fetch(`/api/v1/security/whitelist/${ip}`, { method: 'DELETE' });
+        const data = await res.json();
+        if (data.status === 'success') {
+          showToast(data.message, 'success');
+          fetchSecurityWhitelist();
+        }
+      } catch (err) {
+        showToast("Error menghapus whitelist: " + err, 'error');
+      }
+    }
+
+    async function fetchSecurityWhitelist() {
+      try {
+        const res = await fetch('/api/v1/security/whitelist');
+        const list = await res.json();
+        const container = document.getElementById('secWhitelistContainer');
+        if (!container) return;
+        if (list.length === 0) {
+          container.innerHTML = '<div class="text-center text-xs text-slate-500 py-4">No whitelisted IPs.</div>';
+          return;
+        }
+        container.innerHTML = list.map(item => `
+          <div class="p-2.5 rounded-xl bg-surface-950 border border-emerald-900/20 flex items-center justify-between group">
+            <div class="flex items-center gap-3 truncate">
+              <i class="fa-solid fa-shield text-emerald-500/50"></i>
+              <div class="truncate">
+                <div class="text-xs font-bold font-mono text-slate-200">${item.ip}</div>
+                <div class="text-[9px] font-mono text-slate-500">Trusted Admin</div>
+              </div>
+            </div>
+            <button onclick="secRemoveWhitelistIp('${item.ip}')" class="px-2.5 py-1 rounded-lg bg-surface-800 hover:bg-rose-500/20 text-slate-400 hover:text-rose-400 text-xs transition border border-transparent hover:border-rose-500/30">
+              Remove
+            </button>
+          </div>
+        `).join('');
+      } catch(e) {}
+    }
+    
     async function fetchSecurityTraffic() {
       const spinner = document.getElementById('secRefreshSpinner');
       if (spinner) spinner.classList.add('fa-spin');

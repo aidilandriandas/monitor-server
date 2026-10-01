@@ -185,6 +185,50 @@ async def unblock_security_ip(payload: dict):
         return JSONResponse({"status": "success", "message": f"IP {ip} removed from blocklist"})
     return JSONResponse({"status": "error", "message": f"Failed to unblock {ip}"}, status_code=400)
 
+@app.get("/api/v1/security/whitelist")
+async def get_whitelist():
+    try:
+        import sqlite3
+        conn = sqlite3.connect(database.DB_PATH)
+        conn.row_factory = sqlite3.Row
+        cursor = conn.cursor()
+        cursor.execute("SELECT * FROM security_whitelist ORDER BY added_at DESC")
+        rows = [dict(r) for r in cursor.fetchall()]
+        conn.close()
+        return JSONResponse(rows)
+    except Exception as e:
+        return JSONResponse({"status": "error", "message": str(e)}, status_code=500)
+
+@app.post("/api/v1/security/whitelist")
+async def add_whitelist(payload: dict):
+    ip = payload.get("ip", "").strip()
+    note = payload.get("note", "").strip()
+    if not ip: return JSONResponse({"status": "error", "message": "IP required"}, status_code=400)
+    try:
+        import time, sqlite3
+        conn = sqlite3.connect(database.DB_PATH)
+        cursor = conn.cursor()
+        cursor.execute("INSERT OR REPLACE INTO security_whitelist (ip, note, added_at, added_by) VALUES (?, ?, ?, 'Admin')", (ip, note, int(time.time())))
+        conn.commit()
+        conn.close()
+        security_engine.security_engine.unblock_ip(ip) # Unblock if already blocked
+        return JSONResponse({"status": "success", "message": f"IP {ip} whitelisted"})
+    except Exception as e:
+        return JSONResponse({"status": "error", "message": str(e)}, status_code=500)
+
+@app.delete("/api/v1/security/whitelist/{ip}")
+async def remove_whitelist(ip: str):
+    try:
+        import sqlite3
+        conn = sqlite3.connect(database.DB_PATH)
+        cursor = conn.cursor()
+        cursor.execute("DELETE FROM security_whitelist WHERE ip = ?", (ip,))
+        conn.commit()
+        conn.close()
+        return JSONResponse({"status": "success", "message": f"IP {ip} removed from whitelist"})
+    except Exception as e:
+        return JSONResponse({"status": "error", "message": str(e)}, status_code=500)
+
 @app.get("/api/v1/security/events")
 async def get_security_events(limit: int = 50):
     events = security_engine.security_engine.get_security_events(limit=limit)

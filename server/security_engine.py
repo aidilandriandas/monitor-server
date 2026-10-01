@@ -311,6 +311,16 @@ class SecurityEngine:
             conn = sqlite3.connect(self.db_path)
             cursor = conn.cursor()
             
+            # Whitelist table
+            cursor.execute("""
+            CREATE TABLE IF NOT EXISTS security_whitelist (
+                ip TEXT PRIMARY KEY,
+                note TEXT,
+                added_at INTEGER,
+                added_by TEXT
+            )
+            """)
+
             # Blocklist table
             cursor.execute("""
             CREATE TABLE IF NOT EXISTS security_blocklist (
@@ -379,9 +389,24 @@ class SecurityEngine:
     # =========================================================================
     # MODULE 1: AUTO-BAN / FAIL2BAN ENGINE (Jail Matrix & Telegram Alerts)
     # =========================================================================
+    def is_whitelisted(self, ip: str) -> bool:
+        if not ip or ip in ("127.0.0.1", "10.10.10.9", "10.10.10.2", "0.0.0.0", "unknown"):
+            return True
+        try:
+            conn = sqlite3.connect(self.db_path)
+            cursor = conn.cursor()
+            cursor.execute("SELECT ip FROM security_whitelist WHERE ip = ?", (ip.strip(),))
+            res = cursor.fetchone()
+            conn.close()
+            if res:
+                return True
+        except Exception:
+            pass
+        return False
+
     def record_failed_auth(self, ip: str, username: str = "unknown") -> Optional[Dict[str, Any]]:
         """Tracks failed attempts and triggers Auto-Jail if threshold exceeded"""
-        if not ip or ip in ("127.0.0.1", "10.10.10.9", "10.10.10.2", "0.0.0.0", "unknown"):
+        if self.is_whitelisted(ip):
             return None
             
         now = time.time()
@@ -1637,7 +1662,7 @@ class SecurityEngine:
         return self.pve_perimeter.sync_all_blocked(self.blocked_ips)
 
     def block_ip(self, ip: str, reason: str = "Manual Defense Block") -> bool:
-        if not ip or ip in ("127.0.0.1", "10.10.10.9", "10.10.10.2"):
+        if self.is_whitelisted(ip):
             return False
         
         ip = ip.strip()
