@@ -2016,6 +2016,42 @@ def get_open_ports():
     results.sort(key=lambda x: (risk_order.get(x["risk_level"], 99), x["port"]))
     return results
 
+
+def get_system_meta():
+    import socket, os
+    hostname = socket.gethostname()
+    ip = "127.0.0.1"
+    try:
+        # First attempt: Internet routed IP
+        s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+        s.connect(("8.8.8.8", 80))
+        ip = s.getsockname()[0]
+        s.close()
+    except Exception:
+        try:
+            # Second attempt: Local subnet routed IP (works fully offline)
+            s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+            s.connect(("10.255.255.255", 1))
+            ip = s.getsockname()[0]
+            s.close()
+        except Exception:
+            try:
+                # Fallback: hostname resolution
+                ip = socket.gethostbyname(hostname)
+            except Exception:
+                pass
+    os_str = "Linux"
+    if os.path.exists("/etc/os-release"):
+        try:
+            with open("/etc/os-release") as f:
+                for line in f:
+                    if line.startswith("PRETTY_NAME="):
+                        os_str = line.split("=")[1].strip().strip('"')
+                        break
+        except Exception:
+            pass
+    return hostname, ip, os_str
+
 def host_collector_loop():
 
     prev_time = time.time()
@@ -2149,12 +2185,13 @@ def host_collector_loop():
             cpu_thermal = get_cpu_temperature(cpu_pct)
             uptime_human = format_uptime(uptime_sec)
 
+            meta_hostname, meta_ip, meta_os = get_system_meta()
             telemetry = {
                 "server_id": "srv-host-node",
                 "system": {
-                    "hostname": "aidil",
-                    "ip": "10.10.10.9",
-                    "os": "Ubuntu 22.04 LTS (Jammy)",
+                    "hostname": meta_hostname,
+                    "ip": meta_ip,
+                    "os": meta_os,
                     "uptime_seconds": uptime_sec,
                     "uptime_human": uptime_human,
                     "cpu_temp_c": cpu_thermal["temp_c"],

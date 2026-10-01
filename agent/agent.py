@@ -592,12 +592,24 @@ def get_system_meta():
     hostname = socket.gethostname()
     ip = "127.0.0.1"
     try:
+        # First attempt: Internet routed IP
         s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
         s.connect(("8.8.8.8", 80))
         ip = s.getsockname()[0]
         s.close()
     except Exception:
-        pass
+        try:
+            # Second attempt: Local subnet routed IP (works fully offline)
+            s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+            s.connect(("10.255.255.255", 1))
+            ip = s.getsockname()[0]
+            s.close()
+        except Exception:
+            try:
+                # Fallback: hostname resolution
+                ip = socket.gethostbyname(hostname)
+            except Exception:
+                pass
 
     os_str = "Linux"
     if os.path.exists("/etc/os-release"):

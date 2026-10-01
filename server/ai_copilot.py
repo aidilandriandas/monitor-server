@@ -914,7 +914,7 @@ PANDUAN GAYA JAWABAN:
 
         # 1. If API Key is configured, use the LLM!
         if api_key:
-            system_prompt = self._build_homelab_system_prompt(audit, system_extra)
+            system_prompt = self._build_system_prompt(audit, system_extra)
             messages = [{"role": "system", "content": system_prompt}]
             
             with self._lock:

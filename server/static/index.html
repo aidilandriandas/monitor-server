@@ -303,7 +303,7 @@
         </button>
 
         <!-- Aegis AI Button (24/7 Smart Advisor) -->
-        <button onclick="openAiCopilotModal()" title="Aegis AI - Smart Homelab Advisor (24/7 Monitoring & Optimization)" class="px-2.5 py-1.5 rounded-lg bg-gradient-to-r from-purple-900/60 to-indigo-900/60 hover:from-purple-800/80 hover:to-indigo-800/80 border border-purple-500/40 hover:border-purple-400/80 text-purple-200 hover:text-white transition-all flex items-center gap-1.5 shadow-sm text-xs font-mono font-semibold group">
+        <button onclick="openAiCopilotModal()" title="Aegis AI - Smart Cluster Advisor (24/7 Monitoring & Optimization)" class="px-2.5 py-1.5 rounded-lg bg-gradient-to-r from-purple-900/60 to-indigo-900/60 hover:from-purple-800/80 hover:to-indigo-800/80 border border-purple-500/40 hover:border-purple-400/80 text-purple-200 hover:text-white transition-all flex items-center gap-1.5 shadow-sm text-xs font-mono font-semibold group">
           <i class="fa-solid fa-robot text-purple-400 group-hover:scale-110 transition-transform text-xs"></i>
           <span class="hidden xl:inline">Aegis AI</span>
           <span id="aiNavScoreBadge" class="px-1.5 py-0.2 text-[10px] rounded bg-purple-500/30 text-purple-300 font-bold border border-purple-400/30">24/7</span>
@@ -773,7 +773,7 @@
         </div>
       </div>
 
-      <!-- Card 3: Proxmox VE Backup & Snapshot Shield -->
+      <!-- Card 3: Host / Hypervisor Backup & Snapshot Shield -->
       <div class="bg-surface-900 border border-slate-800/80 rounded-2xl p-4 shadow-sm flex flex-col justify-between">
         <div>
           <div class="flex items-center justify-between pb-2 mb-3 border-b border-slate-800/70">
@@ -782,15 +782,15 @@
                 <i class="fa-solid fa-box-archive text-xs"></i>
               </span>
               <div>
-                <h3 class="text-xs font-bold text-white uppercase tracking-wider">Proxmox Backup Shield</h3>
+                <h3 class="text-xs font-bold text-white uppercase tracking-wider">Host Backup Shield</h3>
                 <p class="text-[10px] text-slate-400">Status & retensi backup VM/LXC</p>
               </div>
             </div>
             <div class="flex items-center gap-1.5">
-              <button onclick="syncProxmoxBackups()" title="Sinkronkan dengan VM Proxmox Real" class="w-6 h-6 rounded-lg bg-surface-800 hover:bg-surface-700 text-slate-300 hover:text-indigo-400 transition flex items-center justify-center border border-slate-700">
+              <button onclick="syncProxmoxBackups()" title="Sinkronkan dengan VM Real" class="w-6 h-6 rounded-lg bg-surface-800 hover:bg-surface-700 text-slate-300 hover:text-indigo-400 transition flex items-center justify-center border border-slate-700">
                 <i class="fa-solid fa-arrows-rotate text-[10px]"></i>
               </button>
-              <button onclick="openAddProxmoxBackupModal()" title="Tambah / Record Backup VM" class="px-2 py-0.5 text-[10px] font-semibold rounded bg-indigo-500/15 hover:bg-indigo-500/25 text-indigo-300 border border-indigo-500/30 transition flex items-center gap-1">
+              <button onclick="openAddProxmoxBackupModal()" title="Tambah / Record Backup" class="px-2 py-0.5 text-[10px] font-semibold rounded bg-indigo-500/15 hover:bg-indigo-500/25 text-indigo-300 border border-indigo-500/30 transition flex items-center gap-1">
                 <i class="fa-solid fa-plus text-[8px]"></i> Add
               </button>
             </div>
@@ -798,7 +798,7 @@
 
           <div class="space-y-2 max-h-36 overflow-y-auto scrollbar-thin pr-1" id="proxmoxBackupsList">
             <!-- Dynamic Backups -->
-            <div class="text-center text-slate-500 text-xs py-4">Memuat riwayat backup Proxmox...</div>
+            <div class="text-center text-slate-500 text-xs py-4">Memuat riwayat backup Host...</div>
           </div>
         </div>
 
@@ -1092,9 +1092,9 @@
         <div>
           <h3 class="text-sm font-bold text-white flex items-center gap-2">
             <i class="fa-solid fa-cubes text-blue-400"></i>
-            VIRTUAL MACHINES & CONTAINERS (PROXMOX VE)
+            VIRTUAL MACHINES & CONTAINERS (HOST)
           </h3>
-          <p class="text-xs text-slate-400">Proxmox VE (QEMU & LXC) Guest Matrix</p>
+          <p class="text-xs text-slate-400">Host / Hypervisor (QEMU & LXC) Guest Matrix</p>
         </div>
         <span class="text-xs text-slate-500" id="vmsSummary">-- Guests</span>
       </div>
@@ -1119,7 +1119,7 @@
           </div>
           <div>
             <div class="flex items-center gap-2">
-              <span class="font-bold text-white text-sm">Aegis AI - Smart Homelab Advisor</span>
+              <span class="font-bold text-white text-sm">Aegis AI - Smart Cluster Advisor</span>
               <span id="aiBannerScoreBadge" class="px-2 py-0.5 rounded-full text-[10px] font-mono font-bold bg-purple-500/20 text-purple-300 border border-purple-500/40 flex items-center gap-1">
                 <span class="w-1.5 h-1.5 rounded-full bg-purple-400 animate-pulse"></span> 24/7 ACTIVE
               </span>
@@ -1181,11 +1181,11 @@
               <span class="text-[11px] font-bold uppercase tracking-wider flex items-center gap-2 text-slate-300">
                 <i class="fa-solid fa-microchip text-indigo-400"></i> Compute Engine
               </span>
-              <span class="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-indigo-500/10 text-indigo-400 border border-indigo-500/30" id="clusterTotalCores">36 Cores</span>
+              <span class="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-indigo-500/10 text-indigo-400 border border-indigo-500/30" id="clusterTotalCores">0 Cores</span>
             </div>
             <div class="flex items-baseline justify-between mt-1">
               <div class="flex items-baseline gap-2">
-                <span class="text-3xl font-black text-white font-mono tracking-tight" id="clusterAvgCpu">2.5%</span>
+                <span class="text-3xl font-black text-white font-mono tracking-tight" id="clusterAvgCpu">0.0%</span>
                 <span class="text-xs text-slate-400 font-sans">Avg Utilization</span>
               </div>
               <span class="text-[10px] font-mono text-indigo-300/80 bg-indigo-950/50 px-1.5 py-0.5 rounded border border-indigo-800/40">Fleet vCPU</span>
@@ -1213,7 +1213,7 @@
               <span class="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-purple-500/10 text-purple-400 border border-purple-500/30" id="clusterRamPctText">47.2%</span>
             </div>
             <div class="flex items-baseline gap-2 mt-1">
-              <span class="text-2xl font-black text-white font-mono tracking-tight" id="clusterRamUsedTotal">23.2 / 49.1 GB</span>
+              <span class="text-2xl font-black text-white font-mono tracking-tight" id="clusterRamUsedTotal">0.0 / 0.0 GB</span>
             </div>
           </div>
           <div class="mt-3">
@@ -1240,14 +1240,14 @@
               </span>
             </div>
             <div class="flex items-baseline gap-2 mt-1">
-              <span class="text-3xl font-black text-white font-mono tracking-tight" id="clusterTotalWorkloads">15</span>
+              <span class="text-3xl font-black text-white font-mono tracking-tight" id="clusterTotalWorkloads">0</span>
               <span class="text-xs text-slate-400 font-sans">Instances Active</span>
             </div>
           </div>
           <div class="pt-3 mt-3 border-t border-slate-800/80 flex justify-between text-[11px] font-mono text-slate-400">
-            <span class="flex items-center gap-1.5"><i class="fa-solid fa-cube text-blue-400 text-[10px]"></i> VMs: <b class="text-white font-bold" id="clusterVmCount">8 (8 Up)</b></span>
+            <span class="flex items-center gap-1.5"><i class="fa-solid fa-cube text-blue-400 text-[10px]"></i> VMs: <b class="text-white font-bold" id="clusterVmCount">0 (0 Up)</b></span>
             <span class="text-slate-500">•</span>
-            <span class="flex items-center gap-1.5"><i class="fa-brands fa-docker text-cyan-400 text-[10px]"></i> Docker: <b class="text-white font-bold" id="clusterContainerCount">7 (5 Up)</b></span>
+            <span class="flex items-center gap-1.5"><i class="fa-brands fa-docker text-cyan-400 text-[10px]"></i> Docker: <b class="text-white font-bold" id="clusterContainerCount">0 (0 Up)</b></span>
           </div>
         </div>
 
@@ -1302,7 +1302,7 @@
               </span>
               <span class="flex items-center gap-1.5">
                 <span class="w-3 h-0.5 bg-amber-400 rounded"></span>
-                <span>Proxmox Virtual Bridge (vmbr0)</span>
+                <span>Virtual Bridge (vmbr0)</span>
               </span>
               <span class="flex items-center gap-1.5">
                 <span class="w-3 h-0.5 bg-cyan-400 rounded"></span>
@@ -2002,7 +2002,7 @@
               <div class="absolute top-3 left-3 pointer-events-none flex flex-col gap-1 text-[10px] font-mono">
                 <span class="bg-surface-950/80 backdrop-blur px-2.5 py-1 rounded-md border border-slate-800 text-slate-300 flex items-center gap-1.5 shadow-sm">
                   <i class="fa-solid fa-location-crosshairs text-emerald-400"></i>
-                  <span>HUB: INDONESIA (10.10.10.9)</span>
+                  <span>CENTRAL HUB (10.10.10.9)</span>
                 </span>
                 <span class="bg-surface-950/80 backdrop-blur px-2.5 py-1 rounded-md border border-slate-800 text-slate-400 flex items-center gap-1.5 shadow-sm">
                   <i class="fa-solid fa-satellite text-cyan-400"></i>
@@ -2301,7 +2301,7 @@
       </div>
 
       <!-- =================================================================== -->
-      <!-- TAB 10: HYPERVISOR PERIMETER (PROXMOX VE 10.10.10.2)                -->
+      <!-- TAB 10: HYPERVISOR PERIMETER (HOST 10.10.10.9)                -->
       <!-- =================================================================== -->
       <div id="secSubTabContent_perimeter" class="space-y-6 hidden">
         <!-- Top Status Banner -->
@@ -2316,7 +2316,7 @@
                 <span class="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-cyan-500/20 text-cyan-300 border border-cyan-500/40">CLUSTER-WIDE ACTIVE</span>
                 <span class="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/40">8 VMs SHIELDED</span>
               </div>
-              <p class="text-xs text-slate-300 mt-0.5">Hardware & Virtual Link-Layer Bridge (<code class="text-cyan-300 font-mono">ebtables</code>) & Kernel Netfilter (<code class="text-cyan-300 font-mono">iptables</code>) on Proxmox VE Master Node (<code class="text-white font-mono">10.10.10.2</code>). Blocked threats are neutralized before reaching ANY virtual machine.</p>
+              <p class="text-xs text-slate-300 mt-0.5">Hardware & Virtual Link-Layer Bridge (<code class="text-cyan-300 font-mono">ebtables</code>) & Kernel Netfilter (<code class="text-cyan-300 font-mono">iptables</code>) on Host / Hypervisor Master Node (<code class="text-white font-mono">10.10.10.9</code>). Blocked threats are neutralized before reaching ANY virtual machine.</p>
             </div>
           </div>
           <div class="flex items-center gap-2">
@@ -2333,8 +2333,8 @@
             <div class="text-[11px] font-bold uppercase text-slate-400 mb-1 flex items-center gap-1.5">
               <i class="fa-solid fa-server text-cyan-400"></i> Hypervisor Node
             </div>
-            <div class="text-lg font-mono font-bold text-white" id="secPerimeterNode">pve (10.10.10.2)</div>
-            <div class="text-[10px] font-mono text-slate-400 mt-1" id="secPerimeterOs">Proxmox VE 9.2.2 (Kernel 7.0.2-6-pve)</div>
+            <div class="text-lg font-mono font-bold text-white" id="secPerimeterNode">pve (10.10.10.9)</div>
+            <div class="text-[10px] font-mono text-slate-400 mt-1" id="secPerimeterOs">Host / Hypervisor 9.2.2 (Kernel 7.0.2-6-pve)</div>
           </div>
 
           <div class="bg-surface-950 border border-slate-800 p-4 rounded-2xl">
@@ -2384,16 +2384,16 @@
         <!-- Architectural Explainer Banner -->
         <div class="p-4 rounded-2xl bg-surface-900/60 border border-slate-800 text-xs text-slate-300 font-mono space-y-2">
           <div class="text-slate-200 font-bold flex items-center gap-2">
-            <i class="fa-solid fa-circle-info text-cyan-400"></i> How Proxmox VE Hypervisor Perimeter Defense Operates:
+            <i class="fa-solid fa-circle-info text-cyan-400"></i> How Host / Hypervisor Hypervisor Perimeter Defense Operates:
           </div>
           <p class="text-slate-400 leading-relaxed">
-            1. <strong>Bridge Link-Layer Filtering (L2):</strong> When you or Fail2ban block an IP in Aegis, the engine executes <code class="text-cyan-300">ebtables -A AEGIS_CLUSTER_DROP -p IPv4 --ip-src/dst &lt;IP&gt; -j DROP</code> directly on the Proxmox Hypervisor (<code class="text-white">10.10.10.2</code>).<br>
+            1. <strong>Bridge Link-Layer Filtering (L2):</strong> When you or Fail2ban block an IP in Aegis, the engine executes <code class="text-cyan-300">ebtables -A AEGIS_CLUSTER_DROP -p IPv4 --ip-src/dst &lt;IP&gt; -j DROP</code> directly on the Proxmox Hypervisor (<code class="text-white">10.10.10.9</code>).<br>
             2. <strong>Universal VM Shield:</strong> Because every virtual machine interface (<code class="text-slate-300">tap103i0</code> through <code class="text-slate-300">tap110i0</code>) is bridged through <code class="text-slate-300">vmbr0</code>, the hypervisor drops all packets before they can reach the kernel of <strong>Database, immich, Ceritakota, Portfolio, Pentest, or any other VM</strong>.<br>
             3. <strong>Centralized Defense:</strong> Blocking once in Aegis NOC protects the entire physical server and all virtualized workloads simultaneously.
           </p>
           <div class="pt-2 text-[11px] text-slate-500 flex items-center justify-between border-t border-slate-800/80">
             <span>Security Engineering & Architecture: <strong>AIDIL ANDRIANDAS</strong></span>
-            <span>Hypervisor Target: <strong>root@10.10.10.2 (Port 22 / pve)</strong></span>
+            <span>Hypervisor Target: <strong>root@10.10.10.9 (Port 22 / pve)</strong></span>
           </div>
         </div>
       </div>
@@ -2662,7 +2662,7 @@
                 </span>
                 <div>
                   <div class="font-bold text-white text-xs">Node Offline / Heartbeat Loss</div>
-                  <div class="text-[11px] text-slate-400">Trigger alert instan saat ada node Proxmox atau VM yang tidak merespon</div>
+                  <div class="text-[11px] text-slate-400">Trigger alert instan saat ada node atau VM yang tidak merespon</div>
                 </div>
               </div>
               <label class="relative inline-flex items-center cursor-pointer">
@@ -2776,7 +2776,7 @@
               <h3 class="text-sm font-bold text-white tracking-wide">HOMELAB POWER HUB & ORCHESTRATOR</h3>
               <span class="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-amber-500/10 text-amber-300 border border-amber-500/30">POWER OPS</span>
             </div>
-            <p class="text-xs text-slate-400">Wake-on-LAN hardware dispatcher & bulk power lifecycle orchestration untuk guest VM Proxmox VE</p>
+            <p class="text-xs text-slate-400">Wake-on-LAN hardware dispatcher & bulk power lifecycle orchestration untuk guest VM Host / Hypervisor</p>
           </div>
         </div>
         <button onclick="closePowerToolsModal()" class="w-8 h-8 rounded-lg bg-surface-800 hover:bg-slate-700 text-slate-400 hover:text-white flex items-center justify-center transition border border-slate-700">
@@ -2980,7 +2980,7 @@
       <div class="flex items-center justify-between gap-3 px-6 py-4 border-t border-slate-800 bg-surface-900/90 backdrop-blur">
         <div class="text-[11px] font-mono text-slate-500 flex items-center gap-2">
           <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-          <span>Hypervisor Target: <b class="text-slate-300">srv-pve (10.10.10.2)</b></span>
+          <span>Hypervisor Target: <b class="text-slate-300">srv-pve (10.10.10.9)</b></span>
         </div>
         <button onclick="closePowerToolsModal()" class="px-4 py-2 rounded-xl bg-surface-800 text-slate-300 font-semibold hover:bg-surface-700 transition text-xs border border-slate-700">
           Tutup
@@ -3004,13 +3004,13 @@
           </div>
           <div>
             <div class="flex items-center gap-2">
-              <h3 class="text-base font-bold text-white tracking-wide">Aegis AI - Smart Homelab Advisor</h3>
+              <h3 class="text-base font-bold text-white tracking-wide">Aegis AI - Smart Cluster Advisor</h3>
               <span class="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-purple-500/20 text-purple-300 border border-purple-500/40">24/7 ADVISOR</span>
               <span class="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 flex items-center gap-1">
                 <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span> ACTIVE
               </span>
             </div>
-            <p class="text-xs text-slate-400">Analisis performa otomatis, optimasi alokasi RAM Proxmox, dan pemantauan 24 jam via Telegram • <span class="text-purple-300 font-mono font-medium">Engineered by Aidil Andriandas</span></p>
+            <p class="text-xs text-slate-400">Analisis performa otomatis, optimasi alokasi RAM Server, dan pemantauan 24 jam via Telegram • <span class="text-purple-300 font-mono font-medium">Engineered by Aidil Andriandas</span></p>
           </div>
         </div>
         <button onclick="closeAiCopilotModal()" class="w-8 h-8 rounded-lg bg-surface-800 hover:bg-slate-700 text-slate-400 hover:text-white flex items-center justify-center transition border border-slate-700">
@@ -3077,7 +3077,7 @@
               <div class="text-[10px] text-emerald-400 font-mono mt-0.5">● Semua Agen Aktif</div>
             </div>
             <div class="p-3 rounded-xl bg-surface-950 border border-slate-800">
-              <div class="text-[10px] font-mono text-slate-500 uppercase">Proxmox VE RAM</div>
+              <div class="text-[10px] font-mono text-slate-500 uppercase">Host / Hypervisor RAM</div>
               <div id="aiFleetPveRamVal" class="text-base font-bold text-amber-400 font-mono mt-0.5">-- %</div>
               <div id="aiFleetPveRamSub" class="text-[10px] text-slate-400 font-mono mt-0.5">-- GB / -- GB</div>
             </div>
@@ -3348,7 +3348,7 @@
           </div>
           <div>
             <div class="flex items-center gap-2">
-              <h3 class="text-base font-bold text-white tracking-wide">Add Proxmox VE or Linux Node</h3>
+              <h3 class="text-base font-bold text-white tracking-wide">Add Host / Hypervisor or Linux Node</h3>
               <span class="px-2 py-0.5 text-[10px] font-mono font-bold rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/30">
                 v2.0 Full Suite
               </span>
@@ -3390,7 +3390,7 @@
               </button>
             </div>
             <p class="text-[11px] text-slate-400">
-              Jalankan di shell Proxmox VE (<code class="text-cyan-300">root@pve:~#</code>) atau remote Linux. Otomatis cek Python 3 & aktifkan background daemon. <i>(Gunakan <code class="text-slate-300">| sudo bash</code> jika bukan user root)</i>.
+              Jalankan di shell Host / Hypervisor (<code class="text-cyan-300">root@pve:~#</code>) atau remote Linux. Otomatis cek Python 3 & aktifkan background daemon. <i>(Gunakan <code class="text-slate-300">| sudo bash</code> jika bukan user root)</i>.
             </p>
           </div>
 
@@ -3476,14 +3476,14 @@
               </p>
             </div>
 
-            <!-- Feature 6: Proxmox VE Integration -->
+            <!-- Feature 6: Host / Hypervisor Integration -->
             <div class="bg-surface-950/80 border border-slate-800/90 rounded-xl p-3 hover:border-slate-700 transition">
               <div class="flex items-center gap-2 text-rose-400 font-bold mb-1">
                 <i class="fa-solid fa-server text-sm"></i>
-                <span>Proxmox VE & Virtualization</span>
+                <span>Host / Hypervisor & Virtualization</span>
               </div>
               <p class="text-[11px] text-slate-400 leading-relaxed">
-                Deteksi otomatis Virtual Machine QEMU (<code class="text-slate-300">qm list</code>) dan LXC Containers (<code class="text-slate-300">pct list</code>) jika diinstall di host Proxmox VE, lengkap dengan status running/stopped.
+                Deteksi otomatis Virtual Machine QEMU (<code class="text-slate-300">qm list</code>) dan LXC Containers (<code class="text-slate-300">pct list</code>) jika diinstall di host Host / Hypervisor, lengkap dengan status running/stopped.
               </p>
             </div>
 
@@ -3575,7 +3575,7 @@
               </span>
             </div>
             <p class="text-xs text-slate-400 mt-0.5 font-mono" id="vmModalSub">
-              Hypervisor Node: pve (10.10.10.2)
+              Hypervisor Node: pve (10.10.10.9)
             </p>
           </div>
         </div>
@@ -3603,7 +3603,7 @@
           <!-- Direct Proxmox Console button -->
           <a id="vmNoVncBtn" href="#" target="_blank" class="px-3.5 py-1.5 rounded-lg bg-blue-600 hover:bg-blue-500 text-white font-semibold flex items-center gap-1.5 transition shadow">
             <i class="fa-solid fa-display"></i>
-            <span>Buka NoVNC Proxmox</span>
+            <span>Buka Web Console</span>
             <i class="fa-solid fa-up-right-from-square text-[10px]"></i>
           </a>
         </div>
@@ -3684,7 +3684,7 @@
               </div>
               <div class="flex justify-between border-b border-slate-900 pb-1.5">
                 <span class="text-slate-400">Hypervisor Host Node:</span>
-                <span class="font-mono text-emerald-400" id="vmDetailNode">pve (10.10.10.2)</span>
+                <span class="font-mono text-emerald-400" id="vmDetailNode">pve (10.10.10.9)</span>
               </div>
               <div class="flex justify-between border-b border-slate-900 pb-1.5">
                 <span class="text-slate-400">System Uptime:</span>
@@ -3705,7 +3705,7 @@
             <div>
               <div class="flex items-center gap-2 text-white font-bold text-xs mb-0.5">
                 <i class="fa-solid fa-display text-cyan-400"></i>
-                <span>Native Proxmox NoVNC & xterm.js Web Console</span>
+                <span>Native Web Console & xterm.js Web Console</span>
               </div>
               <p class="text-[11px] text-slate-400">
                 Akses console grafis / TTY interaktif langsung ke VM ini tanpa perlu buka dashboard Proxmox utama.
@@ -3780,7 +3780,7 @@
       <!-- Modal Footer -->
       <div class="flex items-center justify-between px-6 py-3 border-t border-slate-800 bg-surface-900/90 backdrop-blur z-10">
         <span class="text-[11px] text-slate-500 font-mono">
-          Aegis NOC • Proxmox VE Integration Engine
+          Aegis NOC • Host / Hypervisor Integration Engine
         </span>
         <button onclick="closeVmModal()" class="px-5 py-2 rounded-xl bg-surface-800 hover:bg-surface-700 text-white font-semibold transition-all text-xs">
           Tutup
@@ -3818,9 +3818,9 @@
           <div class="flex items-center bg-surface-950 p-1 rounded-lg border border-slate-800 text-xs font-mono">
             <span class="text-slate-500 text-[10px] px-2 font-sans font-semibold">NODE:</span>
             <select id="terminalNodeSelect" onchange="onTerminalTargetChange()" class="bg-surface-900 border border-slate-700 rounded px-2 py-1 text-slate-200 outline-none text-xs">
-              <option value="srv-host-node">aidil (10.10.10.9)</option>
-              <option value="srv-immich">immich (10.10.10.4)</option>
-              <option value="srv-pve">pve (10.10.10.2)</option>
+              
+              
+              
             </select>
           </div>
 
@@ -3898,9 +3898,9 @@
           <i class="fa-solid fa-server text-blue-400"></i> Target Node:
         </span>
         <select id="runbookTargetNode" class="bg-surface-900 border border-slate-700 rounded-lg px-3 py-1.5 text-slate-200 outline-none text-xs font-mono">
-          <option value="srv-host-node">aidil (10.10.10.9) - Primary</option>
-          <option value="srv-immich">immich (10.10.10.4)</option>
-          <option value="srv-pve">pve (10.10.10.2) - Hypervisor</option>
+          
+          
+          
         </select>
       </div>
 
@@ -4151,7 +4151,7 @@
                   <span>${n.hostname || n.id}</span>
                   ${isActive ? '<span class="text-[9px] px-1.5 py-0.2 bg-blue-500/30 text-blue-300 rounded uppercase font-semibold">Active</span>' : ''}
                 </div>
-                <div class="text-[10px] text-slate-400 font-mono">${n.ip || '127.0.0.1'} | ${n.os || 'Linux'}</div>
+                <div class="text-[10px] text-slate-400 font-mono">${n.ip || '10.10.10.9'} | ${n.os || 'Linux'}</div>
               </div>
             </div>
             <div class="flex items-center gap-2 shrink-0">
@@ -4691,7 +4691,7 @@
       const list = document.getElementById('webProbesList');
       if (!list) return;
       if (!probes.length) {
-        list.innerHTML = `<div class="p-6 text-center text-slate-500 text-xs">No web endpoints monitored yet. Click '+ Add URL' above to add Immich, Proxmox, or custom services.</div>`;
+        list.innerHTML = `<div class="p-6 text-center text-slate-500 text-xs">No web endpoints monitored yet. Click '+ Add URL' above to add Custom services.</div>`;
         return;
       }
 
@@ -4927,7 +4927,7 @@
           <div class="p-6 text-center text-slate-500 text-xs col-span-full">
             <i class="fa-solid fa-circle-info mb-1 text-slate-400 text-sm"></i><br>
             Belum ada Virtual Machine (QEMU) atau LXC Container yang terdaftar di node ini.
-            <div class="text-[11px] text-slate-600 mt-1">Jika ini adalah node Proxmox VE, pastikan VM atau Container sudah dibuat di web GUI Proxmox.</div>
+            <div class="text-[11px] text-slate-600 mt-1">Jika ini adalah node Host / Hypervisor, pastikan VM atau Container sudah dibuat di web GUI Host.</div>
           </div>
         `;
         return;
@@ -5010,7 +5010,7 @@
       stBadge.className = `px-2 py-0.5 text-[10px] font-mono font-bold rounded ${isRunning ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/30' : 'bg-red-500/10 text-red-400 border border-red-500/30'}`;
 
       // Node text
-      const nodeIp = (activeServerData && activeServerData.ip) ? activeServerData.ip : '10.10.10.2';
+      const nodeIp = (activeServerData && activeServerData.ip) ? activeServerData.ip : '10.10.10.9';
       document.getElementById('vmModalSub').innerText = `Hypervisor Node: ${vm.node_name || 'pve'} (${nodeIp})`;
 
       // Stats
@@ -5162,7 +5162,7 @@
       const act = actionMap[type];
       if (!act) return;
 
-      confirmAction(act, String(vmid), `${type.toUpperCase()} VM #${vmid}`, `Kirim instruksi ${type.toUpperCase()} ke VM '${name}' di Proxmox VE.`);
+      confirmAction(act, String(vmid), `${type.toUpperCase()} VM #${vmid}`, `Kirim instruksi ${type.toUpperCase()} ke VM '${name}' di Host / Hypervisor.`);
     }
 
     async function toggleDemoMode() {
@@ -5233,7 +5233,7 @@
     async function loadPowerVms() {
       const tbody = document.getElementById('powerVmsTableBody');
       if (!tbody) return;
-      tbody.innerHTML = `<tr><td colspan="6" class="py-4 text-center text-slate-500"><i class="fa-solid fa-spinner fa-spin mr-1"></i> Memuat data guest VM dari Proxmox...</td></tr>`;
+      tbody.innerHTML = `<tr><td colspan="6" class="py-4 text-center text-slate-500"><i class="fa-solid fa-spinner fa-spin mr-1"></i> Memuat data guest VM...</td></tr>`;
 
       try {
         const res = await fetch('/api/v1/power/vms');
@@ -5346,7 +5346,7 @@
       if (resBox) {
         resBox.classList.remove('hidden');
         resBox.className = "p-3 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-300 text-xs font-mono flex items-center gap-2";
-        resBox.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> <span>Mendispatch perintah '${action.toUpperCase()}' ke ${vmids.length} VM Proxmox VE...</span>`;
+        resBox.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> <span>Mendispatch perintah '${action.toUpperCase()}' ke ${vmids.length} VM Host / Hypervisor...</span>`;
       }
 
       try {
@@ -5359,7 +5359,7 @@
 
         if (resBox) {
           resBox.className = "p-3 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 text-xs font-mono";
-          resBox.innerHTML = `<i class="fa-solid fa-circle-check mr-1.5 text-emerald-400"></i> ${data.message || 'Perintah power berhasil dikirim ke Proxmox!'}`;
+          resBox.innerHTML = `<i class="fa-solid fa-circle-check mr-1.5 text-emerald-400"></i> ${data.message || 'Perintah power berhasil dikirim ke Host!'}`;
         }
 
         setTimeout(() => {
@@ -5388,7 +5388,7 @@
         if (resBox) {
           resBox.classList.remove('hidden');
           resBox.className = "p-3 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 text-xs font-mono";
-          resBox.innerHTML = `<i class="fa-solid fa-circle-check mr-1.5 text-emerald-400"></i> Aksi '${action.toUpperCase()}' untuk #${vmid} (${vmName}) berhasil dikirim ke Proxmox VE.`;
+          resBox.innerHTML = `<i class="fa-solid fa-circle-check mr-1.5 text-emerald-400"></i> Aksi '${action.toUpperCase()}' untuk #${vmid} (${vmName}) berhasil dikirim ke Host / Hypervisor.`;
         }
 
         setTimeout(() => {
@@ -6418,10 +6418,10 @@
 
       const safeNodes = nodes || [];
       const pveNode = safeNodes.find(n => n.id === 'srv-pve' || n.hostname === 'pve') || {
-        id: 'srv-pve', hostname: 'srv-pve', ip: '10.10.10.2', is_online: true, cpu_pct: 12.4, ram_pct: 68.2
+        id: 'srv-pve', hostname: 'srv-pve', ip: '10.10.10.9', is_online: true, cpu_pct: 12.4, ram_pct: 68.2
       };
       const sentinelNode = safeNodes.find(n => n.id === 'srv-host-node' || n.hostname === 'aidil') || {
-        id: 'srv-host-node', hostname: 'aidil (NOC)', ip: '10.10.10.9', is_online: true, cpu_pct: 8.5, ram_pct: 35.1
+        id: 'srv-host-node', hostname: 'NOC Server', ip: '10.10.10.9', is_online: true, cpu_pct: 8.5, ram_pct: 35.1
       };
       
       // Guest VMs (all nodes except PVE and Sentinel)
@@ -6500,7 +6500,7 @@
         </g>
       `;
 
-      // 2. Master Hypervisor: Proxmox VE (300, 150)
+      // 2. Master Hypervisor: Host / Hypervisor (300, 150)
       const pveStatusColor = pveNode.is_online ? "#10b981" : "#f43f5e";
       nodesHtml += `
         <g class="cursor-pointer group" onclick="inspectNodeFromCluster('${pveNode.id}')">
@@ -6529,7 +6529,7 @@
           <rect x="${nocX - 88}" y="${nocY - 18}" width="36" height="36" rx="10" fill="#164e63" stroke="#06b6d4" stroke-width="1"/>
           <text x="${nocX - 70}" y="${nocY + 5}" fill="#a5f3fc" font-size="15" text-anchor="middle">🛡️</text>
 
-          <text x="${nocX - 42}" y="${nocY - 6}" fill="#ffffff" font-size="12" font-family="sans-serif" font-weight="bold">${sentinelNode.hostname || 'aidil (NOC)'}</text>
+          <text x="${nocX - 42}" y="${nocY - 6}" fill="#ffffff" font-size="12" font-family="sans-serif" font-weight="bold">${sentinelNode.hostname || 'NOC Server'}</text>
           <text x="${nocX - 42}" y="${nocY + 8}" fill="#22d3ee" font-size="10" font-family="monospace">${sentinelNode.ip} • Aegis NOC</text>
           <text x="${nocX - 42}" y="${nocY + 20}" fill="#94a3b8" font-size="9" font-family="monospace">CPU ${(sentinelNode.cpu_pct || 0).toFixed(0)}% • RAM ${(sentinelNode.ram_pct || 0).toFixed(0)}%</text>
 
@@ -6834,7 +6834,7 @@
         const isPub = p.bind_type && p.bind_type.includes('Public');
         const bindBadge = isPub 
           ? `<span class="px-1.5 py-0.5 rounded text-[10px] font-semibold bg-rose-500/10 text-rose-400 border border-rose-500/30">0.0.0.0 Public</span>` 
-          : `<span class="px-1.5 py-0.5 rounded text-[10px] font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/30">127.0.0.1 Local</span>`;
+          : `<span class="px-1.5 py-0.5 rounded text-[10px] font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/30">10.10.10.9 Local</span>`;
 
         return `
           <tr class="hover:bg-surface-850/60 transition-colors">
@@ -7480,7 +7480,7 @@
         }
 
         let actions = [];
-        if (c.peer_ip && !['*', '0.0.0.0', '127.0.0.1'].includes(c.peer_ip)) {
+        if (c.peer_ip && !['*', '0.0.0.0', '10.10.10.9'].includes(c.peer_ip)) {
           // AI Investigate Button
           actions.push(`
             <button onclick="openSecAiModal('${c.peer_ip}', 'socket_inspection', 'Service: ${c.service}, Direction: ${c.direction || 'Inbound'}, State: ${c.state}, Port: ${c.local_port}')" class="px-2 py-1 text-[10px] font-semibold bg-cyan-500/15 hover:bg-cyan-500/25 text-cyan-300 border border-cyan-500/30 rounded-lg transition" title="Ask Aegis AI">
@@ -8498,7 +8498,7 @@
             <td class="py-2.5 px-4 text-slate-400 font-mono">${p.threads}</td>
             <td class="py-2.5 px-4 text-right">
               <div class="flex items-center justify-end gap-1.5">
-                <button onclick="openSecAiModal('127.0.0.1', 'process_forensics', 'PID: ${p.pid}, Name: ${p.name}, CPU: ${p.cpu_percent}%, Mem: ${p.memory_mb}MB, Cmd: ${p.cmdline}')" class="px-2 py-1 text-[10px] font-semibold bg-cyan-500/15 hover:bg-cyan-500/25 text-cyan-300 border border-cyan-500/30 rounded-lg transition" title="AI Forensics">
+                <button onclick="openSecAiModal('10.10.10.9', 'process_forensics', 'PID: ${p.pid}, Name: ${p.name}, CPU: ${p.cpu_percent}%, Mem: ${p.memory_mb}MB, Cmd: ${p.cmdline}')" class="px-2 py-1 text-[10px] font-semibold bg-cyan-500/15 hover:bg-cyan-500/25 text-cyan-300 border border-cyan-500/30 rounded-lg transition" title="AI Forensics">
                   <i class="fa-solid fa-microchip-ai text-[9px]"></i> AI
                 </button>
                 ${p.is_critical ? `
@@ -8627,7 +8627,7 @@
     }
 
     // =========================================================================
-    // MODULE 10: HYPERVISOR PERIMETER FIREWALL (PROXMOX VE 10.10.10.2)
+    // MODULE 10: HYPERVISOR PERIMETER FIREWALL (HOST 10.10.10.9)
     // =========================================================================
     async function fetchSecPerimeter() {
       try {
@@ -8647,8 +8647,8 @@
       const ruleCountEl = document.getElementById('secPerimeterRuleCount');
       const gridEl = document.getElementById('secPerimeterVmsGrid');
       
-      if (nodeEl) nodeEl.innerText = `${p.hypervisor_node || 'pve'} (${p.hypervisor_ip || '10.10.10.2'})`;
-      if (osEl) osEl.innerText = p.hypervisor_os || 'Proxmox VE (Kernel 7.0.2-6-pve)';
+      if (nodeEl) nodeEl.innerText = `${p.hypervisor_node || 'pve'} (${p.hypervisor_ip || '10.10.10.9'})`;
+      if (osEl) osEl.innerText = p.hypervisor_os || 'Host / Hypervisor (Kernel 7.0.2-6-pve)';
       if (vmCountEl) vmCountEl.innerText = `${p.total_vms || 8} Virtual Machines`;
       if (ruleCountEl) ruleCountEl.innerText = `${p.cluster_blocked_rules || 0} Drop Rules`;
 
@@ -8694,7 +8694,7 @@
       try {
         const resp = await fetch('/api/v1/security/perimeter/sync', { method: 'POST' });
         const res = await resp.json();
-        showToast(res.status === 'success' ? `Hypervisor Perimeter re-synced! ${res.synced_count} IPs enforced on Proxmox VE.` : 'Sync failed', res.status === 'success' ? 'success' : 'error');
+        showToast(res.status === 'success' ? `Hypervisor Perimeter re-synced! ${res.synced_count} IPs enforced on Host / Hypervisor.` : 'Sync failed', res.status === 'success' ? 'success' : 'error');
         fetchSecurityTraffic();
       } catch (e) {
         showToast(`Sync error: ${e.message}`, 'error');
@@ -8723,7 +8723,7 @@
         else if (e.severity === 'LOW') badgeColor = "bg-emerald-500/20 text-emerald-300 border-emerald-500/40";
 
         let blockBtn = "";
-        if (e.ip && !['127.0.0.1', 'unknown', '0.0.0.0'].includes(e.ip)) {
+        if (e.ip && !['10.10.10.9', 'unknown', '0.0.0.0'].includes(e.ip)) {
           if (!e.is_blocked && !e.is_jailed) {
             blockBtn = `
               <div class="flex items-center gap-1.5 shrink-0 ml-2">
@@ -8888,7 +8888,7 @@
       if (id === 'srv-pve' || hostname === 'pve') {
         return {
           isMaster: true,
-          roleTitle: '👑 PROXMOX VE HYPERVISOR MASTER',
+          roleTitle: '👑 HOST HYPERVISOR MASTER',
           roleShort: 'PVE HYPERVISOR',
           badgeClass: 'bg-amber-500/15 text-amber-300 border border-amber-500/40 shadow-[0_0_12px_rgba(245,158,11,0.2)]',
           icon: 'fa-solid fa-chess-king text-amber-400',
@@ -9291,6 +9291,17 @@
       
       const offlineNodesEl = document.getElementById('clusterOfflineNodes');
       if (offlineNodesEl) offlineNodesEl.innerText = summary.offline_nodes || 0;
+      
+      let pveCount = 0;
+      let linuxCount = 0;
+      nodes.forEach(n => {
+          if (n.os && n.os.toLowerCase().includes('proxmox')) pveCount++;
+          else linuxCount++;
+      });
+      const pveEl = document.getElementById('clusterPveNodes');
+      if (pveEl) pveEl.innerText = `${pveCount} PVE Host${pveCount !== 1 ? 's' : ''}`;
+      const linuxEl = document.getElementById('clusterLinuxNodes');
+      if (linuxEl) linuxEl.innerText = `${linuxCount} Linux Node${linuxCount !== 1 ? 's' : ''}`;
       
       const nodesPill = document.getElementById('clusterNodesPill');
       if (nodesPill) {
@@ -10077,7 +10088,7 @@
     }
 
     // ========================================================
-    // 3. PROXMOX VE BACKUP & SNAPSHOT SENTINEL
+    // 3. HOST BACKUP & SNAPSHOT SENTINEL
     // ========================================================
     async function fetchProxmoxBackups() {
       try {
@@ -10775,7 +10786,7 @@
       <div class="flex items-center justify-between pb-3 mb-4 border-b border-slate-800">
         <h3 class="text-base font-bold text-white flex items-center gap-2">
           <i class="fa-solid fa-box-archive text-indigo-400"></i>
-          Tambah / Record Backup Proxmox
+          Tambah / Record Backup Host
         </h3>
         <button onclick="closeAddProxmoxBackupModal()" class="text-slate-400 hover:text-white text-lg">
           <i class="fa-solid fa-xmark"></i>
